@@ -1,0 +1,40 @@
+HOMEPAGE
+-	Advance Search
+-	Add to cart
+-	A list of categories
+-	Most watched by students category
+-	Personal learning recommendation form and list
+-	Top categories
+-	Testimonials
+-	Become a tutor
+-	Trusted By Organizations
+-	Switch language (later update)
+-	Footer
+•	About us
+•	Contact us
+•	Terms and conditions
+•	Privacy policy
+•	Cookie policy
+•	Featured courses
+•	Blog
+•	Sitemap
+-	Side bar
+•	Most Popular categories
+•	Login and sign up
+•	Business account (later update)
+USER DASHBOARD
+-	Aside 
+•	Welcome back note with name.
+•	Avatar or letter that symbolizes users
+•	Most popular Categories
+
+-	Main
+•	Let’s start learning
+•	List of last ten courses watched by the user
+•	What to learn next recommendation
+•	What students are viewing recommendations
+•	Popular courses.
+•	Newest courses on topics/categories of the courses the user registered.
+•	Explore more courses.
+ADMIN PAGE
+-	More updates on that.

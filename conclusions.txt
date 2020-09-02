@@ -1,0 +1,20 @@
+Database Tables
+
+-	User
+-	Profile
+-	Categories
+-	Testimonials
+
++ User
+	-	User types
+		-	Tutor
+		-	Student
+	-	Extra infos
+		- 	First and last name
+		-	E-Mail
+		-	Username
+
++ Categories
+	-	Ratings
+		-	Top categories
+		-	Popular Categories

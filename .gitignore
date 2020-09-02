@@ -1,0 +1,6 @@
+/Home/__pycache__/
+/Home/migrations/
+/Home/migrations/__pycache__/
+/LMS/__pycache__/
+
+db.sqlite3
