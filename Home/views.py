@@ -147,19 +147,22 @@ def CourseListView(request, slug):
 
 def likeCategory(request, slug):
 	category = models.Category.objects.get(slug=slug)
-	user_like = models.CategoryLike.objects.get_or_create(pk=request.user.id)
+	user_like = models.CategoryLike.objects.get_or_create(
+		user=models.User.objects.get(pk=request.user.id),
+		category=category
+	)
 
-	if user_like.status:
+	if user_like[0].status:
 		category.popularity -= 1
-		user_like.status = False
+		user_like[0].status = False
 	else:
 		category.popularity += 1
-		user_like.status = True
+		user_like[0].status = True
 
-	user_like.save()
+	user_like[0].save()
 	category.save()
 
-	return redirect('Home:index')
+	return redirect('Home:categories')
 
 
 def likeCourse(request, slug):

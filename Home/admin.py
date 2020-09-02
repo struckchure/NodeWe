@@ -27,13 +27,12 @@ class CategoryAdmin(admin.ModelAdmin):
 	search_fields = ('category', 'description',)
 
 
-
 class CourseAdmin(admin.ModelAdmin):
 	list_display = ('category', 'description',)
 	search_fields = ('category', 'description',)
 	fieldsets = (
 	    ('New Course', {
-	        'fields': ('category', 'course', 'description', 'image',)
+	        'fields': ('category', 'course', 'description', 'image', 'slug')
 	    	}
 	    ),
 	    # ('Ratings', {

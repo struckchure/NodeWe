@@ -16,5 +16,5 @@ urlpatterns = [
 	path('courses/<slug:slug>/like/', views.likeCourse, name='likeCourse'),
 	path('categories/', views.categories, name='categories'),
 	path('categories/<slug:slug>/', views.CategoryListView, name='categoryList'),
-	# path('courses/<slug:slug>/like/', views.likeCategory, name='likeCategory'),
+	path('categories/<slug:slug>/like/', views.likeCategory, name='likeCategory'),
 ]
