@@ -2,5 +2,5 @@
 /Home/migrations/
 /Home/migrations/__pycache__/
 /LMS/__pycache__/
-
+/Media/
 db.sqlite3
