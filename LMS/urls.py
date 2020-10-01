@@ -3,6 +3,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.site_header = 'NodeWe'
+admin.site.site_title = 'NodeWe'
+
 handler400 = 'Home.views.Error400'
 handler403 = 'Home.views.Error403'
 handler404 = 'Home.views.Error404'

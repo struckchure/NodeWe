@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-	<title>LMS | {{ course.course }}</title>
+	<title>NodeWe | {{ course.course }}</title>
 {% endblock title %}
 
 {% block body %}
@@ -11,7 +11,7 @@
 		{{ course.title }}
 	</p>
 	<div class="row">
-		<div class="col-7 col-sm-6">
+		<div class="col-10">
 			{% for video in videos %}
 				<div class="row">
 					<div class="col-4">
@@ -33,7 +33,7 @@
 			{% endfor %}
 		</div>
 
-		<div class="col-5 col-sm-6 custom-scroll">
+		<div class="col-2 custom-scroll">
 			<h3>{{ course.course }}</h3>
 
 			<p>
