@@ -1,44 +1,463 @@
 {% extends "base.html" %}
-
 {% load static %}
 
-{% block title %}		
-	<title>NodeWe | Home</title>
-{% endblock title %}
 
 {% block body %}
-	<div class="container">
-		<center>
-			<p>Available Courses</p>
-		</center>
-		{% for course in courses %}
-			<div class="row">
-				<div class="col-4">
-					<div class="container-fluid">
-						<img style="width: 300px; height: 200px;" src="{{ course.image.url }}" alt="{{ course.course }}">
+		<!-- Hero section -->
+		<section class="hero-section">
+			<div class="hero-slider owl-carousel">
+				<div class="hs-item set-bg" data-setbg="{% static 'img/bg-2.png' %}">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-6 col-lg-7 text-white">
+								<span style="color: #fff">Learning</span>
+								<h2 style="color: #2b3990">Made Easy</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
+								<a href="{% url 'Home:register' %}" class="site-btn sb-success" style="background: #2b3990;">GET STARTED</a>
+								<a href="{% url 'Home:login' %}" class="site-btn sb-success" style="background: #2b3990;">LOGIN</a>
+							</div>
+						</div>
+						<div class="offer-card text-white">
+							<span>from</span>
+							<h2><del>N</del>0</h2>
+							<p>STUDY NOW</p>
+						</div>
 					</div>
 				</div>
-
-				<div class="col-8">
-					<h3>{{ course.course }}</h3>
-					<p>
-						{{ course.description }}
-					</p>
-					<br>
-					<a href="#" >
-						<button class="btn btn-sm btn-success">star</button>
-					</a>
-					
-					<a href="{% url 'Home:likeCourse' course.slug %}" >
-						<button class="btn btn-sm btn-info">{{ course.popularity }} like</button>
-					</a>
-
-					<a href="{% url 'Home:courseList' course.slug %}" >
-						<button class="btn btn-sm btn-primary">view</button>
-					</a>
+				<div class="hs-item set-bg" data-setbg="{% static 'img/bg-5.png' %}">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-6 col-lg-7 text-white">
+								<span style="color: #fff">Learning</span>
+								<h2 style="color: #2b3990">Made Easy</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
+								<a href="{% url 'Home:register' %}" class="site-btn sb-success" style="background: #2b3990;">GET STARTED</a>
+								<a href="{% url 'Home:login' %}" class="site-btn sb-success" style="background: #2b3990;">LOGIN</a>
+							</div>
+						</div>
+						<div class="offer-card text-white">
+							<span>from</span>
+							<h2><del>N</del>0</h2>
+							<p>STUDY NOW</p>
+						</div>
+					</div>
+				</div>
+				<div class="hs-item set-bg" data-setbg="{% static 'img/bg-5.png' %}">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-6 col-lg-7 text-white">
+								<span style="color: #fff">Learning</span>
+								<h2 style="color: #2b3990">Made Easy</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+									et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas
+									accumsan lacus vel facilisis. </p>
+								<a href="{% url 'Home:register' %}" class="site-btn sb-success" style="background: #2b3990;">GET STARTED</a>
+								<a href="{% url 'Home:login' %}" class="site-btn sb-success" style="background: #2b3990;">LOGIN</a>
+							</div>
+						</div>
+						<div class="offer-card text-white">
+							<span>from</span>
+							<h2><del>N</del>0</h2>
+							<p>STUDY NOW</p>
+						</div>
+					</div>
+				</div>
+				<div class="hs-item set-bg" data-setbg="{% static 'img/bg-4.png' %}">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-6 col-lg-7 text-white">
+								<span style="color: #fff">Learning</span>
+								<h2 style="color: #2b3990">Made Easy</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+									et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas
+									accumsan lacus vel facilisis. </p>
+								<a href="{% url 'Home:register' %}" class="site-btn sb-success" style="background: #2b3990;">GET STARTED</a>
+								<a href="{% url 'Home:login' %}" class="site-btn sb-success" style="background: #2b3990;">LOGIN</a>
+							</div>
+						</div>
+						<div class="offer-card text-white">
+							<span>from</span>
+							<h2><del>N</del>0</h2>
+							<p>STUDY NOW</p>
+						</div>
+					</div>
+				</div>
+				<div class="hs-item set-bg" data-setbg="{% static 'img/bg-3.png' %}">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-6 col-lg-7 text-white">
+								<span style="color: #fff">Learning</span>
+								<h2 style="color: #2b3990">Made Easy</h2>
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+									et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas
+									accumsan lacus vel facilisis. </p>
+								<a href="{% url 'Home:register' %}" class="site-btn sb-success" style="background: #2b3990;">GET STARTED</a>
+								<a href="{% url 'Home:login' %}" class="site-btn sb-success" style="background: #2b3990;">LOGIN</a>
+							</div>
+						</div>
+						<div class="offer-card text-white">
+							<span>from</span>
+							<h2><del>N</del>0</h2>
+							<p>STUDY NOW</p>
+						</div>
+					</div>
 				</div>
 			</div>
-			<br>
-		{% endfor %}
+			<div class="container">
+				<div class="slide-num-holder" id="snh-1"></div>
+			</div>
+		</section>
+		<!-- Hero section end -->
+
+
+
+		<!-- Features section -->
+		<section class="features-section">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-3 p-0 feature">
+						<div class="feature-inner">
+							<div class="feature-icon">
+								<img src="{% static 'img/icons/1.png' %}" alt="#">
+							</div>
+							<h2>Learn</h2>
+						</div>
+					</div>
+					<div class="col-md-3 p-0 feature">
+						<div class="feature-inner">
+							<div class="feature-icon">
+								<img src="{% static 'img/icons/2.png' %}" alt="#">
+							</div>
+							<h2>Educate</h2>
+						</div>
+					</div>
+					<div class="col-md-3 p-0 feature">
+						<div class="feature-inner">
+							<div class="feature-icon">
+								<img src="{% static 'img/icons/3.png' %}" alt="#">
+							</div>
+							<h2>Skill Up</h2>
+						</div>
+					</div>
+					<div class="col-md-3 p-0 feature" style="background-color: #ff6427; color: #fff;">
+						<div class="feature-inner">
+							<div class="feature-icon">
+								<img src="{% static 'img/icons/2.png' %}" alt="#">
+							</div>
+							<h2 style=" color: #fff;">Scale High</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Features section end -->
+
+
+		<!-- latest product section -->
+		<section class="top-latest-product-section">
+			<div class="container-fluid">
+				<div class="section-title">
+					<h4 style="color: #1d4354;">LATEST COURSES</h4>
+				</div>
+				<div class="product-slider owl-carousel">
+					<!--
+
+					<div class="product-item">
+						<div class="pi-pic">
+							<img src="{% static 'img/prog/prog1.jpg' %}" alt="">
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6><del>N</del>0.00</h6>
+							<p>Python Course </p>
+						</div>
+					</div>
+					
+					<div class="product-item">
+						<div class="pi-pic">
+							<div class="tag-new">New</div>
+							<img src="{% static 'img/prog/prog2.jpg' %}" alt="">
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6><del>N</del>0.00</h6>
+							<p>C++ Course</p>
+						</div>
+					</div>
+					
+					<div class="product-item">
+						<div class="pi-pic">
+							<img src="{% static 'img/prog/prog3.jpeg' %}" alt="">
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6><del>N</del>0.00</h6>
+							<p>C# Courses </p>
+						</div>
+					</div>
+					
+					<div class="product-item">
+							<div class="pi-pic">
+								<img src="{% static 'img/prog/prog4.png' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6><del>N</del>0.00</h6>
+								<p>Java Courses </p>
+							</div>
+					</div>
+					
+					<div class="product-item">
+							<div class="pi-pic">
+								<img src="{% static 'img/prog/prog5.jpg' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6><del>N</del>0.00</h6>
+								<p>JavaScript Course </p>
+							</div>
+					</div>
+
+					-->
+
+					{% for course in courses %}
+						<div class="product-item">
+							<div class="pi-pic">
+								<img src="{{ course.image.url }}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="{{ course.like_item }}" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6><del>N</del>0.00</h6>
+								<p>{{ course.course }}</p>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+		<!-- latest product section end -->
+
+	<!--top categories-->
+	<section>
+		<div class="container-fluid">
+	<div class="section-title">
+		<h4 style="color: #1d4354;">TOP CATEGORIES</h4>
 	</div>
+	<ul class="product-filter-menu mt-3 mb-5">
+		<!--
+		<li><a href="#">PYTHON</a></li>
+		<li><a href="#">JAVASCRIPT</a></li>
+		<li><a href="#">JAVA</a></li>
+		<li><a href="#">C++</a></li>
+		<li><a href="#">C#</a></li>
+		<li><a href="#">KOTLIN</a></li>
+		<li><a href="#">NODE.JS</a></li>
+		<li><a href="#">GOLANG</a></li>
+		<li><a href="#">PYTHON</a></li>
+		<li><a href="#">JAVASCRIPT</a></li>
+		<li><a href="#">JAVA</a></li>
+		<li><a href="#">C++</a></li>
+		<li><a href="#">C#</a></li>
+		<li><a href="#">KOTLIN</a></li>
+		<li><a href="#">NODE.JS</a></li>
+		<li><a href="#">GOLANG</a></li>
+		-->
+
+		{% for category in categories %}
+			<li><a href="{% url 'Home:categoryDetails' category.slug %}">{{ category.category }}</a></li>
+		{% endfor %}
+	</ul>
+	</div>
+	</section>
+
+	<!--tio categogies ends-->
+
+		<!-- Product filter section -->
+		<section class="product-filter-section">
+			<div class="container-fluid">
+				<div class="section-title">
+					<h4 style="color: #1d4354;">WHAT STUDENTS ARE VIEWING</h4>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-3 col-sm-6">
+						<div class="product-item">
+							<div class="pi-pic">
+								<img src="{% static 'img/prog/prog6.png' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6>$35,00</h6>
+								<p>New Node.Js Course </p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="product-item">
+							<div class="pi-pic">
+								<div class="tag-sale">ON SALE</div>
+								<img src="{% static 'img/prog/prog16.png' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6>$35,00</h6>
+								<p>New C# Course</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="product-item">
+							<div class="pi-pic">
+								<img src="{% static 'img/prog/prog8.png' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6>$35,00</h6>
+								<p>New Python Course </p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="product-item">
+							<div class="pi-pic">
+								<img src="{% static 'img/prog/prog9.jpg' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6>$35,00</h6>
+								<p>New C Prog Course </p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="product-item">
+							<div class="pi-pic">
+								<img src="{% static 'img/prog/prog10.jpg' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6>$35,00</h6>
+								<p>New Networking Course </p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="product-item">
+							<div class="pi-pic">
+								<img src="{% static 'img/prog/prog11.png' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6>$35,00</h6>
+								<p>New Django Course</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="product-item">
+							<div class="pi-pic">
+								<img src="{% static 'img/prog/prog17.jpg' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6>$35,00</h6>
+								<p>New Javascript Course </p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-6">
+						<div class="product-item">
+							<div class="pi-pic">
+								<img src="{% static 'img/prog/prog13.jpg' %}" alt="">
+								<div class="pi-links">
+									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+								</div>
+							</div>
+							<div class="pi-text">
+								<h6>$35,00</h6>
+								<p>New PHP Course </p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-center pb-3">
+					<button class="site-btn sb-line sb-dark">GET MORE COURSES</button>
+				</div>
+			</div>
+		</section>
+		<!-- Product filter section end -->
+
+
+		<!-- Banner section -->
+		<section class="banner-section">
+			<div class="container-fluid">
+				<div class="banner set-bg" data-setbg="{% static 'img/banner-bg.jpg' %}">
+					<div class="tag-new">Trending</div>
+					<span>Best Rated Course</span>
+					<!-- <span>Best Rated Course</span> -->
+					<h2 style="color: #1d4354;">PYTHON</h2>
+					<a href="#" class="site-btn">REGISTER NOW</a>
+				</div>
+			</div>
+		</section>
+		<!-- Banner section end  -->
+
+		<!--Clients logos-->
+		<section>
+			<div class="container-fluid mb-4">
+				<h4 style="color: #1d4354;">ORGANIZATIONS THAT TRUST US</h4>
+				<div class="social-links mt-3">
+					<a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+					<a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
+					<a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
+					<a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+					<a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+					<a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
+					<a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
+					<a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
+					<a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
+				</div>
+			</div>
+		</section>
+		<!--Clients logos-->
 {% endblock body %}

@@ -14,6 +14,16 @@ class UserManager(BaseUserManager):
 
         return user
     
+    def create_tutor(self, username, password=True, **extra_fields):
+        extra_fields.setdefault('is_tutor', True)
+
+        return self._create_user(username, password, **extra_fields)
+
+    def create_student(self, username, password=True, **extra_fields):
+        extra_fields.setdefault('is_student', True)
+
+        return self._create_user(username, password, **extra_fields)
+
     def create_user(self, username, password=True, **extra_fields):
         extra_fields.setdefault('is_admin', False)
 

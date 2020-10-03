@@ -1,15 +1,16 @@
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-# from django.contrib.contenttypes.fields import GenericForeignKey
-# from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 # from django.contrib.contenttypes.fields import GenericRelation
+from django.urls import reverse
 from django.utils.text import slugify
 import os
 import random
 
 from . import managers
-from LMS import settings
+from NodeWe import settings
 
 # User Models
 
@@ -20,7 +21,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
     username = models.CharField(max_length=100, blank=False, unique=True)
-    email = models.EmailField(blank=True)
+    email = models.EmailField(blank=False)
     date = models.DateTimeField(auto_now=True)
     last_updated = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True, blank=True)
@@ -154,6 +155,12 @@ class Course(models.Model):
 	def get_course(self):
 		return self.course
 
+	def get_absolute_url(self):
+		return reverse('Home:courseDetails', args=[self.slug])
+
+	def like_item(self):
+		return reverse('Home:likeCourse', args=[self.slug])
+
 	class Meta:
 		verbose_name = 'Course'
 		verbose_name_plural = 'Courses'
@@ -186,6 +193,22 @@ class CourseLike(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	course = models.ForeignKey(Course, on_delete=models.CASCADE)
 	status = models.BooleanField(default=False)
+
+	def __str__(self):
+		return f'{self.user}-_-{self.course}'
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField(blank=True)
+    content_object = GenericForeignKey('item', 'object_id')
+    status = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now=True)
+    last_updated = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+    	return f'{self.user}-_-{self.item}'
 
 
 # class Like(models.Model):

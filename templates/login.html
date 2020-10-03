@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
 	<title>Tutor Login | NodeWe</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-<link rel="shortcut icon" href="../img/png/logomark_tranparent.png" type="image/x-icon">
+<link rel="shortcut icon" href="{% static 'img/png/logomark_tranparent.png' %}" type="image/x-icon">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/vendor/bootstrap/css/bootstrap.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/vendor/animate/animate.css' %}">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/vendor/css-hamburgers/hamburgers.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/vendor/animsition/css/animsition.min.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/vendor/select2/select2.min.css' %}">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/vendor/daterangepicker/daterangepicker.css' %}">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'join/css/main.css' %}">
 <!--===============================================================================================-->
 </head>
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('../img/bg-2.png');">
+		<div class="container-login100" style="background-image: url({% static "img/bg-2.png" %});">
 			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
 				<div class="logo" style="text-align: center;">
-					<img src="../img/png/node_we_colored-transparent.png" alt="logo" style="height: 100px; width:100px;">
+					<img src="{% static 'img/png/node_we_colored-transparent.png' %}" alt="logo" style="height: 100px; width:100px;">
 				</div>
-				<form class="login100-form validate-form flex-sb flex-w">
+				<form method="POST" class="login100-form validate-form flex-sb flex-w">
+					{% csrf_token %}
+
+					<!-- error messsage -->
+					
+					{% for message in messages %}
+						{{ message }} <!-- message -->
+					{% endfor %}
+
 					<span class="login100-form-title p-b-53">
 						Welcome back.
 					</span>
@@ -46,7 +55,7 @@
 					</a>
 
 					<a href="#" class="btn-google m-b-20">
-						<img src="images/icons/icon-google.png" alt="GOOGLE">
+						<img src="{% static 'join/images/icons/icon-google.png' %}" alt="GOOGLE">
 						Proceed with Google
 					</a>
 					
@@ -70,12 +79,12 @@
 						</a>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" >
+						<input class="input100" type="password" name="password" >
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="container-login100-form-btn m-t-17">
-						<button class="login100-form-btn">
+						<button type="submit" class="login100-form-btn">
 							Sign In
 						</button>
 					</div>
@@ -85,7 +94,7 @@
 							Not a member?
 						</span>
 
-						<a href="#" class="txt2 bo1">
+						<a href="{% url 'Home:register' %}" class="txt2 bo1">
 							Sign up now
 						</a>
 					</div>
@@ -98,21 +107,21 @@
 	<div id="dropDownSelect1"></div>
 	
 <!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="{% static 'join/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="{% static 'join/vendor/animsition/js/animsition.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="{% static 'join/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'join/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="{% static 'join/vendor/select2/select2.min.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="{% static 'join/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'join/vendor/daterangepicker/daterangepicker.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="{% static 'join/vendor/countdowntime/countdowntime.js' %}"></script>
 <!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<script src="{% static 'join/js/main.js' %}"></script>
 
 </body>
 </html>

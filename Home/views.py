@@ -4,10 +4,12 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 from . import models
 from . import forms
+from . import utils
+
 
 # Errors
 
@@ -34,21 +36,47 @@ def Error500(request, exception=None):
 	
 	return render(request, template_name)
 
+# External context
+
+def external_context(request=None):
+	courses = models.Course.objects.all().order_by('-popularity', '-views', '-last_updated')
+	categories = models.Category.objects.all().order_by('-popularity', '-views', '-last_updated')
+
+	user = request.user
+	if request.user.is_authenticated:
+		user = request.user
+
+	context = {
+		'user': user,
+		'courses': courses,
+		'categories': categories
+	}
+
+	return context
 
 # Authentification
 
 
 def signUp(request):
-	template_name = 'signUp.html'
+	template_name = 'register.html'
 	context = {
 
 	}
+
+	if request.method == 'POST':
+		signUpForm = forms.SignUpForm(request.POST)
+		if signUpForm.is_valid():
+			signUpForm.save()
+
+			return redirect('Home:login')
+		else:
+			return redirect('Home:register')
 
 	return render(request, template_name, context)
 
 
 def signIn(request):
-	template_name = 'signIn.html'
+	template_name = 'login.html'
 	context = {
 
 	}
@@ -58,7 +86,7 @@ def signIn(request):
 		if signInForm.is_valid():
 			username = signInForm.cleaned_data.get('username')
 			password = signInForm.cleaned_data.get('password')
-			print(username, password)
+
 			user = authenticate(
 				username=username,
 				password=password
@@ -70,12 +98,12 @@ def signIn(request):
 				message = 'Login successful !'
 				messages.info(request, message)
 				
-				return redirect('Home:dashboard')
+				return redirect('Home:index')
 			else:
 				message = 'Incorrect Username or Password'
 				messages.warning(request, message)
 
-				return redirect('Home:signIn')
+				return redirect('Home:login')
 	else:
 		signInForm = forms.SignInForm()
 
@@ -86,36 +114,52 @@ def signIn(request):
 
 
 def IndexView(request):
-	courses = models.Course.objects.all().order_by('-popularity', '-views', '-last_updated')
-
 	template_name = 'Home/index.html'
 	context = {
-		'courses': courses
+		
 	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
 
 	return render(request, template_name, context)
 
 
 def categories(request):
-	categories = models.Category.objects.all().order_by('-popularity', '-views', '-last_updated')
+	like = models.CourseLike.objects.all().filter(user=request.user)
 
-	template_name = 'Home/categories.html'
+	template_name = 'Home/category.html'
 	context = {
-		'categories': categories
+		'like': like,
 	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
 
 	return render(request, template_name, context)
 
 
-def CategoryListView(request, slug):
-	category = models.Category.objects.get(slug=slug)
-	courses = models.Course.objects.all().filter(category=category)
+def categoriesDetails(request, slug):
+	pass
 
-	template_name = 'Home/categoryList.html'
+
+def courses(request):
+	pass
+
+
+def courseDetails(request, slug):
+	course = get_object_or_404(models.Course, slug=slug)
+
+	template_name = 'Home/product.html'
 	context = {
-		'category': category,
-		'courses': courses
+		'course': course,
 	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
 
 	return render(request, template_name, context)
 
@@ -169,7 +213,7 @@ def likeCourse(request, slug):
 	course = models.Course.objects.get(slug=slug)
 	user_like = models.CourseLike.objects.get_or_create(
 		user=models.User.objects.get(pk=request.user.id),
-		course=course
+		content_object=course
 	)
 
 	if user_like[0].status:
@@ -182,4 +226,4 @@ def likeCourse(request, slug):
 	user_like[0].save()
 	course.save()
 
-	return redirect('Home:index')
+	return redirect('Home:categories')
