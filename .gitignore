@@ -4,3 +4,5 @@
 /LMS/__pycache__/
 /Media/
 db.sqlite3
+ *.pyc
+ 
