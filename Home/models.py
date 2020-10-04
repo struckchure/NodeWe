@@ -1,20 +1,20 @@
 from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
-# from django.contrib.contenttypes.fields import GenericRelation
 from django.urls import reverse
 from django.utils.text import slugify
+from django.utils import timezone
 import os
 import random
 
 from . import managers
 from NodeWe import settings
 
-# User Models
+# Generics
 
-default_avatar = os.path.join(settings.BASE_DIR, 'static_files/dist/img/course_default.png')
+new_course_frame = timezone.timedelta(days=5)
+
+# User Models
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -82,8 +82,6 @@ class Category(models.Model):
 	description = models.TextField()
 	popularity = models.IntegerField(default=0)
 	views = models.IntegerField(default=0)
-	# popularity = GenericRelation(Like)
-	# views = GenericRelation(Views)
 	date = models.DateTimeField(auto_now=True)
 	last_updated = models.DateTimeField(auto_now_add=True)
 	slug = models.SlugField(blank=True, unique=True)
@@ -111,6 +109,16 @@ class Category(models.Model):
 	def save(self, *args, **kwargs):
 		self.slug = self.custom_slugify(f'{self.category}')
 		super(Category, self).save(*args, **kwargs)
+
+	def get_courses(self, index=3):
+		courses = Course.objects.filter(category=self.id)[:index]
+
+		return courses
+
+	def get_all_courses(self):
+		courses = Course.objects.filter(category=self.id)
+
+		return courses
 
 	class Meta:
 		verbose_name = 'Category'
@@ -161,6 +169,15 @@ class Course(models.Model):
 	def like_item(self):
 		return reverse('Home:likeCourse', args=[self.slug])
 
+	def is_new(self):
+		is_new_course_time = new_course_frame + self.date
+		current_time = timezone.now()
+
+		if is_new_course_time >= current_time:
+			return True
+		else:
+			return False
+
 	class Meta:
 		verbose_name = 'Course'
 		verbose_name_plural = 'Courses'
@@ -196,34 +213,3 @@ class CourseLike(models.Model):
 
 	def __str__(self):
 		return f'{self.user}-_-{self.course}'
-
-
-class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    item = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField(blank=True)
-    content_object = GenericForeignKey('item', 'object_id')
-    status = models.BooleanField(default=False)
-    date_created = models.DateTimeField(auto_now=True)
-    last_updated = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-    	return f'{self.user}-_-{self.item}'
-
-
-# class Like(models.Model):
-# 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-# 	like = models.IntegerField(default=0)
-# 	like_status = models.BooleanField(default=False)
-
-# 	content_type =   models.ForeignKey(ContentType)
-# 	object_id = models.PositiveIntegerField()
-# 	content_object=GenericForeignKey('content_type', 'object_id')
-
-
-# class View(models.Model):
-# 	views = models.IntegerField(default=0)
-
-# 	content_type =   models.ForeignKey(ContentType)
-# 	object_id = models.PositiveIntegerField()
-# 	content_object=GenericForeignKey('content_type', 'object_id')

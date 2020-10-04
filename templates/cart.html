@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/flaticon.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock styles %}
+
+{% block body %}
+	<!-- cart section end -->
+	<section class="cart-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="cart-table">
+						<h3>Your Cart</h3>
+						<div class="cart-table-warp">
+							<table>
+								<thead>
+									<tr>
+										<th class="product-th">Course Title</th>
+										<th class="size-th">Date</th>
+										<th class="total-th">Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="product-col">
+											<img src="{% static 'img/cart/1.jpg' %}" alt="">
+											<div class="pc-title">
+												<h4>Python for Django</h4>
+												<p>$0.00</p>
+											</div>
+										</td>
+										<td class="size-col">
+											<h4>03-05-2020</h4>
+										</td>
+										<td class="total-col">
+											<h4>$0.00</h4>
+										</td>
+									</tr>
+									<tr>
+										<td class="product-col">
+											<img src="{% static 'img/cart/2.jpg' %}" alt="">
+											<div class="pc-title">
+												<h4>Python for Flask</h4>
+												<p>$0.00</p>
+											</div>
+										</td>
+										<td class="size-col">
+											<h4>03-05-2020</h4>
+										</td>
+										<td class="total-col">
+											<h4>$0.00</h4>
+										</td>
+									</tr>
+									<tr>
+										<td class="product-col">
+											<img src="{% static 'img/cart/3.jpg' %}" alt="">
+											<div class="pc-title">
+												<h4>Python for Data Science</h4>
+												<p>$0.00</p>
+											</div>
+										</td>
+										<td class="size-col">
+											<h4>03-05-2020</h4>
+										</td>
+										<td class="total-col">
+											<h4>$0.00</h4>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="total-cost">
+							<h6>Total <span>$0.00</span></h6>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 card-right">
+					<form class="promo-code-form">
+						<input type="text" placeholder="Enter promo code">
+						<button>Submit</button>
+					</form>
+					<a href="" class="site-btn">Proceed to checkout</a>
+					<a href="" class="site-btn sb-dark">Continue shopping</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- cart section end -->
+
+	<!-- Related product section -->
+	<section class="related-product-section">
+		<div class="container">
+			<div class="section-title text-uppercase">
+				<h2>Continue Shopping</h2>
+			</div>
+			<div class="row">
+				<div class="col-lg-3 col-sm-6">
+					<div class="product-item">
+						<div class="pi-pic">
+							<div class="tag-new">New</div>
+							<img src="{% static 'img/prog/prog4.png' %}" alt="">
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6>$35,00</h6>
+							<p>Black and White Stripes Dress</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="product-item">
+						<div class="pi-pic">
+							<img src="{% static 'img/prog/prog5.jpg' %}" alt="">
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6>$35,00</h6>
+							<p>Flamboyant Pink Top </p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="product-item">
+						<div class="pi-pic">
+							<img src="{% static 'img/prog/prog6.png' %}" alt="">
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6>$35,00</h6>
+							<p>Flamboyant Pink Top </p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="product-item">
+						<div class="pi-pic">
+							<img src="{% static 'img/prog/prog2.jpg' %}" alt="">
+							<div class="pi-links">
+								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+							</div>
+						</div>
+						<div class="pi-text">
+							<h6>$35,00</h6>
+							<p>Flamboyant Pink Top </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Related product section end -->
+
+{% endblock %}
+
+{% block scripts %}
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+	<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}

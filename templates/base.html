@@ -47,7 +47,7 @@
 				<div class="row">
 					<div class="col-lg-2 text-center text-lg-left"  style="margin-left: 0;">
 						<!-- logo -->
-						<a href="index.html" class="site-logo">
+						<a href="{% url 'Home:index' %}" class="site-logo">
 							<img src="{% static 'img/png/node_we_horizontal_colored-transparent.png' %}" alt="logo"> 
 						</a>
 					</div>
@@ -72,7 +72,7 @@
 									<i class="flaticon-bag"></i>
 									<span>0</span>
 								</div>
-								<a href="#">Course Cart</a>
+								<a href="{% url 'Home:cartView' %}">Course Cart</a>
 							</div>
 						</div>
 					</div>
@@ -126,6 +126,13 @@
 	<!-- Footer section -->
 	<section class="footer-section">
 		<div class="container">
+			<div class="footer-logo text-center">
+			    <a href="{% url 'Home:index' %}">
+			        <img src="{% static 'img/png/node_we_horizontal_colored-transparent.png' %}" alt="logo"
+			            style="height: 60px; width: 250px;">
+			    </a>
+			</div>
+
 			<div class="row">
 				<div class="col-lg-3 col-sm-6">
 					<div class="footer-widget about-widget">

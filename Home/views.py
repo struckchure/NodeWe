@@ -43,13 +43,17 @@ def external_context(request=None):
 	categories = models.Category.objects.all().order_by('-popularity', '-views', '-last_updated')
 
 	user = request.user
+	courseLikes = None
+	
 	if request.user.is_authenticated:
 		user = request.user
+		courseLikes = models.CourseLike.filter(user=request.user)
 
 	context = {
 		'user': user,
 		'courses': courses,
-		'categories': categories
+		'categories': categories,
+		'courseLikes': courseLikes
 	}
 
 	return context
@@ -126,6 +130,19 @@ def IndexView(request):
 	return render(request, template_name, context)
 
 
+def cartView(request):
+	template_name = 'cart.html'
+	context = {
+		
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
 def categories(request):
 	like = models.CourseLike.objects.all().filter(user=request.user)
 
@@ -141,12 +158,43 @@ def categories(request):
 	return render(request, template_name, context)
 
 
-def categoriesDetails(request, slug):
-	pass
+def allCategories(request):
+	template_name = 'Home/allCategories.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+def categoryDetails(request, slug):
+	category = get_object_or_404(models.Category, slug=slug)
+
+	template_name = 'Home/categoryDetails.html'
+	context = {
+		'category': category
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
 
 
 def courses(request):
-	pass
+	template_name = 'Home/allCategories.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
 
 
 def courseDetails(request, slug):
@@ -213,7 +261,7 @@ def likeCourse(request, slug):
 	course = models.Course.objects.get(slug=slug)
 	user_like = models.CourseLike.objects.get_or_create(
 		user=models.User.objects.get(pk=request.user.id),
-		content_object=course
+		course=course
 	)
 
 	if user_like[0].status:

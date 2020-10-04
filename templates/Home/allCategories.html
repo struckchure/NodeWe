@@ -1,0 +1,372 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block styles %}
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/flaticon.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/animate.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock styles %}
+
+{% block body %}
+	<!-- Page info -->
+	<div class="page-top-info">
+		<div class="container">
+			<h4>All Categories</h4>
+			<div class="site-pagination">
+				<a href="{% url 'Home:index' %}">NodeWe</a> /
+				<a href="{% url 'Home:categories' %}">Categories</a> /
+			</div>
+		</div>
+	</div>
+	<!-- Page info end -->
+
+
+	<!-- Category section -->
+	<section class="category-section spad">
+		<div class="container">
+			<div class="row">
+				
+
+				<div class="col-lg-12  order-1 order-lg-2 mb-5 mb-lg-0">
+					{% for category in categories %}
+						<h5 class="mb-3" style="color: #2b3990;">{{ category.category }}</h5>
+						<div class="row">
+
+							{% if category.get_courses %}
+								{% for course in category.get_courses %}
+									<div class="col-lg-4 col-sm-6">
+										<div class="product-item">
+											<div class="pi-pic">
+												<div class="tag-sale">NEW</div>
+												<img src="{{ course.image.url }}" alt="">
+												<div class="pi-links">
+													<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+													<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+												</div>
+											</div>
+											<div class="pi-text">
+												<h6>$35,00</h6>
+												<p>{{ course.course }}</p>
+											</div>
+										</div>
+									</div>	
+								{% endfor %}
+							{% else %}
+								<div class="col-lg-4 col-sm-6">
+									<h5>No Courses under {{ category }} yet</h5>
+								</div>
+							{% endif %}
+
+							<div class="text-center w-100 pt-2 mb-5">
+								<button class="site-btn sb-line sb-dark">SEE ALL</button>
+							</div>
+						</div>
+					{% endfor %}
+					<!--
+
+					<h5 class="mb-3" style="color: #2b3990;">Programming</h5>
+					<div class="row">
+						
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<div class="tag-sale">NEW</div>
+									<img src="{% static 'img/prog/prog6.png' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>$35,00</h6>
+									<p>New Python Course</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<img src="{% static 'img/prog/prog7.jpg' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>$35,00</h6>
+									<p>New Python Course</p>
+								</div>
+							</div>
+						</div>
+					
+					
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<img src="{% static 'img/prog/prog11.png' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>$35,00</h6>
+									<p>New Python Course</p>
+								</div>
+							</div>
+						</div>
+						<div class="text-center w-100 pt-2 mb-5">
+							<button class="site-btn sb-line sb-dark">SEE ALL</button>
+						</div>
+					</div>
+
+					<h5 class="mb-3" style="color: #2b3990;">Engineering</h5>
+					<div class="row">
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<img src="{% static 'img/prog/prog9.jpg' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>$35,00</h6>
+									<p>New Python Course</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<img src="{% static 'img/prog/prog10.jpg' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>$35,00</h6>
+									<p>New Python Course</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<img src="{% static 'img/prog/prog8.png' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>$35,00</h6>
+									<p>New Python Course</p>
+								</div>
+							</div>
+						</div>
+						<div class="text-center w-100 pt-2 mb-5">
+							<button class="site-btn sb-line sb-dark">SEE ALL</button>
+						</div>
+						</div>
+						<h5 class="mb-3" style="color: #2b3990;">Design</h5>
+					<div class="row">
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<div class="tag-sale">NEW</div>
+									<img src="{% static 'img/prog/prog6.png' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>$35,00</h6>
+									<p>New Python Course</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<img src="{% static 'img/prog/prog7.jpg' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>$35,00</h6>
+									<p>New Python Course</p>
+								</div>
+							</div>
+						</div>
+					
+						
+						<div class="col-lg-4 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<img src="{% static 'img/prog/prog11.png' %}" alt="">
+									<div class="pi-links">
+										<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+										<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>$35,00</h6>
+									<p>New Python Course</p>
+								</div>
+							</div>
+						</div>
+					<div class="text-center w-100 pt-2 mb-5">
+						<button class="site-btn sb-line sb-dark">SEE ALL</button>
+					</div>
+					</div>
+					<h5 class="mb-3" style="color: #2b3990;">Finance</h5>
+
+					<div class="row">
+							<div class="col-lg-4 col-sm-6">
+								<div class="product-item">
+									<div class="pi-pic">
+										<img src="{% static 'img/prog/prog9.jpg' %}" alt="">
+										<div class="pi-links">
+											<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+											<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+										</div>
+									</div>
+									<div class="pi-text">
+										<h6>$35,00</h6>
+										<p>New Python Course</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 col-sm-6">
+								<div class="product-item">
+									<div class="pi-pic">
+										<img src="{% static 'img/prog/prog10.jpg' %}" alt="">
+										<div class="pi-links">
+											<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+											<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+										</div>
+									</div>
+									<div class="pi-text">
+										<h6>$35,00</h6>
+										<p>New Python Course</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-4 col-sm-6">
+								<div class="product-item">
+									<div class="pi-pic">
+										<img src="{% static 'img/prog/prog10.jpg' %}" alt="">
+										<div class="pi-links">
+											<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+											<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+										</div>
+									</div>
+									<div class="pi-text">
+										<h6>$35,00</h6>
+										<p>New Python Course</p>
+									</div>
+								</div>
+							</div>
+							<div class="text-center w-100 pt-3">
+								<button class="site-btn sb-line sb-dark">SEE MORE</button>
+							</div>
+					</div>
+					-->
+				</div>
+				
+			</div>
+		</div>
+	</section>
+
+	<section class="other-categories mb-5">
+		<div class="container">
+			<div class="card">
+				<div class="card-header" style="background-color:#2b3990; color: #ffffff;">
+					Other Categories
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-3 col-lg-3 col-sm-4">
+							<ul class="pl-3">
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-3 col-lg-3 col-sm-4">
+							<ul class="pl-3">
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-3 col-lg-3 col-sm-4">
+							<ul class="pl-3">
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-md-3 col-lg-3 col-sm-4">
+							<ul class="pl-3">
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+								<li>
+									<a class="text-dark" href="#">Programming</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Category section end -->
+{% endblock %}
+
+{% block scripts %}
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+	<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'js/jquery.nicescroll.min.js' %}"></script>
+	<script src="{% static 'js/jquery.zoom.min.js' %}"></script>
+	<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+{% endblock scripts %}

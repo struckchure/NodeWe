@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'livereload',
     'django.contrib.staticfiles',
 
     'Home',
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'NodeWe.urls'
@@ -124,18 +126,10 @@ AUTH_USER_MODEL = 'Home.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
 STATIC_URL = '/static_files/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_files')
 ]
-
-# STATICFILES_DIRS = [
-#     os.path.join(STATIC_ROOT, 'admin'),
-#     os.path.join(STATIC_ROOT, 'css'),
-#     os.path.join(STATIC_ROOT, 'js'),
-#     os.path.join(STATIC_ROOT, 'img'), 
-# ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 MEDIA_URL = '/Media/'
