@@ -60,6 +60,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_courses(self):
     	return reverse('Home:userCourses')
 
+    def get_user_courses(self):
+    	courses = Course.objects.filter(tutor=self.id)
+
+    	return courses
+
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'
@@ -84,7 +89,6 @@ class Category(models.Model):
 	image = models.FileField(upload_to='Images/', blank=True)
 	description = models.TextField()
 	popularity = models.IntegerField(default=0)
-	views = models.IntegerField(default=0)
 	date = models.DateTimeField(auto_now=True)
 	last_updated = models.DateTimeField(auto_now_add=True)
 	slug = models.SlugField(blank=True, unique=True)
@@ -111,6 +115,7 @@ class Category(models.Model):
 
 	def save(self, *args, **kwargs):
 		self.slug = self.custom_slugify(f'{self.category}')
+
 		super(Category, self).save(*args, **kwargs)
 
 	def get_courses(self, index=3):
@@ -123,6 +128,16 @@ class Category(models.Model):
 
 		return courses
 
+	def get_tutor_courses(self):
+		courses = Course.objects.filter(category=self.id)
+
+		return courses
+
+	def get_sub_categories(self):
+		sub_categories = SubCategory.objects.filter(category=self.id)
+
+		return sub_categories
+
 	def get_absolute_url(self):
 		return reverse('Home:categoryDetails', args=[self.slug])
 
@@ -131,17 +146,29 @@ class Category(models.Model):
 		verbose_name_plural = 'Categories'
 
 
+class SubCategory(models.Model):
+	category = models.ForeignKey(Category, on_delete=models.CASCADE)
+	sub_category = models.CharField(max_length=200, blank=False)
+
+	def __str__(self):
+		return f'{self.category}-_-{self.sub_category}'
+
+	class Meta:
+		verbose_name = 'Sub Category'
+		verbose_name_plural = 'Sub categories'
+
+
 class Course(models.Model):
-	# tutor = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+	tutor = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True)
 	category = models.ForeignKey(Category, on_delete=models.CASCADE)
 	course = models.CharField(max_length=200, blank=False)
-	image = models.FileField(upload_to='Images/', blank=True, default='default_avatar')
+	image = models.FileField(upload_to='Images/courses', blank=True, default='default_avatar')
 	description = models.TextField(blank=False)
 	popularity = models.IntegerField(default=0)
 	price = models.PositiveIntegerField(default=0)
-	views = models.IntegerField(default=0)
-	date = models.DateTimeField(auto_now=True)
-	last_updated = models.DateTimeField(auto_now_add=True)
+	views = models.ManyToManyField(User, related_name='views', blank=True)
+	date = models.DateTimeField(auto_now_add=True)
+	last_updated = models.DateTimeField(auto_now=True)
 	slug = models.SlugField(blank=True, unique=True)
 
 	def __str__(self):
@@ -170,6 +197,11 @@ class Course(models.Model):
 
 	def get_course(self):
 		return self.course
+
+	def get_views(self):
+		views = self.views.all()
+
+		return views
 
 	def get_absolute_url(self):
 		return reverse('Home:courseDetails', args=[self.slug])
@@ -236,8 +268,8 @@ class Cart(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	total_items = models.PositiveIntegerField(default=0)
 	total_amount = models.PositiveIntegerField(default=0)
-	date = models.DateTimeField(auto_now=True)
-	last_updated = models.DateTimeField(auto_now_add=True)
+	date = models.DateTimeField(auto_now_add=True)
+	last_updated = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return f'{self.user}'
@@ -247,6 +279,20 @@ class Cart(models.Model):
 
 		return cart_items
 
+	def get_total_amount(self):
+		cart_items = CartItem.objects.filter(cart=self.id)
+		prices = []
+
+		for i in cart_items:
+			prices.append(i.item.price)
+
+		amount = sum(prices)
+		self.total_amount = amount
+
+		super(Cart, self).save()
+
+		return amount
+
 	class Meta:
 		verbose_name = 'Cart'
 		verbose_name_plural = 'Carts'
@@ -255,8 +301,8 @@ class Cart(models.Model):
 class CartItem(models.Model):
 	cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
 	item = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
-	date = models.DateTimeField(auto_now=True)
-	last_updated = models.DateTimeField(auto_now_add=True)
+	date = models.DateTimeField(auto_now_add=True)
+	last_updated = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return f'{self.cart}-_-{self.item}'

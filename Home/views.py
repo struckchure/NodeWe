@@ -42,7 +42,7 @@ def Error500(request, exception=None):
 
 def external_context(request=None):
 	courses = models.Course.objects.all().order_by('-popularity', '-views', '-last_updated')
-	categories = models.Category.objects.all().order_by('-popularity', '-views', '-last_updated')
+	categories = models.Category.objects.all().order_by('-popularity', '-last_updated')
 	tutors = get_user_model().objects.filter(is_tutor=True, is_active=True)
 
 	cart = None
@@ -199,9 +199,18 @@ def addToCart(request, slug):
 def userCourses(request):
 	request.session['next'] = request.path
 
+	if request.user.is_tutor:
+		courses = models.Course.objects.filter(tutor=request.user).order_by('-popularity', '-views', '-last_updated')
+		categories = models.Category.objects.all().order_by('-popularity', '-last_updated')
+	else:
+		courses = models.Course.objects.filter().order_by('-popularity', '-views', '-last_updated')
+		categories = models.Category.objects.all().order_by('-popularity', '-last_updated')
+
 	template_name = 'Home/allCategories.html'
 	context = {
-		'all_courses_header': 'My Courses'
+		'all_courses_header': 'My Courses',
+		'courses': courses,
+		'categories': categories
 	}
 	context = utils.dictMerge(
 		external_context(request),

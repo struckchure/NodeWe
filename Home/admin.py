@@ -28,17 +28,17 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class CourseAdmin(admin.ModelAdmin):
-	list_display = ('category', 'description',)
+	list_display = ('category', 'description', 'date', 'last_updated')
 	search_fields = ('category', 'description',)
 	fieldsets = (
 	    ('New Course', {
-	        'fields': ('category', 'course', 'description', 'image', 'price')
+	        'fields': ('tutor', 'category', 'course', 'description', 'image', 'price')
 	    	}
 	    ),
-	    # ('Ratings', {
-	    # 	'fields': ('popularity', 'views',)
-	    # 	}
-	    # )
+	    ('Ratings', {
+	    	'fields': ('popularity', 'views',)
+	    	}
+	    )
 	)
 
 class CourseItemAdmin(admin.ModelAdmin):
@@ -48,6 +48,7 @@ class CourseItemAdmin(admin.ModelAdmin):
 admin.site.register(models.User)
 admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Category, CategoryAdmin)
+admin.site.register(models.SubCategory)
 admin.site.register(models.Course, CourseAdmin)
 admin.site.register(models.CourseItem, CourseItemAdmin)
 admin.site.register(models.Cart)
