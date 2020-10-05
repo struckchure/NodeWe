@@ -3,8 +3,10 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse
 
 from . import models
 from . import forms
@@ -41,6 +43,7 @@ def Error500(request, exception=None):
 def external_context(request=None):
 	courses = models.Course.objects.all().order_by('-popularity', '-views', '-last_updated')
 	categories = models.Category.objects.all().order_by('-popularity', '-views', '-last_updated')
+	tutors = get_user_model().objects.filter(is_tutor=True, is_active=True)
 
 	cart = None
 	user = None
@@ -54,9 +57,28 @@ def external_context(request=None):
 		'cart': cart,
 		'courses': courses,
 		'categories': categories,
+		'tutors': tutors,
+		'all_courses_header': 'Courses'
 	}
 
 	return context
+
+
+# Default view format
+
+def Default(request):
+	request.session['next'] = request.path
+	
+	template_name = 'default.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
 
 # Authentification
 
@@ -139,6 +161,8 @@ def IndexView(request):
 
 
 def cartView(request):
+	request.session['next'] = request.path
+
 	template_name = 'cart.html'
 	context = {
 		
@@ -152,7 +176,7 @@ def cartView(request):
 
 
 def addToCart(request, slug):
-	next_url = request.GET.get('next')
+	next_url = request.session['next']
 
 	item = get_object_or_404(models.Course, slug=slug)
 	cart =  get_object_or_404(models.Cart, user=request.user)
@@ -167,10 +191,29 @@ def addToCart(request, slug):
 	if not next_url:
 		next_url = item.get_absolute_url()
 
+	# next_url = request.path
+
 	return redirect(next_url)
 
 
+def userCourses(request):
+	request.session['next'] = request.path
+
+	template_name = 'Home/allCategories.html'
+	context = {
+		'all_courses_header': 'My Courses'
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
 def categories(request):
+	request.session['next'] = request.path
+
 	like = models.CourseLike.objects.all().filter(user=request.user)
 
 	template_name = 'Home/category.html'
@@ -186,6 +229,8 @@ def categories(request):
 
 
 def allCategories(request):
+	request.session['next'] = request.path
+
 	template_name = 'Home/allCategories.html'
 	context = {
 	}
@@ -198,6 +243,8 @@ def allCategories(request):
 
 
 def categoryDetails(request, slug):
+	request.session['next'] = request.path
+
 	category = get_object_or_404(models.Category, slug=slug)
 
 	template_name = 'Home/categoryDetails.html'
@@ -213,6 +260,8 @@ def categoryDetails(request, slug):
 
 
 def courses(request):
+	request.session['next'] = request.path
+
 	template_name = 'Home/allCategories.html'
 	context = {
 	}
@@ -225,6 +274,8 @@ def courses(request):
 
 
 def courseDetails(request, slug):
+	request.session['next'] = request.path
+
 	course = get_object_or_404(models.Course, slug=slug)
 
 	template_name = 'Home/product.html'
@@ -241,6 +292,8 @@ def courseDetails(request, slug):
 
 @login_required(login_url='Home:signIn')
 def dashBoard(request):
+	request.session['next'] = request.path
+
 	user = models.User.objects.get(pk=request.user.id)
 
 	template_name = 'dashboard.html'
@@ -252,6 +305,8 @@ def dashBoard(request):
 
 
 def CourseListView(request, slug):
+	request.session['next'] = request.path
+
 	course = models.Course.objects.get(slug=slug)
 	videos = models.CourseItem.objects.all().filter(course=course)
 
@@ -265,6 +320,8 @@ def CourseListView(request, slug):
 
 
 def likeCategory(request, slug):
+	next_url = request.session['next']
+
 	category = models.Category.objects.get(slug=slug)
 	user_like = models.CategoryLike.objects.get_or_create(
 		user=models.User.objects.get(pk=request.user.id),
@@ -281,10 +338,12 @@ def likeCategory(request, slug):
 	user_like[0].save()
 	category.save()
 
-	return redirect('Home:categories')
+	return redirect(next_url)
 
 
 def likeCourse(request, slug):
+	next_url = request.session['next']
+
 	course = models.Course.objects.get(slug=slug)
 	user_like = models.CourseLike.objects.get_or_create(
 		user=models.User.objects.get(pk=request.user.id),
@@ -301,4 +360,4 @@ def likeCourse(request, slug):
 	user_like[0].save()
 	course.save()
 
-	return redirect('Home:categories')
+	return redirect(next_url)

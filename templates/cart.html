@@ -128,67 +128,33 @@
 				<h2>Continue Shopping</h2>
 			</div>
 			<div class="row">
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<div class="tag-new">New</div>
-							<img src="{% static 'img/prog/prog4.png' %}" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Black and White Stripes Dress</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{% static 'img/prog/prog5.jpg' %}" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{% static 'img/prog/prog6.png' %}" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{% static 'img/prog/prog2.jpg' %}" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6>$35,00</h6>
-							<p>Flamboyant Pink Top </p>
-						</div>
-					</div>
-				</div>
+				{% for course in courses %}
+					<div class="col-lg-3 col-sm-6">
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                {% if course.is_new %}                                        
+                                    <div class="tag-sale">NEW</div>
+                                {% endif %}
+                                <img src="{{ course.image.url }}" alt="">
+                                <div class="pi-links">
+                                    <a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
+                                            CART</span></a>
+                                    <a href="{{ course.like_item }}" class="wishlist-btn">
+                                        {% if user.username in course.get_user_likes %}
+                                            <i class="flaticon-heart"></i> <!-- clicked -->
+                                        {% else %}
+                                            <i class="flaticon-heart"></i> <!-- not clicked -->
+                                        {% endif %}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="pi-text">
+                                <h6>${{ course.price }}</h6>
+                                <p>{{ course.course }}</p>
+                            </div>
+                        </div>
+                    </div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>

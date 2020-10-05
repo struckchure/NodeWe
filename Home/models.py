@@ -57,6 +57,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
 
+    def get_courses(self):
+    	return reverse('Home:userCourses')
+
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'
@@ -120,12 +123,16 @@ class Category(models.Model):
 
 		return courses
 
+	def get_absolute_url(self):
+		return reverse('Home:categoryDetails', args=[self.slug])
+
 	class Meta:
 		verbose_name = 'Category'
 		verbose_name_plural = 'Categories'
 
 
 class Course(models.Model):
+	# tutor = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 	category = models.ForeignKey(Category, on_delete=models.CASCADE)
 	course = models.CharField(max_length=200, blank=False)
 	image = models.FileField(upload_to='Images/', blank=True, default='default_avatar')

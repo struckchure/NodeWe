@@ -13,6 +13,7 @@ urlpatterns = [
 	path('account/', views.dashBoard, name='dashboard'),
 	path('account/login/', views.signIn, name='login'),
 	path('account/register/', views.signUp, name='register'),
+	path('account/courses/', views.userCourses, name='userCourses'),
 	path('account/cart', views.cartView, name='cartView'),
 	path('account/cart/add/<slug:slug>/', views.addToCart, name='addToCart'),
 

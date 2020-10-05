@@ -160,87 +160,12 @@
 					<h4 style="color: #1d4354;">LATEST COURSES</h4>
 				</div>
 				<div class="product-slider owl-carousel">
-					<!--
-
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{% static 'img/prog/prog1.jpg' %}" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6><del>N</del>0.00</h6>
-							<p>Python Course </p>
-						</div>
-					</div>
-					
-					<div class="product-item">
-						<div class="pi-pic">
-							<div class="tag-new">New</div>
-							<img src="{% static 'img/prog/prog2.jpg' %}" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6><del>N</del>0.00</h6>
-							<p>C++ Course</p>
-						</div>
-					</div>
-					
-					<div class="product-item">
-						<div class="pi-pic">
-							<img src="{% static 'img/prog/prog3.jpeg' %}" alt="">
-							<div class="pi-links">
-								<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-								<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-							</div>
-						</div>
-						<div class="pi-text">
-							<h6><del>N</del>0.00</h6>
-							<p>C# Courses </p>
-						</div>
-					</div>
-					
-					<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/prog/prog4.png' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6><del>N</del>0.00</h6>
-								<p>Java Courses </p>
-							</div>
-					</div>
-					
-					<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/prog/prog5.jpg' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6><del>N</del>0.00</h6>
-								<p>JavaScript Course </p>
-							</div>
-					</div>
-
-					-->
-
 					{% for course in courses %}
 						<div class="product-item">
 							<div class="pi-pic">
 								<img src="{{ course.image.url }}" alt="">
 								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+									<a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
 									<a href="{{ course.like_item }}" class="wishlist-btn"><i class="flaticon-heart"></i></a>
 								</div>
 							</div>
@@ -298,127 +223,33 @@
 				</div>
 
 				<div class="row">
-					<div class="col-lg-3 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/prog/prog6.png' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6>$35,00</h6>
-								<p>New Node.Js Course </p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<div class="tag-sale">ON SALE</div>
-								<img src="{% static 'img/prog/prog16.png' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6>$35,00</h6>
-								<p>New C# Course</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/prog/prog8.png' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6>$35,00</h6>
-								<p>New Python Course </p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/prog/prog9.jpg' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6>$35,00</h6>
-								<p>New C Prog Course </p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/prog/prog10.jpg' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6>$35,00</h6>
-								<p>New Networking Course </p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/prog/prog11.png' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6>$35,00</h6>
-								<p>New Django Course</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/prog/prog17.jpg' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6>$35,00</h6>
-								<p>New Javascript Course </p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-sm-6">
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{% static 'img/prog/prog13.jpg' %}" alt="">
-								<div class="pi-links">
-									<a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6>$35,00</h6>
-								<p>New PHP Course </p>
-							</div>
-						</div>
-					</div>
+					{% for course in courses %}
+						<div class="col-lg-3 col-sm-6">
+                            <div class="product-item">
+                                <div class="pi-pic">
+                                    {% if course.is_new %}                                        
+                                        <div class="tag-sale">NEW</div>
+                                    {% endif %}
+                                    <img src="{{ course.image.url }}" alt="">
+                                    <div class="pi-links">
+                                        <a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
+                                                CART</span></a>
+                                        <a href="{{ course.like_item }}" class="wishlist-btn">
+                                            {% if user.username in course.get_user_likes %}
+                                                <i class="flaticon-heart"></i> <!-- clicked -->
+                                            {% else %}
+                                                <i class="flaticon-heart"></i> <!-- not clicked -->
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="pi-text">
+                                    <h6>${{ course.price }}</h6>
+                                    <p>{{ course.course }}</p>
+                                </div>
+                            </div>
+                        </div>
+					{% endfor %}
 				</div>
 				<div class="text-center pb-3">
 					<button class="site-btn sb-line sb-dark">GET MORE COURSES</button>
