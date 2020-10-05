@@ -42,18 +42,18 @@ def external_context(request=None):
 	courses = models.Course.objects.all().order_by('-popularity', '-views', '-last_updated')
 	categories = models.Category.objects.all().order_by('-popularity', '-views', '-last_updated')
 
-	user = request.user
-	courseLikes = None
-	
+	cart = None
+	user = None
+
 	if request.user.is_authenticated:
 		user = request.user
-		courseLikes = models.CourseLike.filter(user=request.user)
+		cart, created = models.Cart.objects.get_or_create(user=user)
 
 	context = {
 		'user': user,
+		'cart': cart,
 		'courses': courses,
 		'categories': categories,
-		'courseLikes': courseLikes
 	}
 
 	return context
@@ -66,6 +66,10 @@ def signUp(request):
 	context = {
 
 	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
 
 	if request.method == 'POST':
 		signUpForm = forms.SignUpForm(request.POST)
@@ -84,6 +88,10 @@ def signIn(request):
 	context = {
 
 	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
 
 	if request.method == 'POST':
 		signInForm = forms.SignInForm(request.POST)
@@ -141,6 +149,25 @@ def cartView(request):
 	)
 
 	return render(request, template_name, context)
+
+
+def addToCart(request, slug):
+	next_url = request.GET.get('next')
+
+	item = get_object_or_404(models.Course, slug=slug)
+	cart =  get_object_or_404(models.Cart, user=request.user)
+
+	new_cart_item, created = models.CartItem.objects.get_or_create(
+		cart=cart,
+		item=item
+	)
+
+	new_cart_item.save()
+
+	if not next_url:
+		next_url = item.get_absolute_url()
+
+	return redirect(next_url)
 
 
 def categories(request):

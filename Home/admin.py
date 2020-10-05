@@ -32,7 +32,7 @@ class CourseAdmin(admin.ModelAdmin):
 	search_fields = ('category', 'description',)
 	fieldsets = (
 	    ('New Course', {
-	        'fields': ('category', 'course', 'description', 'image', 'slug')
+	        'fields': ('category', 'course', 'description', 'image', 'price')
 	    	}
 	    ),
 	    # ('Ratings', {
@@ -50,4 +50,5 @@ admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Course, CourseAdmin)
 admin.site.register(models.CourseItem, CourseItemAdmin)
-admin.site.register(models.CourseLike)
+admin.site.register(models.Cart)
+admin.site.register(models.CartItem)

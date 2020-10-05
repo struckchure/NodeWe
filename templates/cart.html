@@ -31,6 +31,26 @@
 									</tr>
 								</thead>
 								<tbody>
+									
+									{% for course in cart.cart_items %}
+										<tr>
+											<td class="product-col">
+												<img src="{{ course.item.image.url }}" alt="">
+												<div class="pc-title">
+													<h4>{{ course.item.course }}</h4>
+													<p>$ {{ course.item.price }}</p>
+												</div>
+											</td>
+											<td class="size-col">
+												<h4>{{ course.item.date }}</h4>
+											</td>
+											<td class="total-col">
+												<h4>$ {{ course.item.price }}</h4>
+											</td>
+										</tr>
+									{% endfor %}
+
+									<!--
 									<tr>
 										<td class="product-col">
 											<img src="{% static 'img/cart/1.jpg' %}" alt="">
@@ -46,6 +66,7 @@
 											<h4>$0.00</h4>
 										</td>
 									</tr>
+									
 									<tr>
 										<td class="product-col">
 											<img src="{% static 'img/cart/2.jpg' %}" alt="">
@@ -61,6 +82,7 @@
 											<h4>$0.00</h4>
 										</td>
 									</tr>
+
 									<tr>
 										<td class="product-col">
 											<img src="{% static 'img/cart/3.jpg' %}" alt="">
@@ -76,11 +98,13 @@
 											<h4>$0.00</h4>
 										</td>
 									</tr>
+									-->
+
 								</tbody>
 							</table>
 						</div>
 						<div class="total-cost">
-							<h6>Total <span>$0.00</span></h6>
+							<h6>Total <span>$ {{ cart.total_amount }}</span></h6>
 						</div>
 					</div>
 				</div>

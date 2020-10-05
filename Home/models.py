@@ -131,6 +131,7 @@ class Course(models.Model):
 	image = models.FileField(upload_to='Images/', blank=True, default='default_avatar')
 	description = models.TextField(blank=False)
 	popularity = models.IntegerField(default=0)
+	price = models.PositiveIntegerField(default=0)
 	views = models.IntegerField(default=0)
 	date = models.DateTimeField(auto_now=True)
 	last_updated = models.DateTimeField(auto_now_add=True)
@@ -178,6 +179,15 @@ class Course(models.Model):
 		else:
 			return False
 
+	def get_user_likes(self):
+		likes = CourseLike.objects.filter(course=self.id, status=True)
+		users = []
+
+		for like in likes:
+			users.append(like.user.username)
+
+		return users
+
 	class Meta:
 		verbose_name = 'Course'
 		verbose_name_plural = 'Courses'
@@ -213,3 +223,51 @@ class CourseLike(models.Model):
 
 	def __str__(self):
 		return f'{self.user}-_-{self.course}'
+
+
+class Cart(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	total_items = models.PositiveIntegerField(default=0)
+	total_amount = models.PositiveIntegerField(default=0)
+	date = models.DateTimeField(auto_now=True)
+	last_updated = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return f'{self.user}'
+
+	def cart_items(self):
+		cart_items = CartItem.objects.filter(cart=self.id)
+
+		return cart_items
+
+	class Meta:
+		verbose_name = 'Cart'
+		verbose_name_plural = 'Carts'
+
+
+class CartItem(models.Model):
+	cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+	item = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
+	date = models.DateTimeField(auto_now=True)
+	last_updated = models.DateTimeField(auto_now_add=True)
+
+	def __str__(self):
+		return f'{self.cart}-_-{self.item}'
+
+	def save(self, *args, **kwargs):
+		cart = Cart.objects.get(user=self.cart.user)
+		
+		try:
+			item = CartItem.objects.get(cart=cart, item=self.item)
+		except CartItem.DoesNotExist:
+			cart.total_items += 1
+			cart.total_amount += self.item.price
+
+		cart.save()
+
+		super(CartItem, self).save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = 'Cart item'
+		verbose_name_plural = 'Cart items'
+

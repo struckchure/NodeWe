@@ -47,9 +47,15 @@
                                         {% endif %}
                                         <img src="{{ course.image.url }}" alt="">
                                         <div class="pi-links">
-                                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
+                                            <a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
                                                     CART</span></a>
-                                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                                            <a href="{{ course.like_item }}" class="wishlist-btn">
+                                                {% if user.username in course.get_user_likes %}
+                                                    <i class="flaticon-heart"></i> <!-- clicked -->
+                                                {% else %}
+                                                    <i class="flaticon-heart"></i> <!-- not clicked -->
+                                                {% endif %}
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="pi-text">
