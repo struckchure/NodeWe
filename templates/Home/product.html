@@ -35,24 +35,23 @@
 	</div>
 	<!-- Page info end -->
 
-
 	<!-- product section -->
 	<section class="product-section">
 		<div class="container">
 			<div class="back-link">
-				<a href="category.html"> &lt;&lt; Back to Category</a>
+				<a href="{{ course.category.get_absolute_url }}"> &lt;&lt; Back to Category</a>
 			</div>
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="card mb-5" style="width: 30rem;">
-						<img src="{% static 'img/prog/prog13.jpg' %}" class="card-img-top" alt="...">
+						<img src="{{ course.image.url }}" class="card-img-top" alt="{{ course }}">
 						<div class="card-body">
 							<h5 class="card-title">This course includes:</h5>
 							<p class="card-text">Lorem ipsum dolor sit amet.</p>
 							<p class="card-text">Lorem ipsum dolor sit amet.</p>
 							<p class="card-text">Lorem ipsum dolor sit amet.</p>
 							<p class="card-text">Lorem ipsum dolor sit amet.</p>
-							<a href="#" class="btn" style="Background-color: #6fda44; color:#fff;">Go to Cart</a>
+							<a href="{% url 'Home:cartView' %}" class="btn" style="Background-color: #6fda44; color:#fff;">Go to Cart</a>
 							<a href="#" class="btn btn-outline-success" style="color: #6fda44;">Buy Now.</a>
 						</div>
 					</div>
@@ -67,7 +66,7 @@
 				</div>
 				<div class="col-lg-6 product-details">
 					<h2 class="p-title">{{ course.course }}</h2>
-					<h3 class="p-price">$0.00</h3>
+					<h3 class="p-price">${{ course.price }}</h3>
 					<h4 class="p-stock">Category: <span>{{ course.category }}</span></h4>
 					<div class="p-rating">
 						<i class="fa fa-star-o"></i>
@@ -79,7 +78,7 @@
 					<div class="p-review">
 						<a href="">3 reviews</a>|<a href="">Add your review</a>
 					</div>
-					<a href="#" class="site-btn">ADD CART <i class="fa fa-cart-plus"></i></a>
+					<a href="{% url 'Home:addToCart' course.slug %}" class="site-btn">ADD CART <i class="fa fa-cart-plus"></i></a>
 					<div id="accordion" class="accordion-area">
 						<div class="panel">
 							<div class="panel-header" id="headingOne">
@@ -88,7 +87,6 @@
 							<div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 								<div class="panel-body">
 									<p>{{ course.description }}</p>
-									
 								</div>
 							</div>
 						</div>

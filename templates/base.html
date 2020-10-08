@@ -83,7 +83,19 @@
 			<div class="container">
 				<!-- menu -->
 				<ul class="main-menu">
-					<li><a href="#">Programming</a></li>
+					{% for section in sections %}
+						<li>
+							<a href="{% url 'Home:categories' %}">{{ section.section }}</a>
+							{% if section.get_categories %}
+								<ul class="sub-menu">
+									{% for category in section.get_categories %}
+										<li><a href="{{ category.get_absolute_url }}">{{ category.category }}</a></li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</li>
+					{% endfor %}
+					<!--
 					<li><a href="#">Finance</a></li>
 					<li><a href="#">Mathematics</a></li>
 					<li><a href="#">Medical
@@ -113,6 +125,7 @@
 					<li><a href="#">Education</a></li>
 					<li><a href="#">Agriculture</a></li>
 					<li><a href="#">Design</a></li>
+					-->
 				</ul>
 			</div>
 		</nav>

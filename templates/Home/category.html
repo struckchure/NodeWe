@@ -59,8 +59,15 @@
 							<li><a href="#">Finance</a></li>
 							<li><a href="#">Design</a></li>
 							-->
-							{% for category in categories %}
-								<li><a href="{% url 'Home:categoryDetails' category.slug %}">{{ category }}</a></li>
+							{% for section in sections %}
+								<li>
+									<a href="#">{{ section }}</a>
+									<ul class="sub-menu">
+										{% for category in section.get_categories %}
+											<li><a href="{{ category.get_absolute_url }}">{{ category.category }} <span>({{ category.get_courses.count }})</span></a></li>
+										{% endfor %}
+									</ul>
+								</li>
 							{% endfor %}
 						</ul>
 					</div>
@@ -178,7 +185,7 @@
 						<h2 class="fw-title">Tutors</h2>
 						<ul class="category-menu">
 							{% for tutor in tutors %}
-								<li><a href="{{ tutor.get_courses }}">{{ tutor.get_full_name }}<span>(2)</span></a></li>
+								<li><a href="{{ tutor.get_courses }}">{{ tutor.get_full_name }}<span>({{ tutor.get_user_courses.count }})</span></a></li>
 							{% endfor %}
 						</ul>
 					</div>
@@ -193,17 +200,21 @@
                                         {% if course.is_new %}                                        
                                             <div class="tag-sale">NEW</div>
                                         {% endif %}
-                                        <img src="{{ course.image.url }}" alt="">
+                                        <a href="{{ course.get_absolute_url }}" title="">
+                                        	<img src="{{ course.image.url }}" alt="">
+                                        </a>
                                         <div class="pi-links">
                                             <a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
                                                     CART</span></a>
-                                            <a href="{{ course.like_item }}" class="wishlist-btn">
-                                                {% if user.username in course.get_user_likes %}
-                                                    <i class="flaticon-heart"></i> <!-- clicked -->
-                                                {% else %}
-                                                    <i class="flaticon-heart"></i> <!-- not clicked -->
-                                                {% endif %}
-                                            </a>
+                                            {% if user.username in course.get_user_likes %}
+                                            	<a href="{{ course.like_item }}" style="background-color: red" class="wishlist-btn">
+                                                    <i style="color: white" class="flaticon-heart"></i> <!-- clicked -->
+                                                </a>
+                                            {% else %}
+	                                            <a href="{{ course.like_item }}" class="wishlist-btn">
+                                                	<i class="flaticon-heart"></i> <!-- not clicked -->
+                                                </a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <div class="pi-text">

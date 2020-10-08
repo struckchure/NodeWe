@@ -48,7 +48,7 @@ class CourseItemAdmin(admin.ModelAdmin):
 admin.site.register(models.User)
 admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Category, CategoryAdmin)
-admin.site.register(models.SubCategory)
+admin.site.register(models.Section)
 admin.site.register(models.Course, CourseAdmin)
 admin.site.register(models.CourseItem, CourseItemAdmin)
 admin.site.register(models.Cart)

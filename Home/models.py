@@ -8,6 +8,7 @@ import os
 import random
 
 from . import managers
+from . import utils
 from NodeWe import settings
 
 # Generics
@@ -61,7 +62,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     	return reverse('Home:userCourses')
 
     def get_user_courses(self):
-    	courses = Course.objects.filter(tutor=self.id)
+    	if self.is_tutor:
+    		courses = Course.objects.filter(tutor=self.id)
+    	else:
+    		courses = Course.objects.all()
 
     	return courses
 
@@ -72,7 +76,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	avatar = models.FileField(blank=True, upload_to='Images/')
+	avatar = models.FileField(blank=True, upload_to=utils.profile_upload_handler)
 	date = models.DateTimeField(auto_now=True)
 	last_updated = models.DateTimeField(auto_now_add=True)
 
@@ -84,9 +88,58 @@ class Profile(models.Model):
 		verbose_name_plural = 'Profiles'
 
 
+class Section(models.Model):
+	section = models.CharField(max_length=200, blank=False)
+	popularity = models.PositiveIntegerField(default=0)
+	views = models.PositiveIntegerField(default=0)
+	date = models.DateTimeField(auto_now=True)
+	last_updated = models.DateTimeField(auto_now_add=True)
+	slug = models.SlugField(blank=True, unique=True)
+
+	def __str__(self):
+		return f'{self.section}'
+
+	def custom_slugify(self, text):
+	    sections = Section.objects.all().values('slug')
+	    section_slugs = []
+
+	    for i in sections:
+	        section_slugs.append(i['slug'])
+
+	    intial_slug = slugify(text)
+	    unique_slug_key = random.randint(1, 1000)
+	    final_slug = f'{intial_slug}-{unique_slug_key}'
+
+	    while text in section_slugs:
+	        unique_slug_key = random.randint(1, 1000)
+	        final_slug = f'{intial_slug}-{unique_slug_key}'
+	    
+	    return final_slug
+
+	def save(self, *args, **kwargs):
+		self.slug = self.custom_slugify(f'{self.section}')
+
+		super(Section, self).save(*args, **kwargs)
+
+	def get_categories(self):
+		categories = Category.objects.filter(section=self.id)
+
+		return categories
+
+	def get_absolute_url(self):
+		url = ''
+
+		# return reverse(url)
+
+	class Meta:
+		verbose_name = 'Section'
+		verbose_name_plural = 'Sections'
+
+
 class Category(models.Model):
-	category = models.CharField(max_length=100, blank=False, unique=True)
-	image = models.FileField(upload_to='Images/', blank=True)
+	category = models.CharField(max_length=200, blank=False, unique=True)
+	section = models.ForeignKey(Section, on_delete=models.CASCADE, null=True)
+	image = models.FileField(upload_to=utils.category_cover_upload_handler, blank=True)
 	description = models.TextField()
 	popularity = models.IntegerField(default=0)
 	date = models.DateTimeField(auto_now=True)
@@ -133,11 +186,6 @@ class Category(models.Model):
 
 		return courses
 
-	def get_sub_categories(self):
-		sub_categories = SubCategory.objects.filter(category=self.id)
-
-		return sub_categories
-
 	def get_absolute_url(self):
 		return reverse('Home:categoryDetails', args=[self.slug])
 
@@ -146,23 +194,11 @@ class Category(models.Model):
 		verbose_name_plural = 'Categories'
 
 
-class SubCategory(models.Model):
-	category = models.ForeignKey(Category, on_delete=models.CASCADE)
-	sub_category = models.CharField(max_length=200, blank=False)
-
-	def __str__(self):
-		return f'{self.category}-_-{self.sub_category}'
-
-	class Meta:
-		verbose_name = 'Sub Category'
-		verbose_name_plural = 'Sub categories'
-
-
 class Course(models.Model):
 	tutor = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True)
-	category = models.ForeignKey(Category, on_delete=models.CASCADE)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 	course = models.CharField(max_length=200, blank=False)
-	image = models.FileField(upload_to='Images/courses', blank=True, default='default_avatar')
+	image = models.FileField(upload_to=utils.course_cover_upload_handler, blank=True, default='default_avatar')
 	description = models.TextField(blank=False)
 	popularity = models.IntegerField(default=0)
 	price = models.PositiveIntegerField(default=0)
@@ -192,7 +228,8 @@ class Course(models.Model):
 	    return final_slug
 
 	def save(self, *args, **kwargs):
-		self.slug = self.custom_slugify(f'{self.course}')
+		self.slug = self.custom_slugify(f'{self.category} {self.course}')
+
 		super(Course, self).save(*args, **kwargs)
 
 	def get_course(self):
@@ -236,7 +273,7 @@ class CourseItem(models.Model):
 	course = models.ForeignKey(Course, on_delete=models.CASCADE)
 	title = models.CharField(max_length=200, blank=False, default='')
 	description = models.TextField(blank=False)
-	file = models.FileField(blank=False, upload_to='Videos/')
+	file = models.FileField(blank=False, upload_to=utils.course_upload_handler)
 
 	def __str__(self):
 		return f'{self.course.course} {self.title}'
@@ -323,4 +360,3 @@ class CartItem(models.Model):
 	class Meta:
 		verbose_name = 'Cart item'
 		verbose_name_plural = 'Cart items'
-

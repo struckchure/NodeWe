@@ -41,7 +41,8 @@ def Error500(request, exception=None):
 # External context
 
 def external_context(request=None):
-	courses = models.Course.objects.all().order_by('-popularity', '-views', '-last_updated')
+	sections = models.Section.objects.order_by('-popularity', '-views', '-last_updated')
+	courses = models.Course.objects.order_by('-popularity', '-views', '-last_updated')
 	categories = models.Category.objects.all().order_by('-popularity', '-last_updated')
 	tutors = get_user_model().objects.filter(is_tutor=True, is_active=True)
 
@@ -55,6 +56,7 @@ def external_context(request=None):
 	context = {
 		'user': user,
 		'cart': cart,
+		'sections': sections,
 		'courses': courses,
 		'categories': categories,
 		'tutors': tutors,
