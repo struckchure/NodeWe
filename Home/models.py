@@ -59,7 +59,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.username
 
     def get_courses(self):
-    	return reverse('Home:userCourses')
+    	return reverse('Home:categories')
 
     def get_user_courses(self):
     	if self.is_tutor:

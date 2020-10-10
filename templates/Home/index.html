@@ -161,19 +161,7 @@
 				</div>
 				<div class="product-slider owl-carousel">
 					{% for course in courses %}
-						<div class="product-item">
-							<div class="pi-pic">
-								<img src="{{ course.image.url }}" alt="">
-								<div class="pi-links">
-									<a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-									<a href="{{ course.like_item }}" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-								</div>
-							</div>
-							<div class="pi-text">
-								<h6><del>N</del>0.00</h6>
-								<p>{{ course.course }}</p>
-							</div>
-						</div>
+						{% include "components/courseCardNoGrid.html" %}
 					{% endfor %}
 				</div>
 			</div>
@@ -187,25 +175,6 @@
 		<h4 style="color: #1d4354;">TOP CATEGORIES</h4>
 	</div>
 	<ul class="product-filter-menu mt-3 mb-5">
-		<!--
-		<li><a href="#">PYTHON</a></li>
-		<li><a href="#">JAVASCRIPT</a></li>
-		<li><a href="#">JAVA</a></li>
-		<li><a href="#">C++</a></li>
-		<li><a href="#">C#</a></li>
-		<li><a href="#">KOTLIN</a></li>
-		<li><a href="#">NODE.JS</a></li>
-		<li><a href="#">GOLANG</a></li>
-		<li><a href="#">PYTHON</a></li>
-		<li><a href="#">JAVASCRIPT</a></li>
-		<li><a href="#">JAVA</a></li>
-		<li><a href="#">C++</a></li>
-		<li><a href="#">C#</a></li>
-		<li><a href="#">KOTLIN</a></li>
-		<li><a href="#">NODE.JS</a></li>
-		<li><a href="#">GOLANG</a></li>
-		-->
-
 		{% for category in categories %}
 			<li><a href="{% url 'Home:categoryDetails' category.slug %}">{{ category.category }}</a></li>
 		{% endfor %}
@@ -225,29 +194,7 @@
 				<div class="row">
 					{% for course in courses %}
 						<div class="col-lg-3 col-sm-6">
-                            <div class="product-item">
-                                <div class="pi-pic">
-                                    {% if course.is_new %}                                        
-                                        <div class="tag-sale">NEW</div>
-                                    {% endif %}
-                                    <img src="{{ course.image.url }}" alt="">
-                                    <div class="pi-links">
-                                        <a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
-                                                CART</span></a>
-                                        <a href="{{ course.like_item }}" class="wishlist-btn">
-                                            {% if user.username in course.get_user_likes %}
-                                                <i class="flaticon-heart"></i> <!-- clicked -->
-                                            {% else %}
-                                                <i class="flaticon-heart"></i> <!-- not clicked -->
-                                            {% endif %}
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="pi-text">
-                                    <h6>${{ course.price }}</h6>
-                                    <p>{{ course.course }}</p>
-                                </div>
-                            </div>
+                            {% include "components/courseCardNoGrid.html" %}
                         </div>
 					{% endfor %}
 				</div>
@@ -257,7 +204,6 @@
 			</div>
 		</section>
 		<!-- Product filter section end -->
-
 
 		<!-- Banner section -->
 		<section class="banner-section">

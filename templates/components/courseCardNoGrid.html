@@ -1,0 +1,27 @@
+<div class="product-item">
+    <div class="pi-pic">
+        {% if course.is_new %}                                        
+            <div class="tag-sale">NEW</div>
+        {% endif %}
+        <a href="{{ course.get_absolute_url }}" title="">
+            <img src="{{ course.image.url }}" alt="">
+        </a>
+        <div class="pi-links">
+            <a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO
+                    CART</span></a>
+            {% if user.username in course.get_user_likes %}
+                <a href="{{ course.like_item }}" style="background-color: red" class="wishlist-btn">
+                    <i style="color: white" class="flaticon-heart"></i> <!-- clicked -->
+                </a>
+            {% else %}
+                <a href="{{ course.like_item }}" class="wishlist-btn">
+                    <i class="flaticon-heart"></i> <!-- not clicked -->
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="pi-text">
+        <h6>${{ course.price }}</h6>
+        <p>{{ course.course }}</p>
+    </div>
+</div>

@@ -16,9 +16,9 @@
     {% endblock meta %}
 
     {% block styles %}
-        <!-- favicon
-                ============================================ -->
-        <link rel="shortcut icon" type="image/x-icon" href="{% static 'student/img/favicon.png' %}">
+        <!-- Favicon -->
+        <link href="{% static 'img/png/logomark_tranparent.png' %}" rel="shortcut icon"/>
+    
         <!-- Google Fonts
             ============================================ -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -98,7 +98,7 @@
                         {% endfor %}
 
                         <li>
-                            <a title="Landing Page" href="" aria-expanded="false">
+                            <a title="Landing Page" href="{% url 'Home:dashboard' %}" aria-expanded="false">
                                 <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true">
 
                                 </span> <span class="mini-click-non">Dashboard</span></a>
@@ -109,28 +109,28 @@
                                 <span class="mini-click-non">My Learnings</span></a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="" aria-expanded="false"><span
+                            <a href="{% url 'Home:profile' %}" aria-expanded="false"><span
                                     class="educate-icon educate-student icon-wrap"></span> <span
                                     class="mini-click-non">Profile</span></a>
+                            <!--
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Students" href=""><span class="mini-sub-pro">View Profile</span></a>
+                                <li><a title="All Students" href="{% url 'Home:profile' %}"><span class="mini-sub-pro">View Profile</span></a>
                                 </li>
-                                <li><a title="Add Students" href=""><span class="mini-sub-pro">Edit Profile</span></a>
+                                <li><a title="Add Students" href="{% url 'Home:profile' %}#INFORMATION"><span class="mini-sub-pro">Edit Profile</span></a>
                                 </li>
                                 <li><a title="Add Students" href=""><span class="mini-sub-pro">View Cart</span></a></li>
 
                             </ul>
+                            -->
                         </li>
                         <li>
                             <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span
                                     class="educate-icon educate-message icon-wrap"></span> <span
                                     class="mini-click-non">Messages</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Inbox" href="mailbox.html"><span class="mini-sub-pro">Inbox</span></a>
+                                <li><a title="Inbox" href="{% url 'Home:mailbox' %}"><span class="mini-sub-pro">Inbox</span></a>
                                 </li>
-                                <li><a title="View Mail" href="mailbox-view.html"><span class="mini-sub-pro">View
-                                            Mail</span></a></li>
-                                <li><a title="Compose Mail" href="mailbox-compose.html"><span
+                                <li><a title="Compose Mail" href="{% url 'Home:mailboxCompose' %}"><span
                                             class="mini-sub-pro">Compose
                                             Mail</span></a></li>
                             </ul>
@@ -142,13 +142,14 @@
                                 </span> <span class="mini-click-non">My Cart</span></a>
                         </li>
                         <li id="removable">
-                            <a class="has-arrow" href="#" aria-expanded="false"><span
+                            <a href="{% url 'Home:dashboardCourses' %}" aria-expanded="false"><span
                                     class="educate-icon educate-pages icon-wrap"></span> <span
                                     class="mini-click-non">Courses</span></a>
+                            <!--
                             <ul class="submenu-angle page-mini-nb-dp" aria-expanded="false">
                                 <li><a title="Login" href="all-courses.html"><span class="mini-sub-pro">All
                                             Courses</span></a></li>
-
+                            -->
                             </ul>
                         </li>
                     </ul>
@@ -366,15 +367,15 @@
                                                     <ul role="menu"
                                                         class="dropdown-header-top author-log dropdown-menu animated zoomIn">
                                                         <li><a href="#"><span
-                                                                    class="edu-icon edu-home-admin author-log-ic"></span>My
+                                                                    class="edu-icon edu-home-admin author-log-ic"></span>
                                                                 Account</a>
                                                         </li>
-                                                        <li><a href="#"><span
-                                                                    class="edu-icon edu-user-rounded author-log-ic"></span>My
+                                                        <li><a href="{% url 'Home:profile' %}"><span
+                                                                    class="edu-icon edu-user-rounded author-log-ic"></span>
                                                                 Profile</a>
                                                         </li>
-                                                        <li><a href="#"><span
-                                                                    class="edu-icon edu-money author-log-ic"></span>User
+                                                        <li><a href="{% url 'Home:dashboardBillings' %}"><span
+                                                                    class="edu-icon edu-money author-log-ic"></span>
                                                                 Billing</a>
                                                         </li>
                                                         <li><a href="#"><span

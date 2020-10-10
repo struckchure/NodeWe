@@ -11,11 +11,27 @@ urlpatterns = [
 
 	path('', views.IndexView, name='index'),
 	path('account/', views.dashBoard, name='dashboard'),
+	path('account/profile/', views.profile, name='profile'),
 	path('account/login/', views.signIn, name='login'),
 	path('account/register/', views.signUp, name='register'),
-	path('account/courses/', views.userCourses, name='userCourses'),
+
+	# Mailbox
+
+	path('account/mailbox/', views.mailbox, name='mailbox'),
+	path('account/mailbox/new/', views.mailboxCompose, name='mailboxCompose'),
+	path('account/mailbox/<slug:slug>/', views.mailboxDetail, name='mailboxDetail'),
+
+	# Courses
+
+	path('account/courses/materials/', views.dashboardMaterials, name='dashboardMaterials'),
+	path('account/courses/', views.dashboardCourses, name='dashboardCourses'),
+	path('account/courses/<slug:slug>/', views.dashboardCourseDetail, name='dashboardCourseDetail'),
+	
+	# Cart
+
 	path('account/cart', views.cartView, name='cartView'),
 	path('account/cart/add/<slug:slug>/', views.addToCart, name='addToCart'),
+	path('account/billings/', views.dashboardBillings, name='dashboardBillings'),
 
 	# Categories
 
@@ -25,8 +41,11 @@ urlpatterns = [
 	path('categories/<slug:slug>/like/', views.likeCategory, name='likeCategory'),
 
 	# Courses / Products
+
 	path('categories/courses/all', views.courses, name='courses'),
 	path('categories/courses/<slug:slug>/', views.courseDetails, name='courseDetails'),
+
 	# Like Course
+
 	path('categories/courses/<slug:slug>/like/', views.likeCourse, name='likeCourse'),
 ]

@@ -145,6 +145,142 @@ def signIn(request):
 
 	return render(request, template_name, context)
 
+# Accounts
+
+@login_required
+def dashBoard(request):
+	request.session['next'] = request.path
+
+	template_name = 'Home/dashboard.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def dashboardCourses(request):
+	request.session['next'] = request.path
+
+	template_name = 'Home/dashboardCourses.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def dashboardCourseDetail(request, slug):
+	request.session['next'] = request.path
+
+	template_name = 'Home/dashboardCourseDetail.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def dashboardBillings(request):
+	request.session['next'] = request.path
+
+	template_name = 'Home/dashboardBillings.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def dashboardMaterials(request):
+	request.session['next'] = request.path
+
+	template_name = 'Home/dashboardMaterials.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def profile(request):
+	request.session['next'] = request.path
+
+	template_name = 'Home/profile.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def mailbox(request):
+	request.session['next'] = request.path
+
+	template_name = 'Home/mailbox.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def mailboxDetail(request, slug):
+	request.session['next'] = request.path
+
+	template_name = 'Home/mailboxDetail.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def mailboxCompose(request):
+	request.session['next'] = request.path
+
+	template_name = 'Home/mailboxCompose.html'
+	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
 
 # Mains
 
@@ -292,21 +428,6 @@ def courseDetails(request, slug):
 	template_name = 'Home/product.html'
 	context = {
 		'course': course,
-	}
-	context = utils.dictMerge(
-		external_context(request),
-		context
-	)
-
-	return render(request, template_name, context)
-
-
-@login_required
-def dashBoard(request):
-	request.session['next'] = request.path
-
-	template_name = 'Home/dashboard.html'
-	context = {
 	}
 	context = utils.dictMerge(
 		external_context(request),
