@@ -62,7 +62,7 @@
 							<div class="up-item">
 								<i class="flaticon-profile"></i>
 								{% if user.is_authenticated %}
-									<a href="#">Account</a>
+									<a href="{% url 'Home:dashboard' %}">Account</a>
 								{% else %}
 									<a href="{% url 'Home:login' %}">Sign</a> In or <a href="{% url 'Home:register' %}">Create Account</a>
 								{% endif %}

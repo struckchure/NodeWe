@@ -134,7 +134,7 @@ def signIn(request):
 				message = 'Login successful !'
 				messages.info(request, message)
 				
-				return redirect('Home:index')
+				return redirect('Home:dashboard')
 			else:
 				message = 'Incorrect Username or Password'
 				messages.warning(request, message)
@@ -301,16 +301,17 @@ def courseDetails(request, slug):
 	return render(request, template_name, context)
 
 
-@login_required(login_url='Home:signIn')
+@login_required
 def dashBoard(request):
 	request.session['next'] = request.path
 
-	user = models.User.objects.get(pk=request.user.id)
-
-	template_name = 'dashboard.html'
+	template_name = 'Home/dashboard.html'
 	context = {
-		'user': user
 	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
 
 	return render(request, template_name, context)
 
