@@ -26,7 +26,7 @@
 	                            <ul class="breadcome-menu">
 	                                <li><a href="#">NodeWe</a> <span class="bread-slash">/</span>
 	                                </li>
-	                                <li><span class="bread-blod">Dashboard</span>
+	                                <li><span class="bread-blod">Courses</span>
 	                                </li>
 	                            </ul>
 	                        </div>
@@ -41,7 +41,12 @@
 {% block body %}
 	<div class="courses-area">
 	    <div class="container-fluid">
-	        <div class="row">
+	        <div class="row mg-b-15">
+	        	{% for course in courses %}
+	        	    {% include "components/dashboardCourseCard.html" %}
+	        	{% endfor %}
+
+	        	<!--
 	            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 	                <div class="courses-inner res-mg-b-30">
 	                    <div class="courses-title">
@@ -126,7 +131,9 @@
 	                    </div>
 	                </div>
 	            </div>
+	        	-->
 	        </div>
+	        <!--
 	        <div class="row mg-b-15">
 	            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 	                <div class="courses-inner mg-t-30">
@@ -213,6 +220,7 @@
 	                </div>
 	            </div>
 	        </div>
+	    	-->
 	    </div>
 	</div>
 {% endblock %}

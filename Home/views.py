@@ -12,6 +12,8 @@ from . import models
 from . import forms
 from . import utils
 
+# Custom filters
+
 
 # Errors
 
@@ -86,6 +88,8 @@ def Default(request):
 
 
 def signUp(request):
+	request.session['next'] = request.path
+
 	template_name = 'register.html'
 	context = {
 
@@ -108,6 +112,8 @@ def signUp(request):
 
 
 def signIn(request):
+	request.session['next'] = request.path
+
 	template_name = 'login.html'
 	context = {
 
@@ -144,6 +150,13 @@ def signIn(request):
 		signInForm = forms.SignInForm()
 
 	return render(request, template_name, context)
+
+
+def signOut(request):
+	logout(request)
+
+	return redirect('Home:dashboard')
+
 
 # Accounts
 
@@ -286,6 +299,8 @@ def mailboxCompose(request):
 
 
 def IndexView(request):
+	request.session['next'] = request.path
+
 	template_name = 'Home/index.html'
 	context = {
 		
@@ -477,20 +492,21 @@ def likeCategory(request, slug):
 def likeCourse(request, slug):
 	next_url = request.session['next']
 
-	course = models.Course.objects.get(slug=slug)
-	user_like = models.CourseLike.objects.get_or_create(
-		user=models.User.objects.get(pk=request.user.id),
-		course=course
-	)
+	if request.user.is_authenticated:
+		course = models.Course.objects.get(slug=slug)
+		user_like = models.CourseLike.objects.get_or_create(
+			user=models.User.objects.get(pk=request.user.id),
+			course=course
+		)
 
-	if user_like[0].status:
-		course.popularity -= 1
-		user_like[0].status = False
-	else:
-		course.popularity += 1
-		user_like[0].status = True
+		if user_like[0].status:
+			course.popularity -= 1
+			user_like[0].status = False
+		else:
+			course.popularity += 1
+			user_like[0].status = True
 
-	user_like[0].save()
-	course.save()
+		user_like[0].save()
+		course.save()
 
 	return redirect(next_url)

@@ -16,60 +16,26 @@
     {% endblock meta %}
 
     {% block styles %}
-        <!-- Favicon -->
         <link href="{% static 'img/png/logomark_tranparent.png' %}" rel="shortcut icon"/>
-    
-        <!-- Google Fonts
-            ============================================ -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
-        <!-- Bootstrap CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/bootstrap.min.css' %}">
-        <!-- Bootstrap CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/font-awesome.min.css' %}">
-        <!-- owl.carousel CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/owl.carousel.css' %}">
         <link rel="stylesheet" href="{% static 'student/css/owl.theme.css' %}">
         <link rel="stylesheet" href="{% static 'student/css/owl.transitions.css' %}">
-        <!-- animate CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/animate.css' %}">
-        <!-- normalize CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/normalize.css' %}">
-        <!-- meanmenu icon CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/meanmenu.min.css' %}">
-        <!-- main CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/main.css' %}">
-        <!-- educate icon CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/educate-custon-icon.css' %}">
-        <!-- morrisjs CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/morrisjs/morris.css' %}">
-        <!-- mCustomScrollbar CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/scrollbar/jquery.mCustomScrollbar.min.css' %}">
-        <!-- metisMenu CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/metisMenu/metisMenu.min.css' %}">
         <link rel="stylesheet" href="{% static 'student/css/metisMenu/metisMenu-vertical.css' %}">
-        <!-- calendar CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/calendar/fullcalendar.min.css' %}">
         <link rel="stylesheet" href="{% static 'student/css/calendar/fullcalendar.print.min.css' %}">
-        <!-- style CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/style.css' %}">
-        <!-- responsive CSS
-            ============================================ -->
         <link rel="stylesheet" href="{% static 'student/css/responsive.css' %}">
-        <!-- modernizr JS
-            ============================================ -->
         <script src="{% static 'student/js/vendor/modernizr-2.8.3.min.js' %}"></script>
     {% endblock styles %}
 
@@ -98,58 +64,51 @@
                         {% endfor %}
 
                         <li>
-                            <a title="Landing Page" href="{% url 'Home:dashboard' %}" aria-expanded="false">
+                            <a title="Dashboard" href="{% url 'Home:dashboard' %}" aria-expanded="false">
                                 <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true">
-
-                                </span> <span class="mini-click-non">Dashboard</span></a>
+                                </span> <span class="mini-click-non">Dashboard</span>
+                            </a>
                         </li>
                         <li>
-                            <a title="Landing Page" href="" aria-expanded="false"><span
-                                    class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span>
-                                <span class="mini-click-non">My Learnings</span></a>
+                            <a title="My Learnings" href="" aria-expanded="false">
+                                <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span>
+                                <span class="mini-click-non">My Learnings</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="{% url 'Home:profile' %}" aria-expanded="false"><span
-                                    class="educate-icon educate-student icon-wrap"></span> <span
-                                    class="mini-click-non">Profile</span></a>
-                            <!--
+                            <a href="{% url 'Home:profile' %}" aria-expanded="false">
+                                <span class="educate-icon educate-student icon-wrap"></span>
+                                <span class="mini-click-non">Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="#" aria-expanded="false">
+                                <span class="educate-icon educate-message icon-wrap"></span>
+                                <span class="mini-click-non">Messages</span>
+                            </a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Students" href="{% url 'Home:profile' %}"><span class="mini-sub-pro">View Profile</span></a>
+                                <li>
+                                    <a title="Inbox" href="{% url 'Home:mailbox' %}">
+                                        <span class="mini-sub-pro">Inbox</span>
+                                    </a>
                                 </li>
-                                <li><a title="Add Students" href="{% url 'Home:profile' %}#INFORMATION"><span class="mini-sub-pro">Edit Profile</span></a>
+                                <li>
+                                    <a title="Compose Mail" href="{% url 'Home:mailboxCompose' %}">
+                                        <span class="mini-sub-pro">Compose Mail</span>
+                                    </a>
                                 </li>
-                                <li><a title="Add Students" href=""><span class="mini-sub-pro">View Cart</span></a></li>
-
-                            </ul>
-                            -->
-                        </li>
-                        <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span
-                                    class="educate-icon educate-message icon-wrap"></span> <span
-                                    class="mini-click-non">Messages</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Inbox" href="{% url 'Home:mailbox' %}"><span class="mini-sub-pro">Inbox</span></a>
-                                </li>
-                                <li><a title="Compose Mail" href="{% url 'Home:mailboxCompose' %}"><span
-                                            class="mini-sub-pro">Compose
-                                            Mail</span></a></li>
                             </ul>
                         </li>
                         <li>
-                            <a title="Landing Page" href="" aria-expanded="false">
-                                <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true">
-
-                                </span> <span class="mini-click-non">My Cart</span></a>
+                            <a title="My Cart" href="{% url 'Home:cartView' %}" aria-expanded="false">
+                                <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span>
+                                <span class="mini-click-non">My Cart</span></a>
                         </li>
                         <li id="removable">
-                            <a href="{% url 'Home:dashboardCourses' %}" aria-expanded="false"><span
-                                    class="educate-icon educate-pages icon-wrap"></span> <span
-                                    class="mini-click-non">Courses</span></a>
-                            <!--
-                            <ul class="submenu-angle page-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Login" href="all-courses.html"><span class="mini-sub-pro">All
-                                            Courses</span></a></li>
-                            -->
+                            <a href="{% url 'Home:dashboardCourses' %}" aria-expanded="false">
+                                <span class="educate-icon educate-pages icon-wrap"></span>
+                                <span class="mini-click-non">Courses</span>
+                            </a>
                             </ul>
                         </li>
                     </ul>
@@ -381,7 +340,7 @@
                                                         <li><a href="#"><span
                                                                     class="edu-icon edu-settings author-log-ic"></span>Settings</a>
                                                         </li>
-                                                        <li><a href="#"><span
+                                                        <li><a href="{% url 'Home:logout' %}"><span
                                                                     class="edu-icon edu-locked author-log-ic"></span>Log
                                                                 Out</a>
                                                         </li>

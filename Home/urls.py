@@ -14,6 +14,7 @@ urlpatterns = [
 	path('account/profile/', views.profile, name='profile'),
 	path('account/login/', views.signIn, name='login'),
 	path('account/register/', views.signUp, name='register'),
+	path('account/logout/', views.signOut, name='logout'),
 
 	# Mailbox
 
@@ -29,7 +30,7 @@ urlpatterns = [
 	
 	# Cart
 
-	path('account/cart', views.cartView, name='cartView'),
+	path('account/cart/', views.cartView, name='cartView'),
 	path('account/cart/add/<slug:slug>/', views.addToCart, name='addToCart'),
 	path('account/billings/', views.dashboardBillings, name='dashboardBillings'),
 
