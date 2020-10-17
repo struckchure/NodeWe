@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from django.utils import timezone
 import os
 import random
+import secrets
 
 from . import managers
 from . import utils
@@ -384,3 +385,46 @@ class CartItem(models.Model):
 	class Meta:
 		verbose_name = 'Cart item'
 		verbose_name_plural = 'Cart items'
+
+
+class Message(models.Model):
+	sender = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='sender')
+	recipient = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='recipient')
+	subject = models.CharField(max_length=100, blank=False, default='No subject')
+	message = models.TextField()
+	attachment = models.FileField(upload_to=utils.message_upload_handler, blank=True)
+	slug = models.SlugField(blank=True, unique=True)
+	date = models.DateTimeField(auto_now_add=True)
+	last_updated = models.DateTimeField(auto_now=True)
+
+	def __str__(self):
+		return f'{self.sender}'
+
+	def get_details(self):
+		return reverse('Home:mailboxDetail', args=[self.slug])
+
+	def custom_slugify(self, text):
+	    messages = Message.objects.all().values('slug')
+	    message_slugs = []
+
+	    for i in messages:
+	        message_slugs.append(i['slug'])
+
+	    intial_slug = slugify(text)
+	    unique_slug_key = random.randint(1, 1000)
+	    final_slug = f'{intial_slug}-{unique_slug_key}'
+
+	    while text in message_slugs:
+	        unique_slug_key = random.randint(1, 1000)
+	        final_slug = f'{intial_slug}-{unique_slug_key}'
+	    
+	    return final_slug
+
+	def save(self, *args, **kwargs):
+		self.slug = self.custom_slugify(f'{secrets.token_urlsafe(30)}')
+
+		super(Message, self).save(*args, **kwargs)
+
+	class Meta:
+		verbose_name = 'Message'
+		verbose_name_plural = 'Messages'

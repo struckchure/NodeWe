@@ -185,6 +185,24 @@
                                                             <h1>Message</h1>
                                                         </div>
                                                         <ul class="message-menu">
+                                                            {% for message in inbox %}
+                                                                <li>
+                                                                    <a href="#">
+                                                                        <div class="message-img">
+                                                                            <img src="{% static 'student/img/contact/1.jpg' %}" alt="">
+                                                                        </div>
+                                                                        <div class="message-content">
+                                                                            <span class="message-date">{{ message|date }}</span>
+                                                                            <h2>{{ message.sender.get_full_name }}</h2>
+                                                                            <p>
+                                                                                {{ message.message }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </a>
+                                                                </li>
+                                                            {% endfor %}
+
+                                                            <!--
                                                             <li>
                                                                 <a href="#">
                                                                     <div class="message-img">
@@ -237,6 +255,7 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
+                                                            -->
                                                         </ul>
                                                         <div class="message-view">
                                                             <a href="#">View All Messages</a>

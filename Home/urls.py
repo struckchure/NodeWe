@@ -33,6 +33,7 @@ urlpatterns = [
 	path('account/cart/', views.cartView, name='cartView'),
 	path('account/cart/add/<slug:slug>/', views.addToCart, name='addToCart'),
 	path('account/billings/', views.dashboardBillings, name='dashboardBillings'),
+	path('account/cart/checkout', views.checkout, name='checkout'),
 
 	# Categories
 

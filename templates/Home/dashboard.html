@@ -111,7 +111,7 @@
                     <div class="row mg-b-15">
                         {% load course_filters %}
 
-                        {% for course in courses|course_length:courses %}
+                        {% for course in courses %}
                             {% include "components/dashboardCourseCard.html" %}
                         {% endfor %}
                     </div>

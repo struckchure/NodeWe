@@ -49,9 +49,9 @@
                             <ul class="mailbox-list">
                                 <li class="active">
                                     <a href="#">
-											<span class="pull-right">12</span>
-											<i class="fa fa-envelope"></i> Inbox
-										</a>
+										<span class="pull-right">{{ inbox.count }}</span>
+										<i class="fa fa-envelope"></i> Inbox
+									</a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-paper-plane"></i> Sent</a>
@@ -124,6 +124,25 @@
                             <div class="table-responsive ib-tb">
                                 <table class="table table-hover table-mailbox">
                                     <tbody>
+                                        {% for message in inbox %}
+                                            <tr class="unread">
+                                                <td class="">
+                                                    <div class="checkbox checkbox-single checkbox-success">
+                                                        <input type="checkbox" checked>
+                                                        <label></label>
+                                                    </div>
+                                                </td>
+                                                <td><a href="{{ message.get_details }}">{{ message.sender.get_full_name }}</a></td>
+                                                <td><a href="{{ message.get_details }}" class="text-truncate">{{ message.subject }}</a>
+                                                </td>
+                                                {% if message.attachement %}                                                
+                                                    <td><i class="fa fa-paperclip"></i></td>
+                                                {% endif %}
+                                                <td class="text-right mail-date">{{ message.date }}</td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        <!--
                                         <tr class="unread">
                                             <td class="">
                                                 <div class="checkbox checkbox-single checkbox-success">
@@ -387,6 +406,7 @@
                                             <td></td>
                                             <td class="text-right mail-date">Sun, Mar 27</td>
                                         </tr>
+                                    -->
                                     </tbody>
                                 </table>
                             </div>

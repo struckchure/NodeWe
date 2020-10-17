@@ -50,14 +50,17 @@ def external_context(request=None):
 
 	cart = None
 	user = None
+	messages = None
 
 	if request.user.is_authenticated:
 		user = request.user
 		cart, created = models.Cart.objects.get_or_create(user=user)
+		messages = models.Message.objects.filter(recipient=request.user)
 
 	context = {
 		'user': user,
 		'cart': cart,
+		'inbox': messages,
 		'sections': sections,
 		'courses': courses,
 		'categories': categories,
@@ -269,9 +272,13 @@ def mailbox(request):
 def mailboxDetail(request, slug):
 	request.session['next'] = request.path
 
+	mail = get_object_or_404(models.Message, slug=slug)
+
 	template_name = 'Home/mailboxDetail.html'
 	context = {
+		'mail': mail
 	}
+	
 	context = utils.dictMerge(
 		external_context(request),
 		context
@@ -313,6 +320,7 @@ def IndexView(request):
 	return render(request, template_name, context)
 
 
+@login_required
 def cartView(request):
 	request.session['next'] = request.path
 
@@ -328,6 +336,7 @@ def cartView(request):
 	return render(request, template_name, context)
 
 
+@login_required
 def addToCart(request, slug):
 	next_url = request.session['next']
 
@@ -347,6 +356,18 @@ def addToCart(request, slug):
 	# next_url = request.path
 
 	return redirect(next_url)
+
+
+@login_required
+def checkout(request):
+	template_name = 'checkout.html'
+	context = {}
+	context = context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
 
 
 def userCourses(request):

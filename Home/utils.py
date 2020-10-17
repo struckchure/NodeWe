@@ -46,3 +46,12 @@ def profile_upload_handler(instance, filename):
 	file_path = f'Images/users/{username}.{file_extension}'
 
 	return file_path
+
+
+def message_upload_handler(instance, filename):
+	file_extension = str(instance.attachment).split('.')[-1]
+	date = instance.date
+	
+	file_path = f'Messages/attachment/{date}.{file_extension}'
+
+	return file_path
