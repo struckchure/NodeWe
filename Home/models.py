@@ -23,7 +23,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
     username = models.CharField(max_length=100, blank=False, unique=True)
-    email = models.EmailField(blank=False)
+    email = models.EmailField(blank=False, null=True)
     date = models.DateTimeField(auto_now=True)
     last_updated = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True, blank=True)
@@ -394,6 +394,7 @@ class Message(models.Model):
 	message = models.TextField()
 	attachment = models.FileField(upload_to=utils.message_upload_handler, blank=True)
 	slug = models.SlugField(blank=True, unique=True)
+	trashed = models.BooleanField(default=False)
 	date = models.DateTimeField(auto_now_add=True)
 	last_updated = models.DateTimeField(auto_now=True)
 

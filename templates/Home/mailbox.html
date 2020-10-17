@@ -24,7 +24,7 @@
 	                        </div>
 	                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 	                            <ul class="breadcome-menu">
-	                                <li><a href="#">NodeWe</a> <span class="bread-slash">/</span>
+	                                <li><a href="{% url 'Home:dashboard' %}">NodeWe</a> <span class="bread-slash">/</span>
 	                                </li>
 	                                <li><span class="bread-blod">Mailbox</span>
 	                                </li>
@@ -42,57 +42,8 @@
 	<div class="mailbox-area mg-b-15">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-3 col-md-3 col-sm-3 col-xs-12">
-                    <div class="hpanel responsive-mg-b-30">
-                        <div class="panel-body">
+                {% include "components/mailSideBar.html" %}
 
-                            <ul class="mailbox-list">
-                                <li class="active">
-                                    <a href="#">
-										<span class="pull-right">{{ inbox.count }}</span>
-										<i class="fa fa-envelope"></i> Inbox
-									</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-paper-plane"></i> Sent</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-pencil"></i> Draft</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-trash"></i> Trash</a>
-                                </li>
-                            </ul>
-                            <hr>
-                            <ul class="mailbox-list">
-                                <li>
-                                    <a href="#"><i class="fa fa-plane text-danger"></i> Travel</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-bar-chart text-warning"></i> Finance</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-users text-info"></i> Social</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-tag text-success"></i> Promos</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-flag text-primary"></i> Updates</a>
-                                </li>
-                            </ul>
-                            <hr>
-                            <ul class="mailbox-list">
-                                <li>
-                                    <a href="#"><i class="fa fa-gears"></i> Settings</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-info-circle"></i> Support</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-9 col-md-9 col-sm-9 col-xs-12">
                     <div class="hpanel">
                         <div class="panel-heading hbuilt mailbox-hd">

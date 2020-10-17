@@ -49,24 +49,30 @@
 	                    </div>
 	                    <div class="profile-details-hr">
 	                        <div class="row">
-	                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-	                                <div class="address-hr">
-	                                    <p><b>Name</b><br /> Victor Dewinner</p>
-	                                </div>
-	                            </div>
+	                        	{% if userProfile.get_full_name %}
+		                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+		                                <div class="address-hr">
+		                                    <p><b>Name</b><br /> {{ userProfile.get_full_name }}</p>
+		                                </div>
+		                            </div>
+	                        	{% endif %}
 	                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
 	                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-	                                    <p><b>Occupation</b><br /> Student</p>
+	                                    <p><b>Username</b><br /> {{ userProfile.username }}</p>
 	                                </div>
 	                            </div>
 	                        </div>
 	                        <div class="row">
-	                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-	                                <div class="address-hr">
-	                                    <p><b>Email ID</b><br /> dewinner@gmail.com</p>
-	                                </div>
-	                            </div>
-	                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+	                        	{% if userProfile.email != '' %}
+	                        		<div class="col-lg-12">
+	                        		    <div class="address-hr">
+	                        		        <p><b>Email ID</b><br /> {{ userProfile.email }}</p>
+	                        		    </div>
+	                        		</div>
+	                        	{% endif %}
+	                        </div>
+                        	<div class="row">
+	                            <div class="col-lg-12">
 	                                <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
 	                                    <p><b>Phone</b><br /> +234962067309</p>
 	                                </div>
@@ -106,8 +112,10 @@
 	                <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
 	                    <ul id="myTabedu1" class="tab-review-design">
 	                        <li class="active"><a href="#description">Activity</a></li>
-	                        <li><a href="#reviews"> Messages</a></li>
-	                        <li><a href="#INFORMATION">Update Details</a></li>
+	                        {% if userProfile == request.user %}                        	
+		                        <li><a href="#reviews"> Messages</a></li>
+		                        <li><a href="#INFORMATION">Update Details</a></li>
+	                        {% endif %}
 	                    </ul>
 	                    <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
 	                        <div class="product-tab-list tab-pane fade active in" id="description">
@@ -117,7 +125,7 @@
 	                                        <div class="row">
 	                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 	                                                <div class="address-hr biography">
-	                                                    <p><b>Full Name</b><br /> Dewinner Victor</p>
+	                                                    <p><b>Full Name</b><br /> {{ user.get_full_name }}</p>
 	                                                </div>
 	                                            </div>
 	                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
@@ -127,7 +135,7 @@
 	                                            </div>
 	                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 	                                                <div class="address-hr biography">
-	                                                    <p><b>Email</b><br /> dewinner@gmail.com</p>
+	                                                    <p><b>Email</b><br /> {{ user.email }}</p>
 	                                                </div>
 	                                            </div>
 	                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
@@ -285,276 +293,299 @@
 	                                </div>
 	                            </div>
 	                        </div>
-	                        <div class="product-tab-list tab-pane fade" id="reviews">
-	                            <div class="row">
-	                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	                                    <div class="review-content-section">
-	                                        <div class="chat-discussion" style="height: auto">
-	                                            <div class="chat-message">
-	                                                <div class="profile-hdtc">
-	                                                    <img class="message-avatar" src="{% static 'student/img/contact/1.jpg' %}" alt="">
-	                                                </div>
-	                                                <div class="message">
-	                                                    <a class="message-author" href="#"> Michael Smith </a>
-	                                                    <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
-	                                                    <span class="message-content">Lorem ipsum dolor sit amet,
-	                                                        consectetuer adipiscing elit, sed diam nonummy nibh euismod
-	                                                        tincidunt ut laoreet dolore magna aliquam erat volutpat.
-	                                                    </span>
-	                                                    <div class="m-t-md mg-t-10">
-	                                                        <a class="btn btn-xs btn-default"><i
-	                                                                class="fa fa-thumbs-up"></i> Like </a>
-	                                                        <a class="btn btn-xs btn-success"><i class="fa fa-heart"></i>
-	                                                            Love</a>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="chat-message">
-	                                                <div class="profile-hdtc">
-	                                                    <img class="message-avatar" src="{% static 'student/img/contact/2.jpg' %}" alt="">
-	                                                </div>
-	                                                <div class="message">
-	                                                    <a class="message-author" href="#"> Karl Jordan </a>
-	                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
-	                                                    <span class="message-content">
-	                                                        Many desktop publishing packages and web page editors now use
-	                                                        Lorem Ipsum as their default model text, and a search for 'lorem
-	                                                        ipsum' will uncover.
-	                                                    </span>
-	                                                    <div class="m-t-md mg-t-10">
-	                                                        <a class="btn btn-xs btn-default"><i
-	                                                                class="fa fa-thumbs-up"></i> Like </a>
-	                                                        <a class="btn btn-xs btn-default"><i class="fa fa-heart"></i>
-	                                                            Love</a>
-	                                                        <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i>
-	                                                            Message</a>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="chat-message">
-	                                                <div class="profile-hdtc">
-	                                                    <img class="message-avatar" src="{% static 'student/img/contact/3.jpg' %}" alt="">
-	                                                </div>
-	                                                <div class="message">
-	                                                    <a class="message-author" href="#"> Michael Smith </a>
-	                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
-	                                                    <span class="message-content">
-	                                                        There are many variations of passages of Lorem Ipsum available,
-	                                                        but the majority have suffered alteration.
-	                                                    </span>
-	                                                </div>
-	                                            </div>
-	                                            <div class="chat-message">
-	                                                <div class="profile-hdtc">
-	                                                    <img class="message-avatar" src="{% static 'student/img/contact/4.jpg' %}" alt="">
-	                                                </div>
-	                                                <div class="message">
-	                                                    <a class="message-author" href="#"> Alice Jordan </a>
-	                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
-	                                                    <span class="message-content">
-	                                                        All the Lorem Ipsum generators on the Internet tend to repeat
-	                                                        predefined chunks as necessary, making this the first true
-	                                                        generator on the Internet.
-	                                                        It uses a dictionary of over 200 Latin words.
-	                                                    </span>
-	                                                    <div class="m-t-md mg-t-10">
-	                                                        <a class="btn btn-xs btn-default"><i
-	                                                                class="fa fa-thumbs-up"></i> Like </a>
-	                                                        <a class="btn btn-xs btn-warning"><i class="fa fa-eye"></i>
-	                                                            Nudge</a>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="chat-message">
-	                                                <div class="profile-hdtc">
-	                                                    <img class="message-avatar" src="{% static 'student/img/contact/1.jpg' %}" alt="">
-	                                                </div>
-	                                                <div class="message">
-	                                                    <a class="message-author" href="#"> Mark Smith </a>
-	                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
-	                                                    <span class="message-content">
-	                                                        All the Lorem Ipsum generators on the Internet tend to repeat
-	                                                        predefined chunks as necessary, making this the first true
-	                                                        generator on the Internet.
-	                                                        It uses a dictionary of over 200 Latin words.
-	                                                    </span>
-	                                                    <div class="m-t-md mg-t-10">
-	                                                        <a class="btn btn-xs btn-default"><i
-	                                                                class="fa fa-thumbs-up"></i> Like </a>
-	                                                        <a class="btn btn-xs btn-success"><i class="fa fa-heart"></i>
-	                                                            Love</a>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="chat-message">
-	                                                <div class="profile-hdtc">
-	                                                    <img class="message-avatar" src="{% static 'student/img/contact/2.jpg' %}" alt="">
-	                                                </div>
-	                                                <div class="message">
-	                                                    <a class="message-author" href="#"> Karl Jordan </a>
-	                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
-	                                                    <span class="message-content">
-	                                                        Many desktop publishing packages and web page editors now use
-	                                                        Lorem Ipsum as their default model text, and a search for 'lorem
-	                                                        ipsum' will uncover.
-	                                                    </span>
-	                                                    <div class="m-t-md mg-t-10">
-	                                                        <a class="btn btn-xs btn-default"><i
-	                                                                class="fa fa-thumbs-up"></i> Like </a>
-	                                                        <a class="btn btn-xs btn-default"><i class="fa fa-heart"></i>
-	                                                            Love</a>
-	                                                        <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i>
-	                                                            Message</a>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                            <div class="chat-message">
-	                                                <div class="profile-hdtc">
-	                                                    <img class="message-avatar" src="{% static 'student/img/contact/3.jpg' %}" alt="">
-	                                                </div>
-	                                                <div class="message">
-	                                                    <a class="message-author" href="#"> Michael Smith </a>
-	                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
-	                                                    <span class="message-content">
-	                                                        There are many variations of passages of Lorem Ipsum available,
-	                                                        but the majority have suffered alteration.
-	                                                    </span>
-	                                                </div>
-	                                            </div>
-	                                            <div class="chat-message">
-	                                                <div class="profile-hdtc">
-	                                                    <img class="message-avatar" src="{% static 'student/img/contact/4.jpg' %}" alt="">
-	                                                </div>
-	                                                <div class="message">
-	                                                    <a class="message-author" href="#"> Alice Jordan </a>
-	                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
-	                                                    <span class="message-content">
-	                                                        All the Lorem Ipsum generators on the Internet tend to repeat
-	                                                        predefined chunks as necessary, making this the first true
-	                                                        generator on the Internet.
-	                                                        It uses a dictionary of over 200 Latin words.
-	                                                    </span>
-	                                                    <div class="m-t-md mg-t-10">
-	                                                        <a class="btn btn-xs btn-default"><i
-	                                                                class="fa fa-thumbs-up"></i> Like </a>
-	                                                        <a class="btn btn-xs btn-default"><i class="fa fa-heart"></i>
-	                                                            Love</a>
-	                                                    </div>
-	                                                </div>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    <div class="product-tab-list tab-pane fade" id="INFORMATION">
-	                        <div class="row">
-	                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	                                <div class="review-content-section">
-	                                    <div class="row">
-	                                        <div class="col-lg-6">
-	                                            <div class="form-group">
-	                                                <input name="number" type="text" class="form-control" placeholder="First Name">
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <input type="text" class="form-control" placeholder="Last Name">
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <input type="text" class="form-control" placeholder="Address">
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <input type="text" class="form-control" placeholder="Date of Birth">
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <input type="text" class="form-control" placeholder="Department">
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <input type="number" class="form-control" placeholder="Pincode">
-	                                            </div>
-	                                            <div class="file-upload-inner ts-forms">
-	                                                <div class="input prepend-big-btn">
-	                                                    <label class="icon-right" for="prepend-big-btn">
-																<i class="fa fa-download"></i>
-															</label>
-	                                                    <div class="file-button">
-	                                                        Browse
-	                                                        <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;">
-	                                                    </div>
-	                                                    <input type="text" id="prepend-big-btn" placeholder="no file selected">
-	                                                </div>
-	                                                <!-- <form class="md-form">
-	                                                    <div class="file-field">
-	                                                        <div class="btn btn-primary btn-sm float-left">
-	                                                            <span>Choose file</span>
-	                                                            <input type="file">
-	                                                        </div>
-	                                                        <div class="file-path-wrapper">
-	                                                            <input class="file-path validate" type="text" placeholder="Upload your file">
-	                                                        </div>
-	                                                    </div>
-	                                                </form> -->
-	                                            </div>
-	                                        </div>
-	                                        <div class="col-lg-6">
-	                                            <div class="form-group sm-res-mg-15 tbpf-res-mg-15">
-	                                                <input type="text" class="form-control" placeholder="Description">
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <select class="form-control">
-														<option>Select Gender</option>
-														<option>Male</option>
-														<option>Female</option>
-													</select>
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <select class="form-control">
-															<option>Select country</option>
-															<option>India</option>
-															<option>Pakistan</option>
-															<option>Amerika</option>
-															<option>China</option>
-															<option>Dubai</option>
-															<option>Nepal</option>
-														</select>
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <select class="form-control">
-															<option>Select state</option>
-															<option>Gujarat</option>
-															<option>Maharastra</option>
-															<option>Rajastan</option>
-															<option>Maharastra</option>
-															<option>Rajastan</option>
-															<option>Gujarat</option>
-														</select>
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <select class="form-control">
-															<option>Select city</option>
-															<option>Surat</option>
-															<option>Baroda</option>
-															<option>Navsari</option>
-															<option>Baroda</option>
-															<option>Surat</option>
-														</select>
-	                                            </div>
-	                                            <div class="form-group">
-	                                                <input type="text" class="form-control" placeholder="Website URL">
-	                                            </div>
-	                                            <input type="number" class="form-control" placeholder="Mobile no.">
-	                                        </div>
-	                                    </div>
-	                                    <div class="row">
-	                                        <div class="col-lg-12">
-	                                            <div class="payment-adress mg-t-15">
-	                                                <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15">Submit</button>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
-	                    </div>
+							
+							{% if userProfile == request.user %}
+		                        <div class="product-tab-list tab-pane fade" id="reviews">
+		                            <div class="row">
+		                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		                                    <div class="review-content-section">
+		                                        <div class="chat-discussion" style="height: auto">
+		                                        	{% for message in inbox %}
+	                                        			<div class="chat-message">
+		                                        		    <div class="profile-hdtc">
+                                        						<a href="{% url 'Home:profile' message.sender.username %}">
+		                                        		        	<img class="message-avatar" src="{% static 'student/img/contact/1.jpg' %}" alt="">
+		                                        				</a>
+		                                        		    </div>
+		                                        		    <div class="message">
+		                                        		        <a class="message-author" href="{% url 'Home:profile' message.sender.username %}"> {{ message.sender.get_full_name }} </a>
+		                                        		        <span class="message-date"> {{ message.date }} </span>
+		                                        		        <a href="{{ message.get_details }}">
+			                                        		        <span class="message-content">
+			                                        		        	{{ message.message }}
+			                                        		        </span>
+		                                        		       	</a>
+		                                        		        <div class="m-t-md mg-t-10">
+		                                        		            <a class="btn btn-xs btn-default"><i
+		                                        		                    class="fa fa-thumbs-up"></i> Like </a>
+		                                        		            <a class="btn btn-xs btn-success"><i class="fa fa-heart"></i>
+		                                        		                Love</a>
+		                                        		        </div>
+		                                        		    </div>
+		                                        		</div>
+		                                        	{% endfor %}
+		                                        	<!--
+		                                            <div class="chat-message">
+		                                                <div class="profile-hdtc">
+		                                                    <img class="message-avatar" src="{% static 'student/img/contact/1.jpg' %}" alt="">
+		                                                </div>
+		                                                <div class="message">
+		                                                    <a class="message-author" href="#"> Michael Smith </a>
+		                                                    <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
+		                                                    <span class="message-content">Lorem ipsum dolor sit amet,
+		                                                        consectetuer adipiscing elit, sed diam nonummy nibh euismod
+		                                                        tincidunt ut laoreet dolore magna aliquam erat volutpat.
+		                                                    </span>
+		                                                    <div class="m-t-md mg-t-10">
+		                                                        <a class="btn btn-xs btn-default"><i
+		                                                                class="fa fa-thumbs-up"></i> Like </a>
+		                                                        <a class="btn btn-xs btn-success"><i class="fa fa-heart"></i>
+		                                                            Love</a>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+		                                            <div class="chat-message">
+		                                                <div class="profile-hdtc">
+		                                                    <img class="message-avatar" src="{% static 'student/img/contact/2.jpg' %}" alt="">
+		                                                </div>
+		                                                <div class="message">
+		                                                    <a class="message-author" href="#"> Karl Jordan </a>
+		                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
+		                                                    <span class="message-content">
+		                                                        Many desktop publishing packages and web page editors now use
+		                                                        Lorem Ipsum as their default model text, and a search for 'lorem
+		                                                        ipsum' will uncover.
+		                                                    </span>
+		                                                    <div class="m-t-md mg-t-10">
+		                                                        <a class="btn btn-xs btn-default"><i
+		                                                                class="fa fa-thumbs-up"></i> Like </a>
+		                                                        <a class="btn btn-xs btn-default"><i class="fa fa-heart"></i>
+		                                                            Love</a>
+		                                                        <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i>
+		                                                            Message</a>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+		                                            <div class="chat-message">
+		                                                <div class="profile-hdtc">
+		                                                    <img class="message-avatar" src="{% static 'student/img/contact/3.jpg' %}" alt="">
+		                                                </div>
+		                                                <div class="message">
+		                                                    <a class="message-author" href="#"> Michael Smith </a>
+		                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
+		                                                    <span class="message-content">
+		                                                        There are many variations of passages of Lorem Ipsum available,
+		                                                        but the majority have suffered alteration.
+		                                                    </span>
+		                                                </div>
+		                                            </div>
+		                                            <div class="chat-message">
+		                                                <div class="profile-hdtc">
+		                                                    <img class="message-avatar" src="{% static 'student/img/contact/4.jpg' %}" alt="">
+		                                                </div>
+		                                                <div class="message">
+		                                                    <a class="message-author" href="#"> Alice Jordan </a>
+		                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
+		                                                    <span class="message-content">
+		                                                        All the Lorem Ipsum generators on the Internet tend to repeat
+		                                                        predefined chunks as necessary, making this the first true
+		                                                        generator on the Internet.
+		                                                        It uses a dictionary of over 200 Latin words.
+		                                                    </span>
+		                                                    <div class="m-t-md mg-t-10">
+		                                                        <a class="btn btn-xs btn-default"><i
+		                                                                class="fa fa-thumbs-up"></i> Like </a>
+		                                                        <a class="btn btn-xs btn-warning"><i class="fa fa-eye"></i>
+		                                                            Nudge</a>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+		                                            <div class="chat-message">
+		                                                <div class="profile-hdtc">
+		                                                    <img class="message-avatar" src="{% static 'student/img/contact/1.jpg' %}" alt="">
+		                                                </div>
+		                                                <div class="message">
+		                                                    <a class="message-author" href="#"> Mark Smith </a>
+		                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
+		                                                    <span class="message-content">
+		                                                        All the Lorem Ipsum generators on the Internet tend to repeat
+		                                                        predefined chunks as necessary, making this the first true
+		                                                        generator on the Internet.
+		                                                        It uses a dictionary of over 200 Latin words.
+		                                                    </span>
+		                                                    <div class="m-t-md mg-t-10">
+		                                                        <a class="btn btn-xs btn-default"><i
+		                                                                class="fa fa-thumbs-up"></i> Like </a>
+		                                                        <a class="btn btn-xs btn-success"><i class="fa fa-heart"></i>
+		                                                            Love</a>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+		                                            <div class="chat-message">
+		                                                <div class="profile-hdtc">
+		                                                    <img class="message-avatar" src="{% static 'student/img/contact/2.jpg' %}" alt="">
+		                                                </div>
+		                                                <div class="message">
+		                                                    <a class="message-author" href="#"> Karl Jordan </a>
+		                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
+		                                                    <span class="message-content">
+		                                                        Many desktop publishing packages and web page editors now use
+		                                                        Lorem Ipsum as their default model text, and a search for 'lorem
+		                                                        ipsum' will uncover.
+		                                                    </span>
+		                                                    <div class="m-t-md mg-t-10">
+		                                                        <a class="btn btn-xs btn-default"><i
+		                                                                class="fa fa-thumbs-up"></i> Like </a>
+		                                                        <a class="btn btn-xs btn-default"><i class="fa fa-heart"></i>
+		                                                            Love</a>
+		                                                        <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i>
+		                                                            Message</a>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+		                                            <div class="chat-message">
+		                                                <div class="profile-hdtc">
+		                                                    <img class="message-avatar" src="{% static 'student/img/contact/3.jpg' %}" alt="">
+		                                                </div>
+		                                                <div class="message">
+		                                                    <a class="message-author" href="#"> Michael Smith </a>
+		                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
+		                                                    <span class="message-content">
+		                                                        There are many variations of passages of Lorem Ipsum available,
+		                                                        but the majority have suffered alteration.
+		                                                    </span>
+		                                                </div>
+		                                            </div>
+		                                            <div class="chat-message">
+		                                                <div class="profile-hdtc">
+		                                                    <img class="message-avatar" src="{% static 'student/img/contact/4.jpg' %}" alt="">
+		                                                </div>
+		                                                <div class="message">
+		                                                    <a class="message-author" href="#"> Alice Jordan </a>
+		                                                    <span class="message-date"> Fri Jan 25 2015 - 11:12:36 </span>
+		                                                    <span class="message-content">
+		                                                        All the Lorem Ipsum generators on the Internet tend to repeat
+		                                                        predefined chunks as necessary, making this the first true
+		                                                        generator on the Internet.
+		                                                        It uses a dictionary of over 200 Latin words.
+		                                                    </span>
+		                                                    <div class="m-t-md mg-t-10">
+		                                                        <a class="btn btn-xs btn-default"><i
+		                                                                class="fa fa-thumbs-up"></i> Like </a>
+		                                                        <a class="btn btn-xs btn-default"><i class="fa fa-heart"></i>
+		                                                            Love</a>
+		                                                    </div>
+		                                                </div>
+		                                            </div>
+		                                        	-->
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                    
+			                    <div class="product-tab-list tab-pane fade" id="INFORMATION">
+			                        <div class="row">
+			                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			                                <div class="review-content-section">
+			                                	<form method="post">
+			                                		{% csrf_token %}
+
+				                                    <div class="row">
+				                                        <div class="col-lg-6">
+				                                            <div class="form-group">
+				                                                <input name="number" value="{{ userProfile.first_name }}" type="text" class="form-control" placeholder="First Name">
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <input type="text" value="{{ userProfile.last_name }}" class="form-control" placeholder="Last Name">
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <input type="text" value="{{ userProfile.address }}" class="form-control" placeholder="Address">
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <input type="text" value="{{ userProfile.dob }}" class="form-control" placeholder="Date of Birth">
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <input type="text" class="form-control" placeholder="Department">
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <input type="number" class="form-control" placeholder="Pincode">
+				                                            </div>
+				                                            <div class="file-upload-inner ts-forms">
+				                                                <div class="input prepend-big-btn">
+				                                                    <label class="icon-right" for="prepend-big-btn">
+																			<i class="fa fa-download"></i>
+																		</label>
+				                                                    <div class="file-button">
+				                                                        Browse
+				                                                        <input type="file" onchange="document.getElementById('prepend-big-btn').value = this.value;">
+				                                                    </div>
+				                                                    <input type="text" id="prepend-big-btn" placeholder="no file selected">
+				                                                </div>
+				                                            </div>
+				                                        </div>
+				                                        <div class="col-lg-6">
+				                                            <div class="form-group sm-res-mg-15 tbpf-res-mg-15">
+				                                                <input type="text" class="form-control" placeholder="Description">
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <select class="form-control">
+																	<option>Select Gender</option>
+																	<option>Male</option>
+																	<option>Female</option>
+																</select>
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <select class="form-control">
+																		<option>Select country</option>
+																		<option>India</option>
+																		<option>Pakistan</option>
+																		<option>Amerika</option>
+																		<option>China</option>
+																		<option>Dubai</option>
+																		<option>Nepal</option>
+																	</select>
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <select class="form-control">
+																		<option>Select state</option>
+																		<option>Gujarat</option>
+																		<option>Maharastra</option>
+																		<option>Rajastan</option>
+																		<option>Maharastra</option>
+																		<option>Rajastan</option>
+																		<option>Gujarat</option>
+																	</select>
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <select class="form-control">
+																		<option>Select city</option>
+																		<option>Surat</option>
+																		<option>Baroda</option>
+																		<option>Navsari</option>
+																		<option>Baroda</option>
+																		<option>Surat</option>
+																	</select>
+				                                            </div>
+				                                            <div class="form-group">
+				                                                <input type="text" class="form-control" placeholder="Website URL">
+				                                            </div>
+				                                            <input type="number" class="form-control" placeholder="Mobile no.">
+				                                        </div>
+				                                    </div>
+				                                    <div class="row">
+				                                        <div class="col-lg-12">
+				                                            <div class="payment-adress mg-t-15">
+				                                                <button type="submit" class="btn btn-primary waves-effect waves-light mg-b-15">Submit</button>
+				                                            </div>
+				                                        </div>
+				                                    </div>
+			                                   	</form>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+		                  	{% endif %}
 	                    </div>
 	                </div>
 	            </div>

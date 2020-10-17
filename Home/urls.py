@@ -11,7 +11,7 @@ urlpatterns = [
 
 	path('', views.IndexView, name='index'),
 	path('account/', views.dashBoard, name='dashboard'),
-	path('account/profile/', views.profile, name='profile'),
+	path('account/profile/<slug:slug>/', views.profile, name='profile'),
 	path('account/login/', views.signIn, name='login'),
 	path('account/register/', views.signUp, name='register'),
 	path('account/logout/', views.signOut, name='logout'),
@@ -20,7 +20,9 @@ urlpatterns = [
 
 	path('account/mailbox/', views.mailbox, name='mailbox'),
 	path('account/mailbox/new/', views.mailboxCompose, name='mailboxCompose'),
-	path('account/mailbox/<slug:slug>/', views.mailboxDetail, name='mailboxDetail'),
+	path('account/mailbox/<slug:slug>/details/', views.mailboxDetail, name='mailboxDetail'),
+	path('account/mailbox/trash/', views.mailboxTrash, name='mailboxTrash'),
+	path('account/mailbox/sent/', views.mailboxSent, name='mailboxSent'),
 
 	# Courses
 

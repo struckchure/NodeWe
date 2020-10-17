@@ -58,6 +58,7 @@ def external_context(request=None):
 		messages = models.Message.objects.filter(recipient=request.user)
 
 	context = {
+		'request': request,
 		'user': user,
 		'cart': cart,
 		'inbox': messages,
@@ -239,11 +240,14 @@ def dashboardMaterials(request):
 
 
 @login_required
-def profile(request):
+def profile(request, slug=None):
+	user = get_object_or_404(get_user_model(), username=slug)
+
 	request.session['next'] = request.path
 
 	template_name = 'Home/profile.html'
 	context = {
+		'userProfile': user
 	}
 	context = utils.dictMerge(
 		external_context(request),
@@ -293,6 +297,42 @@ def mailboxCompose(request):
 
 	template_name = 'Home/mailboxCompose.html'
 	context = {
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def mailboxTrash(request):
+	request.session['next'] = request.path
+
+	messages = models.Message.objects.filter(sender=request.user, trashed=True)
+
+	template_name = 'Home/mailbox.html'
+	context = {
+		'inbox': messages,
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
+
+	return render(request, template_name, context)
+
+
+@login_required
+def mailboxSent(request):
+	request.session['next'] = request.path
+
+	messages = models.Message.objects.filter(sender=request.user, trashed=False)
+
+	template_name = 'Home/mailbox.html'
+	context = {
+		'inbox': messages,
 	}
 	context = utils.dictMerge(
 		external_context(request),
