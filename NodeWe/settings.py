@@ -132,3 +132,12 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 MEDIA_URL = '/Media/'
+
+####################
+# APIs Credentials #
+####################
+
+# GitHub
+
+GITHUB_CLIENT_KEY = 'f52e2612b300fec45817'
+GITHUB_CLIENT_SECRET = '0def268f8db9e5f4c772f97fcaeeb766a6bf5f0b'
