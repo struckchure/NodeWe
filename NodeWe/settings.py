@@ -39,8 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'Home.apps.HomeConfig',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +62,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'NodeWe.urls'
+
+AUTHENTICATION_BACKENDS = ( 
+    'django.contrib.auth.backends.ModelBackend', 
+    'allauth.account.auth_backends.AuthenticationBackend', 
+)
 
 TEMPLATES = [
     {
@@ -137,7 +150,70 @@ MEDIA_URL = '/Media/'
 # APIs Credentials #
 ####################
 
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 
+LOGIN_REDIRECT_URL = 'Home:dashboard'
+ACCOUNT_LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'facebook': {
+#         'METHOD': 'oauth2',
+#         'SCOPE': ['email', 'public_profile', 'user_friends'],
+#         'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+#         'INIT_PARAMS': {'cookie': True},
+#         'FIELDS': [
+#             'id',
+#             'email',
+#             'name',
+#             'first_name',
+#             'last_name',
+#             'verified',
+#             'locale',
+#             'timezone',
+#             'link',
+#             'gender',
+#             'updated_time',
+#         ],
+#         'EXCHANGE_TOKEN': True,
+#         'LOCALE_FUNC': 'path.to.callable',
+#         'VERIFIED_EMAIL': False,
+#         'VERSION': 'v2.12',
+#     },
+#      'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         }
+#     }
+# }
+
+ACCOUNT_FORMS = {
+    'signup': 'Home.forms.SignUpForm',
+    'login': 'Home.forms.SignInForm',
+}
+
+SITE_ID = 1
+
+
 # GitHub
 
 GITHUB_CLIENT_KEY = 'f52e2612b300fec45817'
 GITHUB_CLIENT_SECRET = '0def268f8db9e5f4c772f97fcaeeb766a6bf5f0b'
+
+# Facebook
+
+FACEBOOK_CLIENT_ID = 657502841632941
+FACEBOOK_CLIENT_SECRET = 'd26b0dd263f4c02df412e75a845c18d6'
+
+# Google
+
+GOOGLE_CLIENT_ID = '890326707410-ubro1cpvggfjoen5k4vdh3bacs4bj89o.apps.googleusercontent.com'
+GOOGLE_CLIENT_SECRET = '4Myyots_QCMhF3NbSkqMuWrV'
