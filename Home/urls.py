@@ -56,5 +56,5 @@ urlpatterns = [
 
 	# Utilities
 
-	path('download/<slug:slug>/', views.download_file, name='downloadFile'),
+	path('download/<str:path>/', views.download_file, name='downloadFile'),
 ]

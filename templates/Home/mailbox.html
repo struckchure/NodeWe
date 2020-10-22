@@ -89,7 +89,7 @@
                                                 {% if message.attachement %}                                                
                                                     <td><i class="fa fa-paperclip"></i></td>
                                                 {% endif %}
-                                                <td class="text-right mail-date">{{ message.date }}</td>
+                                                <td class="text-right mail-date">{{ message.date|date:"d M, h:i A" }}</td>
                                             </tr>
                                         {% endfor %}
 

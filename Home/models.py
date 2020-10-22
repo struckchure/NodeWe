@@ -339,7 +339,7 @@ class CourseItem(models.Model):
 		super(CourseItem, self).save(*args, **kwargs)
 
 	def get_download(self):
-		return reverse('Home:downloadFile', args=[self.slug])
+		return reverse('Home:downloadFile', args=[self.file.url])
 
 	class Meta:
 		verbose_name = 'Course Item'

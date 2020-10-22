@@ -53,7 +53,7 @@
                                         <a href="#"><img src="{{ course.image.url }}" alt="{{ course.course }}" />
                                         </a>
                                         <div class="blog-date">
-                                            <p><span class="blog-day">{{ course.date.day }}</span> {{ course.date.month }}</p>
+                                            <p><span class="blog-day">{{ course.date.day }}</span> {{ course.date|date:"M" }}</p>
                                         </div>
                                     </div>
                                     <div class="blog-details blog-sig-details">
@@ -110,7 +110,7 @@
                                                             <a class="btn-primary btn-sm" href="{{ course.file.url }}">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
-                                                            <a class="btn-success btn-sm" href="{{ course.get_download }}" download>
+                                                            <a class="btn-success btn-sm" href="{{ course.file }}" download>
                                                                 <i class="fa fa-cloud-download"></i>
                                                             </a>
                                                         </div>

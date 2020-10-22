@@ -9,9 +9,8 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.conf import settings
 from django.views.static import serve
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponse, Http404
 import os
-import mimetypes
 
 from . import models
 from . import forms
@@ -19,27 +18,17 @@ from . import utils
 
 # Utils
 
-def download_file(request, slug):
-    item = get_object_or_404(models.CourseItem, slug=slug)
-    filename = item.file.path
+def download_file(request, path):
+	file_path = os.path.join(settings.MEDIA_ROOT, path)
+	
+	if os.path.exists(file_path):
+		with open(file_path, 'rb') as fh:
+			response = HttpResponse(fh.read(), content_type="application/download")
+			response['Content-Disposition'] = "inline; filename=%s" % os.path.basename(file_path)
 
-    response = FileResponse(open(filename, 'rb'))
+			return response
 
-    return response
-
-# def download_file(request, slug):
-# 	item = get_object_or_404(models.CourseItem, slug=slug)
-# 	filename = item.file.path
-
-# 	fl_path = filename
-
-# 	fl = open(fl_path, 'r')
-# 	mime_type, _ = mimetypes.guess_type(fl_path)
-# 	response = HttpResponse(fl, content_type=mime_type)
-# 	response['Content-Disposition'] = "attachment; filename=%s" % filename
-
-# 	return response
-
+	raise Http404
 
 # Errors
 

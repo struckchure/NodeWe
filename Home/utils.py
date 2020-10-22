@@ -39,7 +39,7 @@ def course_item_cover_upload_handler(instance, filename):
 	file_extension = str(instance.cover).split('.')[-1]
 	item = instance.title
 
-	file_path = f'Images/courses/item covers{item}.{file_extension}'.replace(' ', '-')
+	file_path = f'Images/courses/item cover-{item}.{file_extension}'.replace(' ', '-')
 
 	return file_path
 
