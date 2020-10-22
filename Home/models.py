@@ -62,6 +62,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_courses(self):
     	return reverse('Home:categories')
 
+    def get_profile(self):
+    	return reverse('Home:profile', args=[self.username])
+
     def get_user_courses(self):
     	if self.is_tutor:
     		courses = Course.objects.filter(tutor=self.id)
@@ -289,6 +292,14 @@ class Course(models.Model):
 
 		return f'{days_str} {hours_str} {minutes_str} {seconds_str}'
 
+	def get_details(self):
+		return reverse('Home:dashboardCourseDetail', args=[self.slug])
+
+	def get_courses_items(self):
+		courses = CourseItem.objects.filter(course=self.id)
+
+		return courses
+
 	class Meta:
 		verbose_name = 'Course'
 		verbose_name_plural = 'Courses'
@@ -296,15 +307,39 @@ class Course(models.Model):
 
 class CourseItem(models.Model):
 	course = models.ForeignKey(Course, on_delete=models.CASCADE)
+	cover = models.ImageField(upload_to=utils.course_item_cover_upload_handler, blank=True, default=None)
 	title = models.CharField(max_length=200, blank=False, default='')
 	description = models.TextField(blank=False)
 	file = models.FileField(blank=False, upload_to=utils.course_upload_handler)
+	slug = models.SlugField(blank=True, unique=True) 
 
 	def __str__(self):
 		return f'{self.course.course} {self.title}'
 
+	def custom_slugify(self, text):
+	    items = CourseItem.objects.all().values('slug')
+	    item_slugs = []
+
+	    for i in items:
+	        item_slugs.append(i['slug'])
+
+	    intial_slug = slugify(text)
+	    unique_slug_key = random.randint(1, 1000)
+	    final_slug = f'{intial_slug}-{unique_slug_key}'
+
+	    while text in item_slugs:
+	        unique_slug_key = random.randint(1, 1000)
+	        final_slug = f'{intial_slug}-{unique_slug_key}'
+	    
+	    return final_slug
+
 	def save(self, *args, **kwargs):
+		self.slug = self.custom_slugify(f'{self.course.course} {self.title}')
+
 		super(CourseItem, self).save(*args, **kwargs)
+
+	def get_download(self):
+		return reverse('Home:downloadFile', args=[self.slug])
 
 	class Meta:
 		verbose_name = 'Course Item'

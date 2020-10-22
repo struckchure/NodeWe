@@ -1,6 +1,7 @@
 from django.urls import path, include
 
 from . import views
+from . import utils
 
 
 app_name = 'Home'
@@ -52,4 +53,8 @@ urlpatterns = [
 	# Like Course
 
 	path('categories/courses/<slug:slug>/like/', views.likeCourse, name='likeCourse'),
+
+	# Utilities
+
+	path('download/<slug:slug>/', views.download_file, name='downloadFile'),
 ]

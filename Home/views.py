@@ -7,12 +7,38 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
+from django.conf import settings
+from django.views.static import serve
+from django.http import FileResponse
+import os
+import mimetypes
 
 from . import models
 from . import forms
 from . import utils
 
-# Custom filters
+# Utils
+
+def download_file(request, slug):
+    item = get_object_or_404(models.CourseItem, slug=slug)
+    filename = item.file.path
+
+    response = FileResponse(open(filename, 'rb'))
+
+    return response
+
+# def download_file(request, slug):
+# 	item = get_object_or_404(models.CourseItem, slug=slug)
+# 	filename = item.file.path
+
+# 	fl_path = filename
+
+# 	fl = open(fl_path, 'r')
+# 	mime_type, _ = mimetypes.guess_type(fl_path)
+# 	response = HttpResponse(fl, content_type=mime_type)
+# 	response['Content-Disposition'] = "attachment; filename=%s" % filename
+
+# 	return response
 
 
 # Errors
@@ -198,8 +224,11 @@ def dashboardCourses(request):
 def dashboardCourseDetail(request, slug):
 	request.session['next'] = request.path
 
+	course = get_object_or_404(models.Course, slug=slug)
+
 	template_name = 'Home/dashboardCourseDetail.html'
 	context = {
+		'course': course
 	}
 	context = utils.dictMerge(
 		external_context(request),

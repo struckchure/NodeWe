@@ -24,10 +24,12 @@
 	                        </div>
 	                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 	                            <ul class="breadcome-menu">
-	                                <li><a href="#">NodeWe</a> <span class="bread-slash">/</span>
+	                                <li><a href="{% url 'Home:dashboard' %}">NodeWe</a> <span class="bread-slash">/</span>
 	                                </li>
-	                                <li><span class="bread-blod">Dashboard</span>
+	                                <li><a href="{% url 'Home:dashboardCourses' %}">Course <span class="bread-slash">/</span></a>
 	                                </li>
+                                    <li><span class="bread-blod">{{ course.course }}</span>
+                                    </li>
 	                            </ul>
 	                        </div>
 	                    </div>
@@ -45,47 +47,91 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="blog-details-inner">
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <div class="latest-blog-single blog-single-full-view">
                                     <div class="blog-image">
-                                        <a href="#"><img src="{% static 'student/img/blog-details/1.jpg' %}" alt="" />
+                                        <a href="#"><img src="{{ course.image.url }}" alt="{{ course.course }}" />
                                         </a>
                                         <div class="blog-date">
-                                            <p><span class="blog-day">20</span> May</p>
+                                            <p><span class="blog-day">{{ course.date.day }}</span> {{ course.date.month }}</p>
                                         </div>
                                     </div>
                                     <div class="blog-details blog-sig-details">
                                         <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
-                                            <span><a href="#"><i class="fa fa-user"></i> <b>Course Name:</b> Web
-                                                    Development</a></span>
-                                            <span><a href="#"><i class="fa fa-heart"></i> <b>Course Price:</b>
-                                                    $0.00</a></span>
-                                            <span><a href="#"><i class="fa fa-comments-o"></i> <b>Instructor:</b> Alva
-                                                    Adition</a></span>
+                                            <span>
+                                                <a href="#"><i class="fa fa-user"></i> <b>Course Name:</b>
+                                                    {{ course.course }}
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a href="#"><i class="fa fa-heart"></i> <b>Course Price:</b>
+                                                    $ {{ course.price }}
+                                                </a>
+                                            </span>
+                                            <span>
+                                                <a href="{{ course.tutor.get_profile }}"><i class="fa fa-comments-o"></i> <b>Instructor:</b>
+                                                    {{ course.tutor.get_full_name }}
+                                                </a>
+                                            </span>
                                         </div>
-                                        <h1><a class="blog-ht" href="#">Courses Info Dummy Title</a></h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla pariatur.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                            culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde
-                                            omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                                            rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                                            beatae vitae dicta sunt explicabo.</p>
-                                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
-                                            quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque
-                                            porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-                                            velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore
-                                            magnam aliquam quaerat voluptatem.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad im veniam, quis nostrud
-                                            exercitation ullamco laboris nisi ut aliquip</p>
+                                        <h1>Description</h1>
+                                        <p>
+                                            {{ course.description }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                <div class="product-status-wrap">
+                                    <h4>Course materials</h4>
+                                    <div class="add-product">
+                                        <a href="#">Add Library</a>
+                                    </div>
+                                    <div class="asset-inner">
+                                        <table>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Image</th>
+                                                <th>Title</th>
+                                                <th>Material</th>
+                                                <th>Status</th>
+                                                <th>Course</th>
+                                                <th>Category</th>
+                                            </tr>
+
+                                            {% for course in course.get_courses_items %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td><img src="{{ course.cover.url }}" alt="{% static 'student/img/product/book-1.jpg' %}" /></td>
+                                                    <td>{{ course.title }}</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a class="btn-primary btn-sm" href="{{ course.file.url }}">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a class="btn-success btn-sm" href="{{ course.get_download }}" download>
+                                                                <i class="fa fa-cloud-download"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button class="pd-setting">Active</button>
+                                                    </td>
+                                                    <td>{{ course.course.course }}</td>
+                                                    <td>{{ course.course.category }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                    <div class="custom-pagination">
+                                        <ul class="pagination">
+                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
