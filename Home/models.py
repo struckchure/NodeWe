@@ -4,13 +4,13 @@ from django.contrib.auth.models import PermissionsMixin
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils import timezone
+from django.conf import settings
 import os
 import random
 import secrets
 
 from . import managers
 from . import utils
-from NodeWe import settings
 
 # Generics
 
@@ -307,7 +307,7 @@ class Course(models.Model):
 
 class CourseItem(models.Model):
 	course = models.ForeignKey(Course, on_delete=models.CASCADE)
-	cover = models.ImageField(upload_to=utils.course_item_cover_upload_handler, blank=True, default=None)
+	cover = models.ImageField(upload_to=utils.course_item_cover_upload_handler, blank=True, default='None', null=True)
 	title = models.CharField(max_length=200, blank=False, default='')
 	description = models.TextField(blank=False)
 	file = models.FileField(blank=False, upload_to=utils.course_upload_handler)
