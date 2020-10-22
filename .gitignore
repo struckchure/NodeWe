@@ -1,5 +1,6 @@
-/NodeWe/__pycache__/
-/Home/migrations/
-/Media/
-*.sqlite3
+db.sqlite3
 *.pyc
+
+/Home/migrations/
+/NodeWe/__pycache__/
+/Media/
