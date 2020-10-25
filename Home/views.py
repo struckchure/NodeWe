@@ -75,7 +75,7 @@ def external_context(request=None):
 	if request.user.is_authenticated:
 		user = request.user
 		cart, created = models.Cart.objects.get_or_create(user=user)
-		messages = models.Message.objects.filter(recipient=request.user)
+		messages = models.Message.objects.filter(recipient=request.user).order_by('-date')
 
 	context = {
 		'request': request,
@@ -128,11 +128,14 @@ def signUp(request):
 		if signUpForm.is_valid():
 			signUpForm.save()
 
-			# username = signUpForm.cleaned_data.get('username')
-			# password = signUpForm.cleaned_data.get('password')
+			messages.info(request, 'Registration complete, check your Mail to verify your account')
 
-			# user = authenticate(username=username, password=password)
-			# login(request, user)
+			username = signUpForm.cleaned_data.get('username')
+			password = signUpForm.cleaned_data.get('password1')
+
+			user = authenticate(username=username, password=password)
+			if user:
+				login(request, user)
 
 			return redirect('Home:dashboard')
 

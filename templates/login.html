@@ -38,15 +38,18 @@
 				<form method="POST" class="login100-form validate-form flex-sb flex-w">
 					{% csrf_token %}
 
-					<!-- error messsage -->
-					
-					{% for message in messages %}
-						{{ message }} <!-- message -->
-					{% endfor %}
-
 					<span class="login100-form-title p-b-53">
 						Welcome back.
 					</span>
+
+					<!-- error messsage -->
+					{% for message in messages %}
+						<div style="padding: 7px; margin: auto;">					
+	                        <div class="alert alert-primary" style="margin: auto;">
+	                            {{ message }}
+	                        </div>
+						</div>
+                    {% endfor %}
 
 					<a href="#" class="btn-face m-b-20">
 						<i class="fa fa-facebook-official"></i>

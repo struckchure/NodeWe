@@ -41,6 +41,15 @@
                 <form class="login100-form validate-form flex-sb flex-w" method="POST">
                     {% csrf_token %}
                     
+                    <!-- error messsage -->
+                    <div style="padding: 7px; margin: auto;">                   
+                        {% for message in messages %}
+                            <div class="alert alert-primary" style="margin: auto;">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+
                     <span class="login100-form-title p-b-53">
                         Welcome to NodeWe. Register Here.
                     </span>

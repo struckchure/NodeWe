@@ -9,9 +9,18 @@
 {% block bread_crumb %}
 	<div class="breadcome-area">
 	    <div class="container-fluid">
+            <div style="padding: 7px; margin: auto;">                   
+                {% for message in messages %}
+                    <div class="alert alert-primary" style="margin: auto;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            
 	        <div class="row">
 	            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	                <div class="breadcome-list single-page-breadcome">
+
 	                    <div class="row">
 	                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 	                            <div class="breadcome-heading">
@@ -109,15 +118,13 @@
                     <p style="font-size:20px; font-weight: 500px;">Recommended For You</p>
                 <div class="row">
                     <div class="row mg-b-15">
-                        {% load course_filters %}
-
                         {% for course in courses %}
                             {% include "components/dashboardCourseCard.html" %}
                         {% endfor %}
                     </div>
                 
                     <center>
-                        <a href="" class="btn btn-primary text-center" style="padding: 15px 15px; border-radius: 30px; margin-top: 30px; margin-bottom: 30px;">Explore
+                        <a href="{% url 'Home:courses' %}" class="btn btn-primary text-center" style="padding: 15px 15px; border-radius: 30px; margin-top: 30px; margin-bottom: 30px;">Explore
                             More.
                         </a>
                     </center>
@@ -238,7 +245,7 @@
                     </div>
 
 
-                    <center><a href="" class="btn btn-primary text-center"
+                    <center><a href="{% url 'Home:courses' %}" class="btn btn-primary text-center"
                             style="padding: 15px 15px; border-radius: 30px; margin-top: 30px; margin-bottom: 30px;">Explore
                             More.</a></center>
 
@@ -373,7 +380,7 @@
                 </div>
     
     
-                <center><a href="" class="btn btn-primary text-center"
+                <center><a href="{% url 'Home:courses' %}" class="btn btn-primary text-center"
                         style="padding: 15px 15px; border-radius: 30px; margin-top: 30px; margin-bottom: 30px;">Explore
                         More.</a></center>
     

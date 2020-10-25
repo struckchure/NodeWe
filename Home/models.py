@@ -81,17 +81,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     	self.save()
 
     def send_verification(self, link):
-    	title = 'NodeWe - Verify your account'
-    	body = f'Follow this link https://www.nodewe.com/accounts/verify/{link} to verify your account.'
-    	recipient = self.email
-    	sender = 'NodeWe'
-    	
-    	mail_delivery = send_mail(title, body, sender, [recipient], fail_silently=True);
+    	if not self.is_verified:
+	    	title = 'NodeWe - Verify your account'
+	    	body = f'Hello {self.username}, \nFollow this link https://www.nodewe.com/accounts/verify/{link} to verify your account.'
+	    	recipient = self.email
+	    	sender = 'NodeWe'
+	    	
+	    	mail_delivery = send_mail(title, body, sender, [recipient], fail_silently=True);
 
-    	if mail_delivery == 1:
-    		print(f'email to {recipient} sent')
-    	else:
-    		print(f'email to {recipient} failed')
+	    	if mail_delivery == 1:
+	    		print(f'email to {recipient} sent')
+	    	else:
+	    		print(f'email to {recipient} failed')
 
     class Meta:
         verbose_name = 'User'
