@@ -101,9 +101,11 @@
                                 </div>
                                 <button class="btn btn-primary ft-compse" type="submit">Send email</button>
                                 <div class="btn-group active-hook mail-btn-sd">
+                                    <!--
                                     <button class="btn btn-default upload"><i class="fa fa-paperclip"></i> </button>
                                     <button class="btn btn-default upload"><i class="fa fa-image"></i> </button>
-                                    <input id="uploadfile" type="file" name="attachment" multiple style="display: none;" >
+                                    -->
+                                    <input id="uploadfile" type="file" name="attachment" multiple>
                                 </div>
                             </div>
                         </form>
@@ -114,8 +116,9 @@
     </div>
 
     {% block extra_scripts %}
-        <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
-        <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
-        <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+        <script src="{% static 'js/vendor/jquery.ui.widget.js' %}"></script>
+        <script src="{% static 'js/jquery.iframe-transport.js' %}"></script>
+        <script src="{% static 'js/jquery.fileupload.js' %}"></script>
+        <script src="{% static 'js/upload.js' %}"></script>
     {% endblock extra_scripts %}
 {% endblock %}
