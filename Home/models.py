@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.mail import send_mail
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.urls import reverse
@@ -31,6 +32,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_tutor = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
 
     objects = managers.UserManager()
 
@@ -73,9 +75,49 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     	return courses
 
+    def verify_user(self):
+    	self.is_verified = True
+
+    	self.save()
+
+    def send_verification(self, link):
+    	title = 'NodeWe - Verify your account'
+    	body = f'Follow this link https://www.nodewe.com/accounts/verify/{link} to verify your account.'
+    	recipient = self.email
+    	
+    	mail_delivery = send_mail(title, body, recipient, [recipient], fail_silently=True);
+
+    	if mail_delivery == 1:
+    		print(f'email to {recipient} sent')
+    	else:
+    		print(f'email to {recipient} failed')
+
     class Meta:
         verbose_name = 'User'
         verbose_name_plural = 'Users'
+
+
+class VerificationToken(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	token = models.CharField(max_length=100, blank=True, unique=True)
+
+	def __str__(self):
+		return f'{self.user}'
+
+	def generate_token(self):
+		tokens = VerificationToken.objects.all().values('token')
+		token_slugs = []
+		unique_slug_key = secrets.token_urlsafe(50)
+
+		while unique_slug_key in token_slugs:
+			unique_slug_key = secrets.token_urlsafe(50)
+
+		return unique_slug_key
+
+	def save(self, *args, **kwargs):
+		self.token = self.generate_token()
+
+		super(VerificationToken, self).save(*args, **kwargs)
 
 
 class Profile(models.Model):

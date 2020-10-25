@@ -6,5 +6,5 @@ class HomeConfig(AppConfig):
     name = 'Home'
     verbose_name = _('Home')
 
-    # def ready(self):
-    #     import Home.signals
+    def ready(self):
+        import Home.signals

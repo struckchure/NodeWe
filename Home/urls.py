@@ -12,6 +12,7 @@ urlpatterns = [
 
 	path('', views.IndexView, name='index'),
 	path('account/', views.dashBoard, name='dashboard'),
+	path('account/verify/<slug:token>', views.verify, name='verify'),
 	path('account/profile/<slug:slug>/', views.profile, name='profile'),
 	path('account/login/', views.signIn, name='login'),
 	path('account/register/', views.signUp, name='register'),

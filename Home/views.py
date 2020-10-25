@@ -128,9 +128,13 @@ def signUp(request):
 		if signUpForm.is_valid():
 			signUpForm.save()
 
-			return redirect('Home:login')
-		else:
-			return redirect('Home:register')
+			# username = signUpForm.cleaned_data.get('username')
+			# password = signUpForm.cleaned_data.get('password')
+
+			# user = authenticate(username=username, password=password)
+			# login(request, user)
+
+			return redirect('Home:dashboard')
 
 	return render(request, template_name, context)
 
@@ -183,6 +187,22 @@ def signOut(request):
 
 
 # Accounts
+
+@login_required
+def verify(request, token):
+	token = get_object_or_404(models.VerificationToken, token=token)
+	user = token.user
+
+	if request.user == user:
+		messages.success(request, 'Account is not verified :)')
+		user.verify_user()
+		token.delete()
+	else:
+		print('Not user')
+
+
+	return redirect('Home:dashboard')
+
 
 @login_required
 def dashBoard(request):
