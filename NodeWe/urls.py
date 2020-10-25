@@ -18,7 +18,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Home.urls')),
     path('account/auth/', include('allauth.urls')),
-    # url('download<str:path>/', serve, {'document_root': settings.MEDIA_ROOT})
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

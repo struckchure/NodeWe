@@ -38,25 +38,25 @@ def download_file(request, path):
 # Errors
 
 def Error404(request, exception=None):
-	template_name = 'Error404.html'
+	template_name = 'ErrorPages/Error404.html'
 	
 	return render(request, template_name)
 
 
 def Error400(request, exception=None):
-	template_name = 'Error400.html'
+	template_name = 'ErrorPages/Error400.html'
 
 	return render(request, template_name)
 
 
 def Error403(request, exception=None):
-	template_name = 'Error403.html'
+	template_name = 'ErrorPages/Error403.html'
 	
 	return render(request, template_name)
 
 
 def Error500(request, exception=None):
-	template_name = 'Error500.html'
+	template_name = 'ErrorPages/Error500.html'
 	
 	return render(request, template_name)
 
@@ -65,6 +65,9 @@ def Error500(request, exception=None):
 def external_context(request=None):
 	sections = models.Section.objects.order_by('-popularity', '-views', '-last_updated')
 	courses = models.Course.objects.order_by('-popularity', '-views', '-last_updated')
+	viewed_courses = models.Course.objects.order_by('-views')
+	populary_courses = models.Course.objects.order_by('-popularity')
+	user_suggested_courses = models.Course.objects.all()
 	categories = models.Category.objects.all().order_by('-popularity', '-last_updated')
 	tutors = User.objects.filter(is_tutor=True, is_active=True)
 
@@ -84,6 +87,9 @@ def external_context(request=None):
 		'inbox': messages,
 		'sections': sections,
 		'courses': courses,
+		'viewed_courses': viewed_courses,
+		'populary_courses': populary_courses,
+		'user_suggested_courses': user_suggested_courses,
 		'categories': categories,
 		'tutors': tutors,
 		'all_courses_header': 'Courses'
