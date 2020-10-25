@@ -1,6 +1,7 @@
 db.sqlite3
 *.pyc
 
-/Home/migrations/
-/NodeWe/__pycache__/
-/Media/
+Home/migrations/
+Home/__pycache__/
+NodeWe/__pycache__/
+Media/
