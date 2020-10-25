@@ -63,9 +63,9 @@ def profile_upload_handler(instance, filename):
 
 def message_upload_handler(instance, filename):
 	file_extension = str(instance.attachment).split('.')[-1]
-	date = instance.date
+	attachment = instance.attachment
 	
-	file_path = f'Messages/attachment/{date}.{file_extension}'.replace(' ', '-')
+	file_path = f'Messages/attachment/{attachment}.{file_extension}'.replace(' ', '-')
 
 	return file_path
 
@@ -95,3 +95,7 @@ def download_file(request, slug):
 
 #     raise Http404
 
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)

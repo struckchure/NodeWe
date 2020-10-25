@@ -9,7 +9,8 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.conf import settings
 from django.views.static import serve
-from django.http import FileResponse, HttpResponse, Http404
+from django.views import View
+from django.http import FileResponse, HttpResponse, Http404, JsonResponse
 import os
 
 from . import models
@@ -17,6 +18,10 @@ from . import forms
 from . import utils
 
 # Utils
+
+
+User = get_user_model()
+
 
 def download_file(request, path):
 	file_path = os.path.join(settings.MEDIA_ROOT, path)
@@ -61,7 +66,7 @@ def external_context(request=None):
 	sections = models.Section.objects.order_by('-popularity', '-views', '-last_updated')
 	courses = models.Course.objects.order_by('-popularity', '-views', '-last_updated')
 	categories = models.Category.objects.all().order_by('-popularity', '-last_updated')
-	tutors = get_user_model().objects.filter(is_tutor=True, is_active=True)
+	tutors = User.objects.filter(is_tutor=True, is_active=True)
 
 	cart = None
 	user = None
@@ -313,6 +318,34 @@ def mailboxDetail(request, slug):
 def mailboxCompose(request):
 	request.session['next'] = request.path
 
+	mail_compose_form = forms.ComposeMail(request.POST, request.FILES)
+	sender = request.user
+
+	if mail_compose_form.is_valid():
+		recipient = User.objects.filter(
+			username=mail_compose_form.cleaned_data.get('recipient')
+		)
+		subject = mail_compose_form.cleaned_data.get('subject')
+		attachments = mail_compose_form.cleaned_data.get('attachment')
+
+		if recipient.exists():
+			recipient = recipient[0]
+			message = mail_compose_form.cleaned_data.get('message')
+
+			mail = models.Message.objects.create(
+				sender=sender,
+				recipient=recipient,
+				subject=subject,
+				message=message,
+				attachment=attachments if attachments else None
+			)
+
+			mail.save()
+		else:
+			print('username does not exist')
+	else:
+		print('invalid form')
+
 	template_name = 'Home/mailboxCompose.html'
 	context = {
 	}
@@ -322,6 +355,42 @@ def mailboxCompose(request):
 	)
 
 	return render(request, template_name, context)
+
+
+# class mailboxCompose(View):
+#     def get(self, request):
+#     	template_name = 'Home/mailboxCompose.html'
+#     	context = utils.dictMerge(external_context(self.request), {})
+
+#     	return render(self.request, template_name, context)
+
+#     def post(self, request):
+#         mail_compose_form = forms.ComposeMail(self.request.POST, self.request.FILES)
+#         sender = self.request.user
+
+#         if mail_compose_form.is_valid():
+#         	recipient = User.objects.filter(username=mail_compose_form.cleaned_data.get('recipient'))
+#         	subject = mail_compose_form.cleaned_data.get('subject')
+#         	attachments = mail_compose_form.cleaned_data.get('attachment')
+#         	data = {'is_valid': True, 'name': attachments.file.name, 'url': attachments.file.url}
+
+#         	if recipient.exists():
+#         		recipient = recipient[0]
+#         		message = mail_compose_form.cleaned_data.get('message')
+#         		mail = models.Message.objects.create(
+# 					sender=sender,
+# 					recipient=recipient,
+# 					subject=subject,
+# 					message=message,
+# 					attachment=attachments if attachments else None
+# 				);mail.save()
+#         	else:
+#         		print('username does not exist')
+#         	return JsonResponse(data)
+#         else:
+#         	data = {'is_valid': False}
+
+#         	return JsonResponse(data)
 
 
 @login_required

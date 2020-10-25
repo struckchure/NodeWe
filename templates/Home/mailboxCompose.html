@@ -46,65 +46,76 @@
                 
                 <div class="col-md-9 col-md-9 col-sm-9 col-xs-12">
                     <div class="hpanel email-compose">
-                        <div class="panel-heading hbuilt">
-                            <div class="p-xs h4">
-                                New message
-                            </div>
-                        </div>
-                        <div class="panel-heading hbuilt">
-                            <div class="p-xs">
-                                <form method="get" class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-lg-1 control-label text-left">To:</label>
-                                        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
-                                            <input name="email" type="text" class="form-control input-sm"
-                                                placeholder="example@email.com">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-1 control-label text-left">Subject:</label>
-                                        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
-                                            <input type="text" class="form-control input-sm" placeholder="Subject">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-lg-1 control-label text-left">Message:</label>
-                                        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
-                                            <textarea name="comment" form="usrform" placeholder="Message Body"></textarea>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="panel-body no-padding">
-                            <div id="dropzone" class="dropmail">
-                                <form action="/upload" class="dropzone dropzone-custom needsclick" id="demo-upload">
-                                    <div class="dz-message needsclick download-custom">
-                                        <i class="fa fa-cloud-download" aria-hidden="true"></i>
-                                        <h2>Drop files here or click to upload.</h2>
-                                        <p><span class="note needsclick">(This is just a demo dropzone. Selected files are
-                                                <strong>not</strong> actually uploaded.)</span>
-                                        </p>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="panel-footer">
-                            <div class="pull-right">
-                                <div class="btn-group active-hook">
-                                    <button class="btn btn-default"><i class="fa fa-edit"></i> Save</button>
-                                    <button class="btn btn-default"><i class="fa fa-trash"></i> Discard</button>
+                        <form enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+
+                            <div class="panel-heading hbuilt">
+                                <div class="p-xs h4">
+                                    New message
                                 </div>
                             </div>
-                            <button class="btn btn-primary ft-compse">Send email</button>
-                            <div class="btn-group active-hook mail-btn-sd">
-                                <button class="btn btn-default"><i class="fa fa-paperclip"></i> </button>
-                                <button class="btn btn-default"><i class="fa fa-image"></i> </button>
+                            <div class="panel-heading hbuilt">
+                                <div class="p-xs">
+                                    <div class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-lg-1 control-label text-left">To:</label>
+                                            <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
+                                                <input name="recipient" type="text" class="form-control input-sm"
+                                                    placeholder="example@email.com">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-1 control-label text-left">Subject:</label>
+                                            <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
+                                                <input name="subject" type="text" class="form-control input-sm" placeholder="Subject">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-1 control-label text-left">Message:</label>
+                                            <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
+                                                <textarea name="message" placeholder="Message Body"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="panel-body no-padding">
+                                <div id="dropzone" class="dropmail">
+                                    <div class="dropzone dropzone-custom needsclick" id="demo-upload">
+                                        <div class="dz-message needsclick download-custom">
+                                            <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                            <h2>Drop files here or click to upload.</h2>
+                                            <p><span class="note needsclick">(This is just a demo dropzone. Selected files are
+                                                    <strong>not</strong> actually uploaded.)</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="pull-right">
+                                    <div class="btn-group active-hook">
+                                        <button class="btn btn-default"><i class="fa fa-edit"></i> Save</button>
+                                        <button class="btn btn-default"><i class="fa fa-trash"></i> Discard</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary ft-compse" type="submit">Send email</button>
+                                <div class="btn-group active-hook mail-btn-sd">
+                                    <button class="btn btn-default upload"><i class="fa fa-paperclip"></i> </button>
+                                    <button class="btn btn-default upload"><i class="fa fa-image"></i> </button>
+                                    <input id="uploadfile" type="file" name="attachment" multiple style="display: none;" >
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {% block extra_scripts %}
+        <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+        <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+        <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+    {% endblock extra_scripts %}
 {% endblock %}

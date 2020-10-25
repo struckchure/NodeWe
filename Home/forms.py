@@ -23,3 +23,13 @@ class SignInForm(forms.Form):
 		required=True,
 		widget=forms.PasswordInput
 	)
+
+
+class ComposeMail(forms.Form):
+	recipient = forms.CharField()
+	subject = forms.CharField()
+	message = forms.CharField()
+	attachment = forms.FileField(
+		widget=forms.ClearableFileInput(attrs={'multiple': True}),
+		required=False
+	)

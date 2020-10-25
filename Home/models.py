@@ -439,6 +439,9 @@ class Message(models.Model):
 	def get_details(self):
 		return reverse('Home:mailboxDetail', args=[self.slug])
 
+	def get_file_name(self):
+		return self.attachment.name.split('/')[-1]
+
 	def custom_slugify(self, text):
 	    messages = Message.objects.all().values('slug')
 	    message_slugs = []
