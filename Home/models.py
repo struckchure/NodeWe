@@ -87,7 +87,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 	    	recipient = self.email
 	    	sender = 'NodeWe'
 	    	
-	    	mail_delivery = send_mail(title, body, recipient, [recipient], fail_silently=True);
+	    	mail_delivery = send_mail(title, body, sender, [recipient], fail_silently=True);
 
 	    	if mail_delivery == 1:
 	    		print(f'email to {recipient} sent')
