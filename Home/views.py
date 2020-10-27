@@ -132,11 +132,18 @@ def signUp(request):
 	if request.method == 'POST':
 		signUpForm = forms.SignUpForm(request.POST)
 		if signUpForm.is_valid():
+			username = signUpForm.cleaned_data.get('username')
+			email = signUpForm.cleaned_data.get('email')
 			password1 = signUpForm.cleaned_data.get('password1')
 			password2 = signUpForm.cleaned_data.get('password2')
 
 			if password1 == password2:
 				signUpForm.save()
+				# new_user = User.objects.create(
+				# 	username=username,
+				# 	email=email
+				# )
+				# new_user.set_password(password1)
 
 				messages.info(request, 'Registration complete, check your Mail to verify your account')
 
@@ -153,6 +160,8 @@ def signUp(request):
 				return redirect('Home:dashboard')
 			else:
 				messages.info(request, 'Password mismatch')
+		else:
+			messages.error(request, f'Password not secure, try combining symbols, numbers')
 
 
 	return render(request, template_name, context)
