@@ -43,7 +43,6 @@
 						Welcome back.
 					</span>
 
-					<!--
 					<a href="#" class="btn-face m-b-20">
 						<i class="fa fa-facebook-official"></i>
 						Procees with Facebook
@@ -53,16 +52,13 @@
 						<img src="{% static 'join/images/icons/icon-google.png' %}" alt="GOOGLE">
 						Proceed with Google
 					</a>
-					-->
 				
 					<!-- error messsage -->
 					{% for message in messages %}
-						<div class="row sense" style="margin-bottom: 30px;">
-							<div style="padding: 7px; margin: auto;">					
-		                        <div class="alert alert-primary" style="margin: auto;">
-		                            {{ message }}
-		                        </div>
-							</div>
+						<div style="padding: 7px; margin: auto;">					
+	                        <div class="alert alert-primary" style="margin: auto;">
+	                            {{ message }}
+	                        </div>
 						</div>
 	                {% endfor %}
 
