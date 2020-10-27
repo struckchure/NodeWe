@@ -23,8 +23,9 @@ def send_verification(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=models.User)
 def save_cart(sender, instance, **kwargs):
-	if not instance.is_verified:
-		token = models.VerificationToken.objects.get(user=instance)
+	# if not instance.is_verified:
+	# 	token = models.VerificationToken.objects.get(user=instance)
 
-		link = token.token
-		instance.send_verification(link)
+	# 	link = token.token
+	# 	instance.send_verification(link)
+	pass

@@ -137,13 +137,16 @@ def signUp(request):
 
 			if password1 == password2:
 				signUpForm.save()
-				
+
 				messages.info(request, 'Registration complete, check your Mail to verify your account')
 
 				username = signUpForm.cleaned_data.get('username')
-				password = signUpForm.cleaned_data.get('password1')
+				password = password1
 
 				user = authenticate(username=username, password=password)
+				token = models.VerificationToken.objects.get(user=user)
+				token.user.send_verification(token.token)
+
 				if user:
 					login(request, user)
 
@@ -209,13 +212,11 @@ def verify(request, token):
 	token = get_object_or_404(models.VerificationToken, token=token)
 	user = token.user
 
-	if request.user == user:
-		messages.success(request, 'Account is not verified :)')
-		user.verify_user()
-		token.delete()
-	else:
-		print('Not user')
+	messages.success(request, 'Account is not verified :)')
+	user.verify_user()
+	token.delete()
 
+	login(request, user)
 
 	return redirect('Home:dashboard')
 
