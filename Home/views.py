@@ -137,19 +137,20 @@ def signUp(request):
 
 			if password1 == password2:
 				signUpForm.save()
+				
+				messages.info(request, 'Registration complete, check your Mail to verify your account')
+
+				username = signUpForm.cleaned_data.get('username')
+				password = signUpForm.cleaned_data.get('password1')
+
+				user = authenticate(username=username, password=password)
+				if user:
+					login(request, user)
+
+				return redirect('Home:dashboard')
 			else:
 				messages.info(request, 'Password mismatch')
 
-			messages.info(request, 'Registration complete, check your Mail to verify your account')
-
-			username = signUpForm.cleaned_data.get('username')
-			password = signUpForm.cleaned_data.get('password1')
-
-			user = authenticate(username=username, password=password)
-			if user:
-				login(request, user)
-
-			return redirect('Home:dashboard')
 
 	return render(request, template_name, context)
 
