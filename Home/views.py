@@ -132,7 +132,13 @@ def signUp(request):
 	if request.method == 'POST':
 		signUpForm = forms.SignUpForm(request.POST)
 		if signUpForm.is_valid():
-			signUpForm.save()
+			password1 = signUpForm.cleaned_data.get('password1')
+			password2 = signUpForm.cleaned_data.get('password2')
+
+			if password1 == password2:
+				signUpForm.save()
+			else:
+				messages.info(request, 'Password mismatch')
 
 			messages.info(request, 'Registration complete, check your Mail to verify your account')
 
