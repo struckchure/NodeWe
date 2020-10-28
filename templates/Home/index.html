@@ -199,7 +199,9 @@
 					{% endfor %}
 				</div>
 				<div class="text-center pb-3">
-					<button class="site-btn sb-line sb-dark">GET MORE COURSES</button>
+					<a href="{% url 'Home:courses' %}">
+						<button class="site-btn sb-line sb-dark">GET MORE COURSES</button>
+					</a>
 				</div>
 			</div>
 		</section>
@@ -213,7 +215,7 @@
 					<span>Best Rated Course</span>
 					<!-- <span>Best Rated Course</span> -->
 					<h2 style="color: #1d4354;">PYTHON</h2>
-					<a href="#" class="site-btn">REGISTER NOW</a>
+					<a href="{% url 'Home:register' %}" class="site-btn">REGISTER NOW</a>
 				</div>
 			</div>
 		</section>

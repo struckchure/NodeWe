@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 
 from . import models
 
@@ -12,9 +12,6 @@ class SignUpForm(UserCreationForm):
             'email'
         ]
 
-
-# class SignInForm(AuthenticationForm):
-#     pass
 
 class SignInForm(forms.Form):
 	username = forms.CharField(max_length=50, required=True)
@@ -33,3 +30,12 @@ class ComposeMail(forms.Form):
 		widget=forms.ClearableFileInput(attrs={'multiple': True}),
 		required=False
 	)
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = [
+        	'comment'
+        ]
+    

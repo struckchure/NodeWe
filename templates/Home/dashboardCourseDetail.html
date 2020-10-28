@@ -110,7 +110,7 @@
                                                             <a class="btn-primary btn-sm" href="{{ course.file.url }}" target="_blank">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
-                                                            <a class="btn-success btn-sm" href="{{ course.file }}" download>
+                                                            <a class="btn-success btn-sm" href="{{ course.file.url }}" download="{{ course.file.url }}">
                                                                 <i class="fa fa-cloud-download"></i>
                                                             </a>
                                                         </div>
@@ -124,6 +124,7 @@
                                             {% endfor %}
                                         </table>
                                     </div>
+                                    <!--
                                     <div class="custom-pagination">
                                         <ul class="pagination">
                                             <li class="page-item"><a class="page-link" href="#">Previous</a></li>
@@ -133,6 +134,7 @@
                                             <li class="page-item"><a class="page-link" href="#">Next</a></li>
                                         </ul>
                                     </div>
+                                    -->
                                 </div>
                             </div>
                         </div>
@@ -143,49 +145,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="user-comment">
-                                    <img src="{% static 'student/img/contact/1.jpg' %}" alt="" />
-                                    <div class="comment-details">
-                                        <h4>Jonathan Doe 2015 15 July <span class="comment-replay">Replay</span></h4>
-                                        <p>Shabby chic selfies pickled Tumblr letterpress iPhone. Wolf vegan retro selvage
-                                            literally <span class="mobile-sm-d-n">Wes Anderson ethical four loko. Meggings
-                                                blog chambray tofu pour-over. Pour-over Tumblr keffiyeh, cornhole whatever
-                                                cardigan Tonx lomo.Shabby.</span></p>
-                                    </div>
+                        {% if course.get_comments %}
+                            {% for comment in course.get_comments %}
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="user-comment">
+                                            <img src="{% static 'student/img/contact/1.jpg' %}" alt="" />
+                                            <div class="comment-details">
+                                                <h4>{{ comment.user.get_full_name }} {{ comment.date|date:"Y d m" }} <span class="comment-replay">Replay</span></h4>
+                                                <p>
+                                                    <span class="mobile-sm-d-n">
+                                                        {{ comment.comment }}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="user-comment admin-comment">
-                                    <img src="{% static 'student/img/contact/2.jpg' %}" alt="" />
-                                    <div class="comment-details">
-                                        <h4>Jonathan Doe 2015 15 July <span class="comment-replay">Replay</span></h4>
-                                        <p>Shabby chic selfies pickled Tumblr letterpress iPhone. Wolf vegan retro selvage
-                                            literally <span class="mobile-sm-d-n">Wes Anderson ethical four loko. Meggings
-                                                blog chambray tofu pour-over. Pour-over Tumblr keffiyeh, cornhole whatever
-                                                cardigan
-                                                Tonx lomo.Shabby.</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="user-comment user-coment2">
-                                    <img src="{% static 'student/img/contact/3.jpg' %}" alt="" />
-                                    <div class="comment-details">
-                                        <h4>Jonathan Doe 2015 15 July <span class="comment-replay">Replay</span></h4>
-                                        <p>Shabby chic selfies pickled Tumblr letterpress iPhone. Wolf vegan retro selvage
-                                            literally Wes Anderson <span class="mobile-sm-d-n">ethical four loko. Meggings
-                                                blog chambray tofu pour-over. Pour-over Tumblr keffiyeh, cornhole whatever
-                                                cardigan Tonx lomo.Shabby.</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            {% endfor %}
+                        {% else %}
+                            <h4>No comments yet</h4>
+                        {% endif %}
+
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="lead-head">
@@ -195,20 +176,12 @@
                         </div>
                         <div class="row">
                             <div class="coment-area">
-                                <form id="comment" action="#" class="comment">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 blog-res-mg-bt">
-                                        <div class="form-group">
-                                            <input name="name" class="responsive-mg-b-10" type="text" placeholder="Name" />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group">
-                                            <input name="email" type="text" placeholder="Email" />
-                                        </div>
-                                    </div>
+                                <form method="POST" class="comment">
+                                    {% csrf_token %}
+
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <textarea name="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                            <textarea name="comment" cols="30" rows="10" placeholder="Message" required></textarea>
                                         </div>
                                         <div class="payment-adress comment-stn">
                                             <button type="submit"

@@ -46,13 +46,13 @@
                     </span>
 
                     <!-- error messsage -->
-                    <div style="padding: 7px; margin: auto;">                   
-                        {% for message in messages %}
+                    {% for message in messages %}
+                        <div style="padding: 7px; margin: auto;">                   
                             <div class="alert alert-primary" style="margin: auto;">
                                 {{ message }}
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
                     
                     <div class="p-t-31 p-b-9">
                         <span class="txt1">

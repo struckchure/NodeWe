@@ -1,9 +1,9 @@
-from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.views.static import serve
+from django.contrib import admin
 
 
 admin.site.site_header = 'NodeWe'
@@ -15,7 +15,7 @@ handler404 = 'Home.views.Error404'
 handler500 = 'Home.views.Error500'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+	path('admin/', admin.site.urls),
     path('', include('Home.urls')),
     path('account/auth/', include('allauth.urls')),
 ]

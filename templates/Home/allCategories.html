@@ -54,7 +54,9 @@
 							{% endif %}
 
 							<div class="text-center w-100 pt-2 mb-5">
-								<button class="site-btn sb-line sb-dark">SEE ALL</button>
+								<a href="{% url 'Home:courses' %}">
+									<button class="site-btn sb-line sb-dark">SEE ALL</button>
+								</a>
 							</div>
 						</div>
 					{% endfor %}

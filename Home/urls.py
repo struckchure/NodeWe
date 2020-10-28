@@ -58,4 +58,5 @@ urlpatterns = [
 	# Utilities
 
 	path('download/<str:path>/', views.download_file, name='downloadFile'),
+	path('view/<str:path>/', views.view_file, name='viewFile'),
 ]

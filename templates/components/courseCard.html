@@ -5,7 +5,7 @@
                 <div class="tag-sale">NEW</div>
             {% endif %}
             <a href="{{ course.get_absolute_url }}" title="">
-                <img src="{{ course.image.url }}" alt="">
+                <img src="{{ course.image.url }}" alt="{{ course.course }}">
             </a>
             <div class="pi-links">
                 <a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO

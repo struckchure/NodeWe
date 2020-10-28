@@ -42,28 +42,6 @@
 					<div class="filter-widget">
 						<h2 class="fw-title">Categories</h2>
 						<ul class="category-menu">
-							<!--
-							<li><a href="#">Engineering</a>
-								<ul class="sub-menu">
-									<li><a href="#">Computer <span>(2)</span></a></li>
-									<li><a href="#">Mechanical<span>(56)</span></a></li>
-									<li><a href="#">Mechatronics<span>(36)</span></a></li>
-									<li><a href="#">Electrical <span>(27)</span></a></li>
-									<li><a href="#">Materials<span>(19)</span></a></li>
-								</ul>
-							</li>
-							<li><a href="#">Science</a>
-								<ul class="sub-menu">
-									<li><a href="#">Computer <span>(2)</span></a></li>
-									<li><a href="#">Physics<span>(56)</span></a></li>
-									<li><a href="#">Geology<span>(36)</span></a></li>
-								</ul>
-							</li>
-							<li><a href="#">Agriculture</a></li>
-							<li><a href="#">Education</a></li>
-							<li><a href="#">Finance</a></li>
-							<li><a href="#">Design</a></li>
-							-->
 							{% for section in sections %}
 								<li>
 									<a href="#">{{ section }}</a>
@@ -203,7 +181,9 @@
 						{% endfor %}
 						
 						<div class="text-center w-100 pt-3">
-							<button class="site-btn sb-line sb-dark">SEE MORE</button>
+							<a href="{% url 'Home:courses' %}">
+								<button class="site-btn sb-line sb-dark">SEE MORE</button>
+							</a>
 						</div>
 					</div>
 				</div>

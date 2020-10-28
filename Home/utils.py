@@ -54,7 +54,7 @@ def category_cover_upload_handler(instance, filename):
 
 def profile_upload_handler(instance, filename):
 	file_extension = str(instance.avatar).split('.')[-1]
-	username = instance.username
+	username = instance.user.username
 
 	file_path = f'Images/users/{username}.{file_extension}'.replace(' ', '-')
 

@@ -35,6 +35,20 @@ def download_file(request, path):
 
 	raise Http404
 
+
+def view_file(request, path):
+	file_path = os.path.join(settings.MEDIA_ROOT, path)
+	
+	if os.path.exists(file_path):
+		with open(file_path, 'rb') as fh:
+			response = HttpResponse(fh.read(), content_type="application/file")
+			response['Content-Disposition'] = "inline; filename=%s" % os.path.basename(file_path)
+
+			return response
+
+	raise Http404
+
+
 # Errors
 
 def Error404(request, exception=None):
@@ -73,18 +87,22 @@ def external_context(request=None):
 
 	cart = None
 	user = None
-	messages = None
+	inbox = None
+	sent = None
 
 	if request.user.is_authenticated:
 		user = request.user
 		cart, created = models.Cart.objects.get_or_create(user=user)
-		messages = models.Message.objects.filter(recipient=request.user).order_by('-date')
+		inbox = models.Message.objects.filter(recipient=request.user).order_by('-date')
+		sent = models.Message.objects.filter(sender=request.user).order_by('-date')
 
 	context = {
 		'request': request,
 		'user': user,
 		'cart': cart,
-		'inbox': messages,
+		'inbox': inbox,
+		'inbox_count': inbox.count() if inbox else 0,
+		'sent_count': sent.count() if sent else 0,
 		'sections': sections,
 		'courses': courses,
 		'viewed_courses': viewed_courses,
@@ -266,6 +284,23 @@ def dashboardCourseDetail(request, slug):
 
 	course = get_object_or_404(models.Course, slug=slug)
 
+	if request.method == 'POST':
+		comment_form = forms.CommentForm(request.POST)
+		if comment_form.is_valid():
+			comment = comment_form.cleaned_data.get('comment')
+
+			new_comment = models.Comment.objects.create(
+				user=request.user,
+				course=course,
+				comment=comment
+			)
+
+			new_comment.save()
+
+			messages.info(request, 'Your comment has been sent')
+	else:
+		comment_form = forms.CommentForm()
+
 	template_name = 'Home/dashboardCourseDetail.html'
 	context = {
 		'course': course
@@ -364,33 +399,39 @@ def mailboxDetail(request, slug):
 def mailboxCompose(request):
 	request.session['next'] = request.path
 
-	mail_compose_form = forms.ComposeMail(request.POST, request.FILES)
 	sender = request.user
 
-	if mail_compose_form.is_valid():
-		recipient = User.objects.filter(
-			username=mail_compose_form.cleaned_data.get('recipient')
-		)
-		subject = mail_compose_form.cleaned_data.get('subject')
-		attachments = mail_compose_form.cleaned_data.get('attachment')
+	if request.method == 'POST':
+		mail_compose_form = forms.ComposeMail(request.POST, request.FILES)
+		if mail_compose_form.is_valid():
+			recipient = mail_compose_form.cleaned_data.get('recipient')
+			recipient = User.objects.get(
+				username=recipient
+			) if recipient in models.User.objects.all().values_list('username', flat=True) else None
 
-		if recipient.exists():
-			recipient = recipient[0]
-			message = mail_compose_form.cleaned_data.get('message')
+			subject = mail_compose_form.cleaned_data.get('subject')
+			attachments = mail_compose_form.cleaned_data.get('attachment')
 
-			mail = models.Message.objects.create(
-				sender=sender,
-				recipient=recipient,
-				subject=subject,
-				message=message,
-				attachment=attachments if attachments else None
-			)
+			if recipient:
+				message = mail_compose_form.cleaned_data.get('message')
 
-			mail.save()
+				mail = models.Message.objects.create(
+					sender=sender,
+					recipient=recipient,
+					subject=subject,
+					message=message,
+					attachment=attachments if attachments else None
+				)
+
+				mail.save()
+
+				messages.info(request, 'Mail sent !!!')
+			else:
+				messages.info(request, 'Username does not exist')
 		else:
-			print('username does not exist')
+			print('invalid form')
 	else:
-		print('invalid form')
+		mail_compose_form = forms.ComposeMail()
 
 	template_name = 'Home/mailboxCompose.html'
 	context = {
@@ -443,11 +484,8 @@ def mailboxCompose(request):
 def mailboxTrash(request):
 	request.session['next'] = request.path
 
-	messages = models.Message.objects.filter(sender=request.user, trashed=True)
-
 	template_name = 'Home/mailbox.html'
 	context = {
-		'inbox': messages,
 	}
 	context = utils.dictMerge(
 		external_context(request),
@@ -461,11 +499,11 @@ def mailboxTrash(request):
 def mailboxSent(request):
 	request.session['next'] = request.path
 
-	messages = models.Message.objects.filter(sender=request.user, trashed=False)
+	sent = models.Message.objects.filter(sender=request.user).order_by('-date')
 
-	template_name = 'Home/mailbox.html'
+	template_name = 'Home/mailboxSent.html'
 	context = {
-		'inbox': messages,
+		'inbox': sent
 	}
 	context = utils.dictMerge(
 		external_context(request),
@@ -633,10 +671,14 @@ def courseDetails(request, slug):
 	request.session['next'] = request.path
 
 	course = get_object_or_404(models.Course, slug=slug)
+	related_courses = models.Course.objects.filter(category=course.category)
+	reviews = course.popularity
 
 	template_name = 'Home/product.html'
 	context = {
 		'course': course,
+		'related_courses': related_courses,
+		'reviews': reviews,
 	}
 	context = utils.dictMerge(
 		external_context(request),

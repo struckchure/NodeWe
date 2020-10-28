@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils import timezone
 from django.conf import settings
+from django.shortcuts import redirect
 import os
 import random
 import secrets
@@ -16,6 +17,7 @@ from . import utils
 # Generics
 
 new_course_frame = timezone.timedelta(days=5)
+default_avatar = os.path.join(settings.BASE_DIR, 'static/img/default_avatar.png')
 
 # User Models
 
@@ -124,7 +126,7 @@ class VerificationToken(models.Model):
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	avatar = models.FileField(blank=True, upload_to=utils.profile_upload_handler)
+	avatar = models.FileField(blank=True, upload_to=utils.profile_upload_handler, default=default_avatar)
 	date = models.DateTimeField(auto_now=True)
 	last_updated = models.DateTimeField(auto_now_add=True)
 
@@ -165,7 +167,8 @@ class Section(models.Model):
 	    return final_slug
 
 	def save(self, *args, **kwargs):
-		self.slug = self.custom_slugify(f'{self.section}')
+		if not self.slug:
+			self.slug = self.custom_slugify(f'{self.section}')
 
 		super(Section, self).save(*args, **kwargs)
 
@@ -215,7 +218,8 @@ class Category(models.Model):
 	    return final_slug
 
 	def save(self, *args, **kwargs):
-		self.slug = self.custom_slugify(f'{self.category}')
+		if not self.slug:
+			self.slug = self.custom_slugify(f'{self.category}')
 
 		super(Category, self).save(*args, **kwargs)
 
@@ -277,9 +281,38 @@ class Course(models.Model):
 	    return final_slug
 
 	def save(self, *args, **kwargs):
-		self.slug = self.custom_slugify(f'{self.category} {self.course}')
+		if not self.slug:
+			self.slug = self.custom_slugify(f'{self.category} {self.course}')
 
 		super(Course, self).save(*args, **kwargs)
+
+	def get_ratings(self):
+		users = User.objects.all().count()
+
+		ratings_col = []
+		if self.popularity:
+			ratings = self.popularity / users
+			ratings *= 5
+
+			for i in range(5):
+				if i <= round(ratings):
+					ratings_col.append(1)
+				else:
+					ratings_col.append(0)
+
+		return ratings_col
+
+	def get_ratings_count(self):
+		users = User.objects.all().count()
+		
+		ratings = 0
+
+		if self.popularity:
+			ratings = self.popularity / users
+			ratings *= 5
+			ratings = round(ratings, 1)
+
+		return ratings
 
 	def get_course(self):
 		return self.course
@@ -344,6 +377,11 @@ class Course(models.Model):
 
 		return courses
 
+	def get_comments(self):
+		comments = Comment.objects.filter(course=self.id)
+
+		return comments
+
 	class Meta:
 		verbose_name = 'Course'
 		verbose_name_plural = 'Courses'
@@ -355,7 +393,7 @@ class CourseItem(models.Model):
 	title = models.CharField(max_length=200, blank=False, default='')
 	description = models.TextField(blank=False)
 	file = models.FileField(blank=False, upload_to=utils.course_upload_handler)
-	slug = models.SlugField(blank=True, unique=True) 
+	slug = models.SlugField(blank=True, unique=True)
 
 	def __str__(self):
 		return f'{self.course.course} {self.title}'
@@ -378,12 +416,16 @@ class CourseItem(models.Model):
 	    return final_slug
 
 	def save(self, *args, **kwargs):
-		self.slug = self.custom_slugify(f'{self.course.course} {self.title}')
+		if not self.slug:
+			self.slug = self.custom_slugify(f'{self.course.course} {self.title}')
 
 		super(CourseItem, self).save(*args, **kwargs)
 
 	def get_download(self):
 		return reverse('Home:downloadFile', args=[self.file.url])
+
+	def get_view(self):
+		return reverse('Home:viewFile', args=[self.file.url])
 
 	class Meta:
 		verbose_name = 'Course Item'
@@ -504,10 +546,43 @@ class Message(models.Model):
 	    return final_slug
 
 	def save(self, *args, **kwargs):
-		self.slug = self.custom_slugify(f'{secrets.token_urlsafe(30)}')
+		if not self.slug:
+			self.slug = self.custom_slugify(f'{secrets.token_urlsafe(30)}')
 
 		super(Message, self).save(*args, **kwargs)
 
 	class Meta:
 		verbose_name = 'Message'
 		verbose_name_plural = 'Messages'
+
+
+
+class Comment(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	course = models.ForeignKey(Course, on_delete=models.CASCADE)
+	comment = models.TextField()
+	reply = models.ManyToManyField('Reply', related_name='coment_reply')
+	date = models.DateTimeField(auto_now_add=True)
+	last_updated = models.DateTimeField(auto_now=True)
+
+	def __str__(self):
+		return f'{self.course}'
+
+	class Meta:
+		verbose_name = 'Comment'
+		verbose_name_plural = 'Comments'
+
+
+class Reply(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='reply_comment')
+	reply = models.TextField()
+	date = models.DateTimeField(auto_now_add=True)
+	last_updated = models.DateTimeField(auto_now=True)
+
+	def __str__(self):
+		return f'{self.comment}'
+
+	class Meta:
+		verbose_name = 'Reply'
+		verbose_name_plural = 'Replies'

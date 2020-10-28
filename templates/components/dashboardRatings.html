@@ -1,0 +1,18 @@
+{% if course.get_ratings %}
+    {% for rating in course.get_ratings %}
+        {% if rating == 1 %}
+            <span><i class="fa fa-star" style="color: #ff6427;"></i></span></span>
+        {% elif rating == 0 %}
+            <span><i class="fa fa-star-half-o" style="color: #ff6427;"></i></span></span>
+        {% else %}
+            <span><i class="fa fa-star" style="color: rgba(0, 0, 0, 0.3);"></i></span></span>
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <span><i class="fa fa-star" style="color: rgba(0, 0, 0, 0.3);"></i></span></span>
+    <span><i class="fa fa-star" style="color: rgba(0, 0, 0, 0.3);"></i></span></span>
+    <span><i class="fa fa-star" style="color: rgba(0, 0, 0, 0.3);"></i></span></span>
+    <span><i class="fa fa-star" style="color: rgba(0, 0, 0, 0.3);"></i></span></span>
+    <span><i class="fa fa-star" style="color: rgba(0, 0, 0, 0.3);"></i></span></span>
+{% endif %}
+<p>{{ course.get_ratings_count }} / 5</p>

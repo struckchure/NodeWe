@@ -59,7 +59,7 @@
                             <div class="p-m custom-address-mailbox">
     
                                 <div>
-                                    <span class="font-extra-bold">Subject: </span> {{ mail.subject }}
+                                    <span class="font-extra-bold">Subject: </span> {{ mail.subject|safe }}
                                 </div>
                                 <div>
                                     <span class="font-extra-bold">From: </span>
@@ -75,7 +75,7 @@
                                 <h4>Hello {{ mail.recipient.first_name }}! </h4>
     
                                 <p>
-                                    {{ mail.message }}
+                                    {{ mail.message|safe }}
                                 </p>
     
                                 <p>
