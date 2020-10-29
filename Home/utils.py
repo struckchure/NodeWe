@@ -2,6 +2,7 @@ import mimetypes
 import os
 from django.conf import settings
 from django.http import HttpResponse, Http404
+from sorl.thumbnail import ImageField, get_thumbnail
 
 '''
 	Utitlities
@@ -31,6 +32,8 @@ def course_cover_upload_handler(instance, filename):
 	file_extension = str(instance.image).split('.')[-1]
 	course = instance.course
 
+	# size = '500x600'
+	# image = get_thumbnail(instance.image, size, quality=99, format='JPEG').url
 	file_path = f'Images/courses/{course}.{file_extension}'.replace(' ', '-')
 
 	return file_path
@@ -39,7 +42,7 @@ def course_item_cover_upload_handler(instance, filename):
 	file_extension = str(instance.cover).split('.')[-1]
 	item = instance.title
 
-	file_path = f'Images/courses/item cover-{item}.{file_extension}'.replace(' ', '-')
+	file_path = f'Images/courses/item-cover-{item}.{file_extension}'.replace(' ', '-')
 
 	return file_path
 

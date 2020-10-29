@@ -7,6 +7,9 @@ from django.utils.text import slugify
 from django.utils import timezone
 from django.conf import settings
 from django.shortcuts import redirect
+
+from sorl.thumbnail import ImageField, get_thumbnail
+
 import os
 import random
 import secrets
@@ -247,10 +250,10 @@ class Category(models.Model):
 
 
 class Course(models.Model):
-	tutor = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True)
+	tutor = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 	course = models.CharField(max_length=200, blank=False)
-	image = models.FileField(upload_to=utils.course_cover_upload_handler, blank=True, default='default_avatar')
+	image = ImageField(upload_to=utils.course_cover_upload_handler, blank=True, default='default_avatar')
 	description = models.TextField(blank=False)
 	popularity = models.IntegerField(default=0)
 	price = models.PositiveIntegerField(default=0)
@@ -333,9 +336,9 @@ class Course(models.Model):
 		current_time = timezone.now()
 
 		if is_new_course_time >= current_time:
-			return True
-		else:
 			return False
+		else:
+			return True
 
 	def get_user_likes(self):
 		likes = CourseLike.objects.filter(course=self.id, status=True)
@@ -483,7 +486,7 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
 	cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
-	item = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
+	item = models.ForeignKey(Course, on_delete=models.CASCADE)
 	date = models.DateTimeField(auto_now_add=True)
 	last_updated = models.DateTimeField(auto_now=True)
 
@@ -509,8 +512,8 @@ class CartItem(models.Model):
 
 
 class Message(models.Model):
-	sender = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='sender')
-	recipient = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='recipient')
+	sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
+	recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipient')
 	subject = models.CharField(max_length=100, blank=False, default='No subject')
 	message = models.TextField()
 	attachment = models.FileField(upload_to=utils.message_upload_handler, blank=True)
