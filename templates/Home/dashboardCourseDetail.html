@@ -50,7 +50,7 @@
                             <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <div class="latest-blog-single blog-single-full-view">
                                     <div class="blog-image">
-                                        <a href="#"><img src="{{ course.image.url }}" alt="{{ course.course }}" />
+                                        <a href="#"><img src="{{ course.image.url }}" alt="{{ course.course }}">
                                         </a>
                                         <div class="blog-date">
                                             <p><span class="blog-day">{{ course.date.day }}</span> {{ course.date|date:"M" }}</p>
@@ -69,8 +69,7 @@
                                                 </a>
                                             </span>
                                             <span>
-                                                <a href="{{ course.tutor.get_profile }}"><i class="fa fa-comments-o"></i> <b>Instructor:</b>
-                                                    {{ course.tutor.get_full_name }}
+                                                <a href="{{ course.tutor.get_profile }}"><i class="fa fa-comments-o"></i> <b>Instructor:</b>{{ course.tutor.get_full_name }}
                                                 </a>
                                             </span>
                                         </div>
@@ -151,25 +150,27 @@
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class="user-comment">
-                                            <img src="{% static 'student/img/contact/1.jpg' %}" alt="" />
+                                            <img src="{% static 'student/img/contact/2.jpg' %}" alt="{{ comment.user }}">
                                             <div class="comment-details">
-                                                <h4>{{ comment.user.get_full_name }} {{ comment.date|date:"Y d M" }}
-                                                    <span class="comment-replay">
-                                                        Replay
-                                                    </span>
+                                                <h4>
+                                                    <a href="{% url 'Home:profile' comment.user.username %}">
+                                                        {{ comment.user.username }}
+                                                    </a>
+
+                                                    <small class="pull-right view-hd-ml">
+                                                        {{ comment.date|date:"Y d M" }}
+                                                    </small>
                                                 </h4>
                                                 <p>
-                                                    <span class="mobile-sm-d-n">
-                                                        {{ comment.comment }}
-                                                    </span>
+                                                    {{ comment.comment }}
                                                 </p>
                                             </div>
                                         </div>
-                                    </div
+                                    </div>
                                 </div>
                             {% endfor %}
                         {% else %}
-                            <div class="row">
+                            <div style="margin: auto;">
                                 <h4>No comments yet</h4>
                             </div>
                         {% endif %}

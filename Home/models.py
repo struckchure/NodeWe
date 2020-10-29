@@ -8,8 +8,6 @@ from django.utils import timezone
 from django.conf import settings
 from django.shortcuts import redirect
 
-from sorl.thumbnail import ImageField, get_thumbnail
-
 import os
 import random
 import secrets
@@ -29,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
     username = models.CharField(max_length=100, blank=False, unique=True)
-    email = models.EmailField(blank=False, null=True)
+    email = models.EmailField(blank=False, null=True, unique=True)
     date = models.DateTimeField(auto_now=True)
     last_updated = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True, blank=True)
@@ -53,7 +51,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         user_profile[0].save()
 
     def get_full_name(self):
-        return f'{self.first_name} {self.last_name}'
+    	name = f'{self.first_name} {self.last_name}'
+    	if len(name) == 0:
+    		name = self.username
+    	return name
 
     @property
     def _is_student(self):
@@ -253,7 +254,7 @@ class Course(models.Model):
 	tutor = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 	category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
 	course = models.CharField(max_length=200, blank=False)
-	image = ImageField(upload_to=utils.course_cover_upload_handler, blank=True, default='default_avatar')
+	image = models.ImageField(upload_to=utils.course_cover_upload_handler, blank=True, default='default_avatar')
 	description = models.TextField(blank=False)
 	popularity = models.IntegerField(default=0)
 	price = models.PositiveIntegerField(default=0)
@@ -564,28 +565,18 @@ class Comment(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	course = models.ForeignKey(Course, on_delete=models.CASCADE)
 	comment = models.TextField()
-	reply = models.ManyToManyField('Reply', related_name='coment_reply')
 	date = models.DateTimeField(auto_now_add=True)
 	last_updated = models.DateTimeField(auto_now=True)
 
 	def __str__(self):
 		return f'{self.course}'
 
+	def get_user(self):
+		if len(self.user.get_full_name()) > 0:
+			return self.user
+		else:
+			return False
+
 	class Meta:
 		verbose_name = 'Comment'
 		verbose_name_plural = 'Comments'
-
-
-class Reply(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='reply_comment')
-	reply = models.TextField()
-	date = models.DateTimeField(auto_now_add=True)
-	last_updated = models.DateTimeField(auto_now=True)
-
-	def __str__(self):
-		return f'{self.comment}'
-
-	class Meta:
-		verbose_name = 'Reply'
-		verbose_name_plural = 'Replies'

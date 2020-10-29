@@ -2,7 +2,6 @@ import mimetypes
 import os
 from django.conf import settings
 from django.http import HttpResponse, Http404
-from sorl.thumbnail import ImageField, get_thumbnail
 
 '''
 	Utitlities
@@ -32,8 +31,6 @@ def course_cover_upload_handler(instance, filename):
 	file_extension = str(instance.image).split('.')[-1]
 	course = instance.course
 
-	# size = '500x600'
-	# image = get_thumbnail(instance.image, size, quality=99, format='JPEG').url
 	file_path = f'Images/courses/{course}.{file_extension}'.replace(' ', '-')
 
 	return file_path
@@ -84,21 +81,3 @@ def download_file(request, slug):
 	response['Content-Disposition'] = "attachment; filename=%s" % filename
 
 	return response
-
-
-# def download_file(request, path):
-#     file_path = path
-
-#     if os.path.exists(file_path):
-#         with open(file_path, 'rb') as fh:
-#             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-#             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            
-#             return response
-
-#     raise Http404
-
-def handle_uploaded_file(f):
-    with open('some/file/name.txt', 'wb+') as destination:
-        for chunk in f.chunks():
-            destination.write(chunk)

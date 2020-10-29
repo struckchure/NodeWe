@@ -155,32 +155,31 @@ def signUp(request):
 			password1 = signUpForm.cleaned_data.get('password1')
 			password2 = signUpForm.cleaned_data.get('password2')
 
-			if password1 == password2:
-				signUpForm.save()
-				# new_user = User.objects.create(
-				# 	username=username,
-				# 	email=email
-				# )
-				# new_user.set_password(password1)
+			emails = User.objects.values_list('email', flat=True)
 
-				messages.info(request, 'Registration complete, check your Mail to verify your account')
+			if email not in emails:
+				if password1 == password2:
+					signUpForm.save()
 
-				username = signUpForm.cleaned_data.get('username')
-				password = password1
+					messages.info(request, 'Registration complete, check your Mail to verify your account')
 
-				user = authenticate(username=username, password=password)
-				token = models.VerificationToken.objects.get(user=user)
-				token.user.send_verification(token.token)
+					username = signUpForm.cleaned_data.get('username')
+					password = password1
 
-				if user:
-					login(request, user)
+					user = authenticate(username=username, password=password)
+					token = models.VerificationToken.objects.get(user=user)
+					token.user.send_verification(token.token)
 
-				return redirect('Home:dashboard')
+					if user:
+						login(request, user)
+
+					return redirect('Home:dashboard')
+				else:
+					messages.info(request, 'Password mismatch')
 			else:
-				messages.info(request, 'Password mismatch')
+				messages.info(request, 'Email already exist')
 		else:
 			messages.error(request, f'Password not secure, try combining symbols, numbers')
-
 
 	return render(request, template_name, context)
 
@@ -442,42 +441,6 @@ def mailboxCompose(request):
 	)
 
 	return render(request, template_name, context)
-
-
-# class mailboxCompose(View):
-#     def get(self, request):
-#     	template_name = 'Home/mailboxCompose.html'
-#     	context = utils.dictMerge(external_context(self.request), {})
-
-#     	return render(self.request, template_name, context)
-
-#     def post(self, request):
-#         mail_compose_form = forms.ComposeMail(self.request.POST, self.request.FILES)
-#         sender = self.request.user
-
-#         if mail_compose_form.is_valid():
-#         	recipient = User.objects.filter(username=mail_compose_form.cleaned_data.get('recipient'))
-#         	subject = mail_compose_form.cleaned_data.get('subject')
-#         	attachments = mail_compose_form.cleaned_data.get('attachment')
-#         	data = {'is_valid': True, 'name': attachments.file.name, 'url': attachments.file.url}
-
-#         	if recipient.exists():
-#         		recipient = recipient[0]
-#         		message = mail_compose_form.cleaned_data.get('message')
-#         		mail = models.Message.objects.create(
-# 					sender=sender,
-# 					recipient=recipient,
-# 					subject=subject,
-# 					message=message,
-# 					attachment=attachments if attachments else None
-# 				);mail.save()
-#         	else:
-#         		print('username does not exist')
-#         	return JsonResponse(data)
-#         else:
-#         	data = {'is_valid': False}
-
-#         	return JsonResponse(data)
 
 
 @login_required
