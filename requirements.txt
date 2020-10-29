@@ -1,4 +1,4 @@
 django
 django-allauth
 pillow
-sort-thumbnail
+sorl-thumbnail
