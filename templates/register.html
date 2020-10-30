@@ -45,14 +45,37 @@
                         Welcome to NodeWe. Register Here.
                     </span>
 
-                    <!-- error messsage -->
-                    {% for message in messages %}
-                        <div style="padding: 7px; margin: auto;">                   
-                            <div class="alert alert-primary" style="margin: auto;">
-                                {{ message }}
+                    <div style="padding: 7px; margin: auto;">
+                        <!-- error messsage -->
+                        {% for message in messages %}
+                            <div style="padding: 7px; margin: auto;">                   
+                                <div class="alert alert-primary" style="margin: auto;">
+                                    {{ message }}
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+
+                        {% if signup_form.errors %}
+                            {% for field in signup_form %}
+                                {% for error in field.errors %}
+                                    <div style="padding: 7px; margin: auto;">
+                                        <div class="alert alert-danger" style="margin: auto;">
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in signup_form.non_field_errors %}
+                                <div style="padding: 7px; margin: auto;">
+                                    <div class="alert alert-danger" style="margin: auto;">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <br>
                     
                     <div class="p-t-31 p-b-9">
                         <span class="txt1">

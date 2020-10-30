@@ -1,14 +1,10 @@
-{% load thumbnail %}
-
 <div class="product-item">
     <div class="pi-pic">
         {% if course.is_new %}                                        
             <div class="tag-sale">NEW</div>
         {% endif %}
         <a href="{{ course.get_absolute_url }}" title="">
-            {# {% thumbnail course.image "500x200" as im %} #}
-                <img src="{{ course.image.url }}" style="width: 100%;">
-            {# {% endthumbnail %} #}
+            <img src="{{ course.image.url }}" style="width: 100%;">
         </a>
         <div class="pi-links">
             <a href="{% url 'Home:addToCart' course.slug %}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO

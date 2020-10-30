@@ -136,17 +136,6 @@ def Default(request):
 
 
 def signUp(request):
-	request.session['next'] = request.path
-
-	template_name = 'register.html'
-	context = {
-
-	}
-	context = utils.dictMerge(
-		external_context(request),
-		context
-	)
-
 	if request.method == 'POST':
 		signUpForm = forms.SignUpForm(request.POST)
 		if signUpForm.is_valid():
@@ -159,7 +148,14 @@ def signUp(request):
 
 			if email not in emails:
 				if password1 == password2:
-					signUpForm.save()
+					new_user = User.objects.create(
+						username=username,
+						email=email
+					)
+					new_user.set_password(password1)
+					new_user.save()
+
+					#signUpForm.save()
 
 					messages.info(request, 'Registration complete, check your Mail to verify your account')
 
@@ -178,8 +174,21 @@ def signUp(request):
 					messages.info(request, 'Password mismatch')
 			else:
 				messages.info(request, 'Email already exist')
-		else:
-			messages.error(request, f'Password not secure, try combining symbols, numbers')
+		# else:
+		# 	print(signUpForm.errors)
+		# 	print(signUpForm.error_messages)
+		# 	messages.error(request, f'Password not secure, try combining symbols, numbers')
+	else:
+		signUpForm = forms.SignUpForm()
+
+	template_name = 'register.html'
+	context = {
+		'signup_form': signUpForm
+	}
+	context = utils.dictMerge(
+		external_context(request),
+		context
+	)
 
 	return render(request, template_name, context)
 
