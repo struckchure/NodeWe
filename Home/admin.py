@@ -4,17 +4,6 @@ from . import models
 
 
 class UserAdmin(admin.ModelAdmin):
-	fields = (
-		'first_name',
-		'last_name',
-		'username',
-		'email',
-		'is_active',
-		'is_staff',
-		'is_student',
-		'is_tutor'
-	)
-	list_display = ('first_name', 'last_name', 'username')
 	search_fields = ('first_name', 'last_name', 'username', 'email')
 
 
