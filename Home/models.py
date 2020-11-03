@@ -89,7 +89,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def send_verification(self, link):
     	if not self.is_verified:
 	    	title = 'NodeWe'
-	    	body = f'Hello {self.username}, \nFollow this link https://www.nodewe.com/account/verify/{link} to verify your account.'
+	    	body = f'Hello {self.username}, \nFollow this link https://www.nodewe.com/{reverse('Home:verify')}{link} to verify your account.'
 	    	recipient = self.email
 	    	sender = 'NodeWe'
 	    	
