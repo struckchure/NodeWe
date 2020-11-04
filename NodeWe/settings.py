@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = '0qbiz@v46kx&ut19(v^edq$f0$fu(^_ci4(5#-ofh#%b%kvwh@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '139.162.211.200',
@@ -67,7 +67,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
 )
 
-PREPEND_WWW = True
+PREPEND_WWW = False
 
 ROOT_URLCONF = 'NodeWe.urls'
 
