@@ -63,6 +63,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+)
+
+PREPEND_WWW = True
+
 ROOT_URLCONF = 'NodeWe.urls'
 
 AUTHENTICATION_BACKENDS = ( 
