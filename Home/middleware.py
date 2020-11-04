@@ -9,7 +9,7 @@ class WwwRedirectMiddleware:
         host = request.get_host().partition(':')[0]
         if host == "http://www.nodewe.com" or "https://www.nodewe.com":
             return HttpResponsePermanentRedirect(
-                "http://nodewe.com" + request.path
+                "https://nodewe.com" + request.path
             )
         else:
             return self.get_response(request)
