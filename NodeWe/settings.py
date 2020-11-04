@@ -29,6 +29,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     '139.162.211.200',
+    'nodewe.com',
     'www.nodewe.com',
     'localhost'
 ]
@@ -57,17 +58,13 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware', # whitenoise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    # Custom middleware
+    'Home.middleware.WwwRedirectMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-)
-
-PREPEND_WWW = False
 
 ROOT_URLCONF = 'NodeWe.urls'
 
