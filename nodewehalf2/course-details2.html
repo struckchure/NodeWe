@@ -4,138 +4,128 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Inbox | NodeWe </title>
+
+    <title>Dashboard | NodeWe </title>
+
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon
-    		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
-    <!-- Google Fonts
-		============================================ -->
+
+    <link href="img/png/logomark_tranparent.png" rel="shortcut icon" />
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
-    <!-- Bootstrap CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Bootstrap CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <!-- owl.carousel CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/owl.theme.css">
-    <link rel="stylesheet" href="css/owl.transitions.css">
-    <!-- animate CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/animate.css">
-    <!-- normalize CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <!-- meanmenu icon CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/meanmenu.min.css">
-    <!-- main CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/main.css">
-    <!-- educate icon CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/educate-custon-icon.css">
-    <!-- morrisjs CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/morrisjs/morris.css">
-    <!-- mCustomScrollbar CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/scrollbar/jquery.mCustomScrollbar.min.css">
-    <!-- metisMenu CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/metisMenu/metisMenu.min.css">
-    <link rel="stylesheet" href="css/metisMenu/metisMenu-vertical.css">
-    <!-- calendar CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/calendar/fullcalendar.min.css">
-    <link rel="stylesheet" href="css/calendar/fullcalendar.print.min.css">
-    <!-- style CSS
-		============================================ -->
-    <link rel="stylesheet" href="style.css">
-    <!-- responsive CSS
-		============================================ -->
-    <link rel="stylesheet" href="css/responsive.css">
-    <!-- modernizr JS
-		============================================ -->
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    <link rel="stylesheet" href="student/css/bootstrap.min.css">
+    <link rel="stylesheet" href="student/css/font-awesome.min.css">
+    <link rel="stylesheet" href="student/css/owl.carousel.css">
+    <link rel="stylesheet" href="student/css/owl.theme.css">
+    <link rel="stylesheet" href="student/css/owl.transitions.css">
+    <link rel="stylesheet" href="student/css/animate.css">
+    <link rel="stylesheet" href="student/css/normalize.css">
+    <link rel="stylesheet" href="student/css/meanmenu.min.css">
+    <link rel="stylesheet" href="student/css/main.css">
+    <link rel="stylesheet" href="student/css/educate-custon-icon.css">
+    <link rel="stylesheet" href="student/css/morrisjs/morris.css">
+    <link rel="stylesheet" href="student/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="student/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="student/css/metisMenu/metisMenu-vertical.css">
+    <link rel="stylesheet" href="student/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="student/css/calendar/fullcalendar.print.min.css">
+    <link rel="stylesheet" href="student/style.css">
+    <link rel="stylesheet" href="student/css/responsive.css">
+    <script src="student/js/vendor/modernizr-2.8.3.min.js"></script>
+
+
+    <style>
+        .play-button {
+            position: absolute;
+            top:400px;
+            left: 45%;
+            border-radius: 50%;
+            height: 90px;
+            width: 90px;
+            background: rgba(255, 255, 255, 0.5);
+            display: inline-block;
+            line-height: 90px;
+            text-align: center !important;
+            position: relative;
+            z-index: 1;
+        }
+    
+        @media screen and (max-width: 613px) {
+            .play-button {
+                position: absolute;
+                top: 120px;
+                left: 40%;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div style="margin-left: 0;" class="sidebar-header" style="background-color: #fff; color: #ff6427">
-                <a href="index.html"><img class="main-logo" src="../img/png/node_we_horizontal_colored-transparent.png"
+                <a href="{% url 'Home:index"><img class="main-logo" src="img/png/node_we_horizontal_colored-transparent.png"
                         style="width:120px; height: 30px; margin: 15px 0;" alt="logo1" /></a>
-                <strong><a href="index.html"><img src="../img/png/node_we_horizontal_colored-transparent.png"
+                <strong><a href="{% url 'Home:index"><img src="img/png/node_we_horizontal_colored-transparent.png"
                             alt="" /></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
                 <nav class="sidebar-nav left-sidebar-menu-pro">
                     <ul class="metismenu" id="menu1">
                         <li class="active">
-                            <a href="index.html">
-                                <span class="mini-click-non" style="color: #000;"><strong>Welcome Back
-                                        <br>Username</strong></span>
+                            <a href="" title="">
+                                <span class="mini-click-non" style="color: #000;">
+                                    <strong>Welcome Back<br></strong>
+                                </span>
                             </a>
                         </li>
                         <li>
-                            <a title="Landing Page" href="" aria-expanded="false">
+                            <a title="Dashboard" href="{% url 'Home:dashboard" aria-expanded="false">
                                 <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true">
-
-                                </span> <span class="mini-click-non">Dashboard</span></a>
+                                </span> <span class="mini-click-non">Dashboard</span>
+                            </a>
                         </li>
                         <li>
-                            <a title="Landing Page" href="" aria-expanded="false"><span
-                                    class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span>
-                                <span class="mini-click-non">My Learnings</span></a>
+                            <a title="My Learnings" href="" aria-expanded="false">
+                                <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span>
+                                <span class="mini-click-non">My Learnings</span>
+                            </a>
                         </li>
                         <li>
-                            <a class="has-arrow" href="" aria-expanded="false"><span
-                                    class="educate-icon educate-student icon-wrap"></span> <span
-                                    class="mini-click-non">Profile</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Students" href=""><span class="mini-sub-pro">View Profile</span></a>
+                            <a href="{% url 'Home:profile' user.username %}" aria-expanded="false">
+                    <span class="educate-icon educate-student icon-wrap"></span>
+                    <span class="mini-click-non">Profile</span>
+                </a>
+                </li>
+                <li>
+                    <a class="has-arrow" href="#" aria-expanded="false">
+                        <span class="educate-icon educate-message icon-wrap"></span>
+                        <span class="mini-click-non">Messages</span>
+                    </a>
+                    <ul class="submenu-angle" aria-expanded="false">
+                        <li>
+                            <a title="Inbox" href="{% url 'Home:mailbox">
+                                        <span class="mini-sub-pro">Inbox</span>
+                                    </a>
                                 </li>
-                                <li><a title="Add Students" href=""><span class="mini-sub-pro">Edit Profile</span></a>
+                                <li>
+                                    <a title="Compose Mail" href="{% url 'Home:mailboxCompose">
+                                        <span class="mini-sub-pro">Compose Mail</span>
+                                    </a>
                                 </li>
-                                <li><a title="Add Students" href=""><span class="mini-sub-pro">View Cart</span></a></li>
-
                             </ul>
                         </li>
                         <li>
-                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span
-                                    class="educate-icon educate-message icon-wrap"></span> <span
-                                    class="mini-click-non">Messages</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Inbox" href="mailbox.html"><span class="mini-sub-pro">Inbox</span></a>
-                                </li>
-                                <li><a title="View Mail" href="mailbox-view.html"><span class="mini-sub-pro">View
-                                            Mail</span></a></li>
-                                <li><a title="Compose Mail" href="mailbox-compose.html"><span
-                                            class="mini-sub-pro">Compose
-                                            Mail</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a title="Landing Page" href="" aria-expanded="false">
-                                <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true">
-
-                                </span> <span class="mini-click-non">My Cart</span></a>
+                            <a title="My Cart" href="{% url 'Home:cartView" aria-expanded="false">
+                                <span class="educate-icon educate-event icon-wrap sub-icon-mg" aria-hidden="true"></span>
+                                <span class="mini-click-non">My Cart</span></a>
                         </li>
                         <li id="removable">
-                            <a class="has-arrow" href="#" aria-expanded="false"><span
-                                    class="educate-icon educate-pages icon-wrap"></span> <span
-                                    class="mini-click-non">Courses</span></a>
-                            <ul class="submenu-angle page-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Login" href="all-courses.html"><span class="mini-sub-pro">All
-                                            Courses</span></a></li>
-
+                            <a href="{% url 'Home:dashboardCourses" aria-expanded="false">
+                                <span class="educate-icon educate-pages icon-wrap"></span>
+                                <span class="mini-click-non">Courses</span>
+                            </a>
                             </ul>
-                        </li>
+                        </li>   
                     </ul>
                 </nav>
             </div>
@@ -148,7 +138,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" style="height:50px; width:150px; padding-top: 10px; padding-bottom:10px;
+                        <a href="{% url 'Home:index"><img class="main-logo" src="student/img/logo/logo.png" style="height:50px; width:150px; padding-top: 10px; padding-bottom:10px;
                                                 margin-bottom: 15px; margin-top:15px;" alt="" /></a>
                     </div>
                 </div>
@@ -172,23 +162,11 @@
                                     <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
                                         <div class="header-top-menu tabl-d-n">
                                             <ul class="nav navbar-nav mai-top-nav">
-                                                <li class="nav-item"><a href="#" class="nav-link">Home</a>
+                                                <li class="nav-item"><a href="{% url 'Home:dashboard" class="nav-link">Home</a>
                                                 </li>
                                                 <li class="nav-item"><a href="#" class="nav-link">About</a>
                                                 </li>
                                                 <li class="nav-item"><a href="#" class="nav-link">Services</a>
-                                                </li>
-                                                <li class="nav-item dropdown res-dis-nn">
-                                                    <a href="#" data-toggle="dropdown" role="button"
-                                                        aria-expanded="false" class="nav-link dropdown-toggle">Project
-                                                        <span class="angle-down-topmenu"><i
-                                                                class="fa fa-angle-down"></i></span></a>
-                                                    <div role="menu" class="dropdown-menu animated zoomIn">
-                                                        <a href="#" class="dropdown-item">Documentation</a>
-                                                        <a href="#" class="dropdown-item">Expert Backend</a>
-                                                        <a href="#" class="dropdown-item">Expert FrontEnd</a>
-                                                        <a href="#" class="dropdown-item">Contact Support</a>
-                                                    </div>
                                                 </li>
                                                 <li class="nav-item"><a href="#" class="nav-link">Support</a>
                                                 </li>
@@ -211,53 +189,15 @@
                                                         </div>
                                                         <ul class="message-menu">
                                                             <li>
-                                                                <a href="#">
+                                                                <a href="{{ message.get_details }}">
                                                                     <div class="message-img">
-                                                                        <img src="img/contact/1.jpg" alt="">
+                                                                        <img src="student/img/contact/1.jpg" alt="">
                                                                     </div>
                                                                     <div class="message-content">
-                                                                        <span class="message-date">16 Sept</span>
-                                                                        <h2>Advanda Cro</h2>
-                                                                        <p>Please done this project as soon possible.
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="message-img">
-                                                                        <img src="img/contact/4.jpg" alt="">
-                                                                    </div>
-                                                                    <div class="message-content">
-                                                                        <span class="message-date">16 Sept</span>
-                                                                        <h2>Sulaiman din</h2>
-                                                                        <p>Please done this project as soon possible.
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="message-img">
-                                                                        <img src="img/contact/3.jpg" alt="">
-                                                                    </div>
-                                                                    <div class="message-content">
-                                                                        <span class="message-date">16 Sept</span>
-                                                                        <h2>Victor Jara</h2>
-                                                                        <p>Please done this project as soon possible.
-                                                                        </p>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">
-                                                                    <div class="message-img">
-                                                                        <img src="img/contact/2.jpg" alt="">
-                                                                    </div>
-                                                                    <div class="message-content">
-                                                                        <span class="message-date">16 Sept</span>
-                                                                        <h2>Victor Jara</h2>
-                                                                        <p>Please done this project as soon possible.
+                                                                        <span class="message-date">{{ message.date|date }}</span>
+                                                                        <h2>{{ message.sender.get_full_name }}</h2>
+                                                                        <p>
+                                                                            {{ message.subject }}
                                                                         </p>
                                                                     </div>
                                                                 </a>
@@ -286,13 +226,19 @@
                                                                             aria-hidden="true"></i>
                                                                     </div>
                                                                     <div class="notification-content">
-                                                                        <span class="notification-date">16 Sept</span>
-                                                                        <h2>Advanda Cro</h2>
-                                                                        <p>Please done this project as soon possible.
+                                                                        <span class="notification-date">
+                                                                            {{ message|date:"d M" }}
+                                                                        </span>
+                                                                        <h2>
+                                                                            {{ message.get_full_name }}
+                                                                        </h2>
+                                                                        <p>
+                                                                            Please done this project as soon possible.
                                                                         </p>
                                                                     </div>
                                                                 </a>
                                                             </li>
+                                                            <!--
                                                             <li>
                                                                 <a href="#">
                                                                     <div class="notification-icon">
@@ -335,6 +281,7 @@
                                                                     </div>
                                                                 </a>
                                                             </li>
+                                                            -->
                                                         </ul>
                                                         <div class="notification-view">
                                                             <a href="#">View All Notification</a>
@@ -344,30 +291,42 @@
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button"
                                                         aria-expanded="false" class="nav-link dropdown-toggle">
-                                                        <img src="img/product/pro4.jpg" alt="" />
-                                                        <span class="admin-name">Victor Dewinner</span>
+                                                            <img src="student/img/product/pro4.jpg" alt="{{ user.username }}">
+
+                                                        <span class="admin-name">John Doe</span>
                                                         <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
                                                     </a>
                                                     <ul role="menu"
                                                         class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span
-                                                                    class="edu-icon edu-home-admin author-log-ic"></span>My
-                                                                Account</a>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="edu-icon edu-home-admin author-log-ic"></span>
+                                                                Account
+                                                            </a>
                                                         </li>
-                                                        <li><a href="#"><span
-                                                                    class="edu-icon edu-user-rounded author-log-ic"></span>My
-                                                                Profile</a>
+                                                        <li>
+                                                            <a href="{% url 'Home:profile' user.username %}">
+                                <span class="edu-icon edu-user-rounded author-log-ic"></span>
+                                Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'Home:dashboardBillings">
+                                                                <span class="edu-icon edu-money author-log-ic"></span>
+                                                                Billing
+                                                            </a>
                                                         </li>
-                                                        <li><a href="#"><span
-                                                                    class="edu-icon edu-money author-log-ic"></span>User
-                                                                Billing</a>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="edu-icon edu-settings author-log-ic"></span>
+                                                                Settings
+                                                            </a>
                                                         </li>
-                                                        <li><a href="#"><span
-                                                                    class="edu-icon edu-settings author-log-ic"></span>Settings</a>
-                                                        </li>
-                                                        <li><a href="#"><span
-                                                                    class="edu-icon edu-locked author-log-ic"></span>Log
-                                                                Out</a>
+                                                        <li>
+                                                            <a href="{% url 'Home:logout">
+                                                                <span class="edu-icon edu-locked author-log-ic"></span>
+                                                                Log Out
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -382,8 +341,10 @@
                                                             <li class="active"><a data-toggle="tab"
                                                                     href="#Notes">Notes</a>
                                                             </li>
+                                                            <!--
                                                             <li><a data-toggle="tab" href="#Projects">Projects</a>
                                                             </li>
+                                                            -->
                                                             <li><a data-toggle="tab" href="#Settings">Settings</a>
                                                             </li>
                                                         </ul>
@@ -402,7 +363,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/4.jpg"
+                                                                                            <img src="student/img/contact/4.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -419,7 +380,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/1.jpg"
+                                                                                            <img src="student/img/contact/1.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -436,7 +397,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/2.jpg"
+                                                                                            <img src="student/img/contact/2.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -453,7 +414,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/3.jpg"
+                                                                                            <img src="student/img/contact/3.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -470,7 +431,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/4.jpg"
+                                                                                            <img src="student/img/contact/4.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -487,7 +448,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/1.jpg"
+                                                                                            <img src="student/img/contact/1.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -504,7 +465,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/2.jpg"
+                                                                                            <img src="student/img/contact/2.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -521,7 +482,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/1.jpg"
+                                                                                            <img src="student/img/contact/1.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -538,7 +499,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/2.jpg"
+                                                                                            <img src="student/img/contact/2.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -555,7 +516,7 @@
                                                                                 <a href="#">
                                                                                     <div class="notes-list-flow">
                                                                                         <div class="notes-img">
-                                                                                            <img src="img/contact/3.jpg"
+                                                                                            <img src="student/img/contact/3.jpg"
                                                                                                 alt="" />
                                                                                         </div>
                                                                                         <div class="notes-content">
@@ -816,9 +777,57 @@
                                                                     <div class="note-heading-indicate">
                                                                         <h2><i class="fa fa-gears"></i> Settings Panel
                                                                         </h2>
-                                                                        <p> You have 20 Settings. 5 not completed.</p>
+                                                                        <!-- <p> You have 20 Settings. 5 not completed.</p> -->
                                                                     </div>
                                                                     <ul class="setting-panel-list">
+                                                                        <li>
+                                                                            <div class="checkbox-setting-pro">
+                                                                                <div class="checkbox-title-pro">
+                                                                                    <h2>Show charts</h2>
+                                                                                    <div class="ts-custom-check">
+                                                                                        <div class="onoffswitch">
+                                                                                            <input type="checkbox"
+                                                                                                name="collapsemenu"
+                                                                                                class="onoffswitch-checkbox"
+                                                                                                id="example7">
+                                                                                            <label
+                                                                                                class="onoffswitch-label"
+                                                                                                for="example7">
+                                                                                                <span
+                                                                                                    class="onoffswitch-inner"></span>
+                                                                                                <span
+                                                                                                    class="onoffswitch-switch"></span>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="checkbox-setting-pro">
+                                                                                <div class="checkbox-title-pro">
+                                                                                    <h2>Global search</h2>
+                                                                                    <div class="ts-custom-check">
+                                                                                        <div class="onoffswitch">
+                                                                                            <input type="checkbox"
+                                                                                                name="collapsemenu"
+                                                                                                checked=""
+                                                                                                class="onoffswitch-checkbox"
+                                                                                                id="example6">
+                                                                                            <label
+                                                                                                class="onoffswitch-label"
+                                                                                                for="example6">
+                                                                                                <span
+                                                                                                    class="onoffswitch-inner"></span>
+                                                                                                <span
+                                                                                                    class="onoffswitch-switch"></span>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+
                                                                         <li>
                                                                             <div class="checkbox-setting-pro">
                                                                                 <div class="checkbox-title-pro">
@@ -891,29 +900,6 @@
                                                                         <li>
                                                                             <div class="checkbox-setting-pro">
                                                                                 <div class="checkbox-title-pro">
-                                                                                    <h2>Show charts</h2>
-                                                                                    <div class="ts-custom-check">
-                                                                                        <div class="onoffswitch">
-                                                                                            <input type="checkbox"
-                                                                                                name="collapsemenu"
-                                                                                                class="onoffswitch-checkbox"
-                                                                                                id="example7">
-                                                                                            <label
-                                                                                                class="onoffswitch-label"
-                                                                                                for="example7">
-                                                                                                <span
-                                                                                                    class="onoffswitch-inner"></span>
-                                                                                                <span
-                                                                                                    class="onoffswitch-switch"></span>
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="checkbox-setting-pro">
-                                                                                <div class="checkbox-title-pro">
                                                                                     <h2>Update everyday</h2>
                                                                                     <div class="ts-custom-check">
                                                                                         <div class="onoffswitch">
@@ -925,30 +911,6 @@
                                                                                             <label
                                                                                                 class="onoffswitch-label"
                                                                                                 for="example2">
-                                                                                                <span
-                                                                                                    class="onoffswitch-inner"></span>
-                                                                                                <span
-                                                                                                    class="onoffswitch-switch"></span>
-                                                                                            </label>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="checkbox-setting-pro">
-                                                                                <div class="checkbox-title-pro">
-                                                                                    <h2>Global search</h2>
-                                                                                    <div class="ts-custom-check">
-                                                                                        <div class="onoffswitch">
-                                                                                            <input type="checkbox"
-                                                                                                name="collapsemenu"
-                                                                                                checked=""
-                                                                                                class="onoffswitch-checkbox"
-                                                                                                id="example6">
-                                                                                            <label
-                                                                                                class="onoffswitch-label"
-                                                                                                for="example6">
                                                                                                 <span
                                                                                                     class="onoffswitch-inner"></span>
                                                                                                 <span
@@ -984,7 +946,6 @@
                                                                             </div>
                                                                         </li>
                                                                     </ul>
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1007,188 +968,35 @@
                             <div class="mobile-menu">
                                 <nav id="dropdown">
                                     <ul class="mobile-menu-nav">
-                                        <li><a data-toggle="collapse" data-target="#Charts" href="#">Home <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul class="collapse dropdown-header-top">
-                                                <li><a href="index.html">Dashboard v.1</a></li>
-                                                <li><a href="index-1.html">Dashboard v.2</a></li>
-                                                <li><a href="index-3.html">Dashboard v.3</a></li>
-                                                <li><a href="analytics.html">Analytics</a></li>
-                                                <li><a href="widgets.html">Widgets</a></li>
-                                            </ul>
+                                        <li>
+                                            <a href="{% url 'Home:index">
+                                                Home <span class="admin-project-icon edu-icon edu-down-arrow"></span>
+                                            </a>
                                         </li>
-                                        <li><a href="events.html">Event</a></li>
-                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Professors <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demoevent" class="collapse dropdown-header-top">
-                                                <li><a href="all-professors.html">All Professors</a>
-                                                </li>
-                                                <li><a href="add-professor.html">Add Professor</a>
-                                                </li>
-                                                <li><a href="edit-professor.html">Edit Professor</a>
-                                                </li>
-                                                <li><a href="professor-profile.html">Professor Profile</a>
-                                                </li>
-                                            </ul>
+                                        <li>
+                                            <a href="#">My Learnings</a>
                                         </li>
-                                        <li><a data-toggle="collapse" data-target="#demopro" href="#">Students <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demopro" class="collapse dropdown-header-top">
-                                                <li><a href="all-students.html">All Students</a>
+                                        <li>
+                                            <a href="{% url 'Home:profile' user.username %}">Profile</a>
+                        </li>
+                        <li>
+                            <a data-toggle="collapse" data-target="#mailbox" href="#">
+                                Messages <span class="admin-project-icon edu-icon edu-down-arrow"></span>
+                            </a>
+                            <ul id="mailbox" class="collapse dropdown-header-top">
+                                <li>
+                                    <a href="{% url 'Home:mailbox">Inbox</a>
                                                 </li>
-                                                <li><a href="add-student.html">Add Student</a>
-                                                </li>
-                                                <li><a href="edit-student.html">Edit Student</a>
-                                                </li>
-                                                <li><a href="student-profile.html">Student Profile</a>
+                                                <li>
+                                                    <a href="{% url 'Home:mailboxCompose">Compose mail</a>
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a data-toggle="collapse" data-target="#democrou" href="#">Courses <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="democrou" class="collapse dropdown-header-top">
-                                                <li><a href="all-courses.html">All Courses</a>
-                                                </li>
-                                                <li><a href="add-course.html">Add Course</a>
-                                                </li>
-                                                <li><a href="edit-course.html">Edit Course</a>
-                                                </li>
-                                                <li><a href="course-profile.html">Courses Info</a>
-                                                </li>
-                                                <li><a href="course-payment.html">Courses Payment</a>
-                                                </li>
-                                            </ul>
+                                        <li>
+                                            <a href="{% url 'Home:cartView">My Cart</a>
                                         </li>
-                                        <li><a data-toggle="collapse" data-target="#demolibra" href="#">Library <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demolibra" class="collapse dropdown-header-top">
-                                                <li><a href="library-assets.html">Library Assets</a>
-                                                </li>
-                                                <li><a href="add-library-assets.html">Add Library Asset</a>
-                                                </li>
-                                                <li><a href="edit-library-assets.html">Edit Library Asset</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#demodepart" href="#">Departments
-                                                <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demodepart" class="collapse dropdown-header-top">
-                                                <li><a href="departments.html">Departments List</a>
-                                                </li>
-                                                <li><a href="add-department.html">Add Departments</a>
-                                                </li>
-                                                <li><a href="edit-department.html">Edit Departments</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#demo" href="#">Mailbox <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="demo" class="collapse dropdown-header-top">
-                                                <li><a href="mailbox.html">Inbox</a>
-                                                </li>
-                                                <li><a href="mailbox-view.html">View Mail</a>
-                                                </li>
-                                                <li><a href="mailbox-compose.html">Compose Mail</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">Interface
-                                                <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="Miscellaneousmob" class="collapse dropdown-header-top">
-                                                <li><a href="google-map.html">Google Map</a>
-                                                </li>
-                                                <li><a href="data-maps.html">Data Maps</a>
-                                                </li>
-                                                <li><a href="pdf-viewer.html">Pdf Viewer</a>
-                                                </li>
-                                                <li><a href="x-editable.html">X-Editable</a>
-                                                </li>
-                                                <li><a href="code-editor.html">Code Editor</a>
-                                                </li>
-                                                <li><a href="tree-view.html">Tree View</a>
-                                                </li>
-                                                <li><a href="preloader.html">Preloader</a>
-                                                </li>
-                                                <li><a href="images-cropper.html">Images Cropper</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#Chartsmob" href="#">Charts <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="Chartsmob" class="collapse dropdown-header-top">
-                                                <li><a href="bar-charts.html">Bar Charts</a>
-                                                </li>
-                                                <li><a href="line-charts.html">Line Charts</a>
-                                                </li>
-                                                <li><a href="area-charts.html">Area Charts</a>
-                                                </li>
-                                                <li><a href="rounded-chart.html">Rounded Charts</a>
-                                                </li>
-                                                <li><a href="c3.html">C3 Charts</a>
-                                                </li>
-                                                <li><a href="sparkline.html">Sparkline Charts</a>
-                                                </li>
-                                                <li><a href="peity.html">Peity Charts</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#Tablesmob" href="#">Tables <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="Tablesmob" class="collapse dropdown-header-top">
-                                                <li><a href="static-table.html">Static Table</a>
-                                                </li>
-                                                <li><a href="data-table.html">Data Table</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#formsmob" href="#">Forms <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="formsmob" class="collapse dropdown-header-top">
-                                                <li><a href="basic-form-element.html">Basic Form Elements</a>
-                                                </li>
-                                                <li><a href="advance-form-element.html">Advanced Form Elements</a>
-                                                </li>
-                                                <li><a href="password-meter.html">Password Meter</a>
-                                                </li>
-                                                <li><a href="multi-upload.html">Multi Upload</a>
-                                                </li>
-                                                <li><a href="tinymc.html">Text Editor</a>
-                                                </li>
-                                                <li><a href="dual-list-box.html">Dual List Box</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#Appviewsmob" href="#">App views
-                                                <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="Appviewsmob" class="collapse dropdown-header-top">
-                                                <li><a href="basic-form-element.html">Basic Form Elements</a>
-                                                </li>
-                                                <li><a href="advance-form-element.html">Advanced Form Elements</a>
-                                                </li>
-                                                <li><a href="password-meter.html">Password Meter</a>
-                                                </li>
-                                                <li><a href="multi-upload.html">Multi Upload</a>
-                                                </li>
-                                                <li><a href="tinymc.html">Text Editor</a>
-                                                </li>
-                                                <li><a href="dual-list-box.html">Dual List Box</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Pages <span
-                                                    class="admin-project-icon edu-icon edu-down-arrow"></span></a>
-                                            <ul id="Pagemob" class="collapse dropdown-header-top">
-                                                <li><a href="login.html">Login</a>
-                                                </li>
-                                                <li><a href="register.html">Register</a>
-                                                </li>
-                                                <li><a href="lock.html">Lock</a>
-                                                </li>
-                                                <li><a href="password-recovery.html">Password Recovery</a>
-                                                </li>
-                                                <li><a href="404.html">404 Page</a></li>
-                                                <li><a href="500.html">500 Page</a></li>
-                                            </ul>
+                                        <li>
+                                            <a href="{% url 'Home:dashboardCourses">Course</a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -1198,6 +1006,7 @@
                 </div>
             </div>
             <!-- Mobile Menu end -->
+
             <div class="breadcome-area">
                 <div class="container-fluid">
                     <div class="row">
@@ -1215,9 +1024,11 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                            <li><a href="{% url 'Home:dashboard">NodeWe</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">Inbox</span>
+                                            <li><a href="{% url 'Home:dashboardCourses">Course <span class="bread-slash">/</span></a>
+                                            </li>
+                                            <li><span class="bread-blod">Course</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -1228,390 +1039,308 @@
                 </div>
             </div>
         </div>
-    <div class="blog-details-area mg-b-15">
+        
+        <div class="blog-details-area mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="blog-details-inner">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="latest-blog-single blog-single-full-view">
+                                        <div class="blog-image">
+                                            <div class="play-button">
+                                                <i class="fa fa-play fa-3x" style="position: relative; top: 3px; left: 3px;"></i>
+                                            </div>
+                                            <a href="#"><img src="student/img/courses/1.jpg" alt="{{ course.course }}" style="width:100%">
+                                            </a>
+                                            <!-- <div class="blog-date">
+                                                <p><span class="blog-day">10</span> Oct</p>
+                                            </div> -->
+                                        </div>
+                                        <div class="blog-details blog-sig-details">
+                                            <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
+                                                <span>
+                                                    <a href="#"><i class="fa fa-user"></i> <b>Course Name:</b>
+                                                        React
+                                                    </a>
+                                                </span>
+                                                <span>
+                                                    <a href="#"><i class="fa fa-heart"></i> <b>Course Price:</b>
+                                                        $ 100
+                                                    </a>
+                                                </span>
+                                                <span>
+                                                    <a href="{{ course.tutor.get_profile }}"><i class="fa fa-comments-o"></i> <b>Instructor:</b>Steve
+                                                    </a>
+                                                </span>
+                                            </div>
+                                            <h1>Description</h1>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="product-status-wrap">
+                                        <h4>Course materials</h4>
+                                        <div class="asset-inner">
+                                            <table>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Image</th>
+                                                    <th>Title</th>
+                                                    <th>Material</th>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td><img src="student/img/courses/1.jpg" alt="student/img/product/book-1.jpg" /></td>
+                                                    <td>Chapter one</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a class="btn-primary btn-sm" href="{{ course.file.url }}" target="_blank">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a class="btn-success btn-sm" href="{{ course.file.url }}" download="{{ course.file.url }}">
+                                                                <i class="fa fa-cloud-download"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td><img src="student/img/courses/1.jpg" alt="student/img/product/book-1.jpg" /></td>
+                                                    <td>Chapter two</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a class="btn-primary btn-sm" href="{{ course.file.url }}" target="_blank">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a class="btn-success btn-sm" href="{{ course.file.url }}" download="{{ course.file.url }}">
+                                                                <i class="fa fa-cloud-download"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td><img src="student/img/courses/1.jpg" alt="student/img/product/book-1.jpg" /></td>
+                                                    <td>Chapter three</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a class="btn-primary btn-sm" href="{{ course.file.url }}" target="_blank">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a class="btn-success btn-sm" href="{{ course.file.url }}" download="{{ course.file.url }}">
+                                                                <i class="fa fa-cloud-download"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                  
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td><img src="student/img/courses/1.jpg" alt="student/img/product/book-1.jpg" /></td>
+                                                    <td>Chapter four</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a class="btn-primary btn-sm" href="{{ course.file.url }}" target="_blank">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a class="btn-success btn-sm" href="{{ course.file.url }}" download="{{ course.file.url }}">
+                                                                <i class="fa fa-cloud-download"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td><img src="student/img/courses/1.jpg" alt="student/img/product/book-1.jpg" /></td>
+                                                    <td>Chapter five</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a class="btn-primary btn-sm" href="{{ course.file.url }}" target="_blank">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a class="btn-success btn-sm" href="{{ course.file.url }}" download="{{ course.file.url }}">
+                                                                <i class="fa fa-cloud-download"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                   
+                                                </tr>
+                                                <tr>
+                                                    <td>6</td>
+                                                    <td><img src="student/img/courses/1.jpg" alt="student/img/product/book-1.jpg" /></td>
+                                                    <td>Chapter six</td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <a class="btn-primary btn-sm" href="{{ course.file.url }}" target="_blank">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                            <a class="btn-success btn-sm" href="{{ course.file.url }}" download="{{ course.file.url }}">
+                                                                <i class="fa fa-cloud-download"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="custom-pagination">
+                                            <ul class="pagination">
+                                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="comment-head">
+                                        <h3>Comments</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="user-comment">
+                                        <img src="student/img/contact/2.jpg" alt="{{ comment.user }}">
+                                        <div class="comment-details">
+                                            <h4>
+                                                <a href="{% url 'Home:profile' comment.user.username %}">
+                                        Steve
+                                    </a>
+
+                                    <small class="pull-right view-hd-ml">
+                                        10, Oct 2020
+                                    </small>
+                                    </h4>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    </p>
+            </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="lead-head">
+                <h3>Leave A Comment</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="coment-area">
+            <form>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        <textarea name="comment" cols="30" rows="10" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="payment-adress comment-stn">
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <div class="footer-copyright-area">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="blog-details-inner">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                <div class="latest-blog-single blog-single-full-view">
-                                    <div class="blog-image">
-                                        <a href="#"><img src="img/blog-details/1.jpg" alt="" />
-                                        </a>
-                                        <div class="blog-date">
-                                            <p><span class="blog-day">20</span> May</p>
-                                        </div>
-                                    </div>
-                                    <div class="blog-details blog-sig-details">
-                                        <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
-                                            <span><a href="#"><i class="fa fa-user"></i> <b>Course Name:</b> Web
-                                                    Development</a></span>
-                                            <span><a href="#"><i class="fa fa-heart"></i> <b>Course Price:</b>
-                                                    $0.00</a></span>
-                                            <span><a href="#"><i class="fa fa-comments-o"></i> <b>Instructor:</b> Victor Dewinner
-                                                   </a></span>
-                                        </div>
-                                        <h1><a class="blog-ht" href="#">Course Description</a></h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla pariatur.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                                            fugiat nulla pariatur.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="admin-pro-accordion-wrap shadow-inner responsive-mg-b-30">
-                                    <div class="alert-title">
-                                        <h2>Course Materials</h2>
-                                    </div>
-                                    <div class="panel-group edu-custon-design" id="accordion">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading accordion-head">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                                        Web Development 1</a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse1" class="panel-collapse panel-ic collapse in">
-                                                <div class="panel-body admin-panel-content animated bounce">
-                                                  <a href="" class="btn btn-outline-secondary"><i class="fa fa-file-archive-o"></i> Download Web Development 1</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading accordion-head">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                                        Web Development 2</a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse2" class="panel-collapse panel-ic collapse">
-                                                <div class="panel-body admin-panel-content animated bounce">
-                                                    <a href="" class="btn btn-outline-secondary"><i class="fa fa-file-archive-o"></i> Download Web Development 1</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading accordion-head">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                                        Web Development 3</a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse3" class="panel-collapse panel-ic collapse">
-                                                <div class="panel-body admin-panel-content animated bounce">
-                                                    <a href="" class="btn btn-outline-secondary"><i class="fa fa-file-archive-o"></i> Download Web Development 1</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading accordion-head">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                                        Web Development 3</a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse3" class="panel-collapse panel-ic collapse">
-                                                <div class="panel-body admin-panel-content animated bounce">
-                                                    <a href="" class="btn btn-outline-secondary"><i class="fa fa-file-archive-o"></i> Download Web Development 1</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading accordion-head">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                                        Web Development 3</a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse3" class="panel-collapse panel-ic collapse">
-                                                <div class="panel-body admin-panel-content animated bounce">
-                                                    <a href="" class="btn btn-outline-secondary"><i class="fa fa-file-archive-o"></i> Download Web Development 1</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading accordion-head">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                                        Web Development 3</a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse3" class="panel-collapse panel-ic collapse">
-                                                <div class="panel-body admin-panel-content animated bounce">
-                                                    <a href="" class="btn btn-outline-secondary"><i class="fa fa-file-archive-o"></i> Download Web Development 1</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading accordion-head">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                                        Web Development 3</a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapse3" class="panel-collapse panel-ic collapse">
-                                                <div class="panel-body admin-panel-content animated bounce">
-                                                    <a href="" class="btn btn-outline-secondary"><i class="fa fa-file-archive-o"></i> Download Web Development 1</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                       
-                                <div class="product-status mg-b-15">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                <div class="product-status-wrap">
-                                                    <h4>Course Materials</h4>
-                                                    <div class="asset-inner">
-                                                        <table>
-                                                            <tr>
-                                                                <th>No</th>
-                                                                <th></th>
-                                                                <th>Course Outline</th>
-                                                                <th></th>
-                                                                <th>Type</th>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td><img src="img/product/book-4.jpg" alt="" /></td>
-                                                                <td>Web Development 0.4</td>
-                                                                <td>
-                                                                    <button class="pd-setting">View</button>
-                                                                </td>
-                                                                <td>Video/PDF</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>2</td>
-                                                                <td><img src="img/product/book-4.jpg" alt="" /></td>
-                                                                <td>Web Development 0.5</td>
-                                                                <td>
-                                                                    <button class="pd-setting">View</button>
-                                                                </td>
-                                                                <td>Video/PDF</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>3</td>
-                                                                <td><img src="img/product/book-4.jpg" alt="" /></td>
-                                                                <td>Web Development 1</td>
-                                                                <td>
-                                                                    <button class="pd-setting">View</button>
-                                                                </td>
-                                                                <td>Video/PDF</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>4</td>
-                                                                <td><img src="img/product/book-4.jpg" alt="" /></td>
-                                                                <td>Web Development 2</td>
-                                                                <td>
-                                                                    <button class="pd-setting">View</button>
-                                                                </td>
-                                                                <td>Video/PDF</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>5</td>
-                                                                <td><img src="img/product/book-4.jpg" alt="" /></td>
-                                                                <td>Web Development 3</td>
-                                                                <td>
-                                                                    <button class="pd-setting">View</button>
-                                                                </td>
-                                                                <td>Video/PDF</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>6</td>
-                                                                <td><img src="img/product/book-4.jpg" alt="" /></td>
-                                                                <td>Web Development 4</td>
-                                                                <td>
-                                                                    <button class="pd-setting">View</button>
-                                                                </td>
-                                                                <td>Video/PDF</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                    <div class="custom-pagination">
-                                                        <ul class="pagination">
-                                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="comment-head">
-                                    <h3>Testimonials</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="user-comment">
-                                    <img src="img/contact/1.jpg" alt="" />
-                                    <div class="comment-details">
-                                        <h4>Jonathan Doe 2015 15 July <span class="comment-replay">Reply</span></h4>
-                                        <p>Shabby chic selfies pickled Tumblr letterpress iPhone. Wolf vegan retro selvage
-                                            literally <span class="mobile-sm-d-n">Wes Anderson ethical four loko. Meggings
-                                                blog chambray tofu pour-over. Pour-over Tumblr keffiyeh, cornhole whatever
-                                                cardigan Tonx lomo.Shabby.</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="user-comment admin-comment">
-                                    <img src="img/contact/2.jpg" alt="" />
-                                    <div class="comment-details">
-                                        <h4>Jonathan Doe 2015 15 July <span class="comment-replay">Reply</span></h4>
-                                        <p>Shabby chic selfies pickled Tumblr letterpress iPhone. Wolf vegan retro selvage
-                                            literally <span class="mobile-sm-d-n">Wes Anderson ethical four loko. Meggings
-                                                blog chambray tofu pour-over. Pour-over Tumblr keffiyeh, cornhole whatever
-                                                cardigan
-                                                Tonx lomo.Shabby.</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="user-comment user-coment2">
-                                    <img src="img/contact/3.jpg" alt="" />
-                                    <div class="comment-details">
-                                        <h4>Jonathan Doe 2015 15 July <span class="comment-replay">Reply</span></h4>
-                                        <p>Shabby chic selfies pickled Tumblr letterpress iPhone. Wolf vegan retro selvage
-                                            literally Wes Anderson <span class="mobile-sm-d-n">ethical four loko. Meggings
-                                                blog chambray tofu pour-over. Pour-over Tumblr keffiyeh, cornhole whatever
-                                                cardigan Tonx lomo.Shabby.</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div class="lead-head">
-                                    <h3>Leave A Rating</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="coment-area">
-                                <form id="comment" action="#" class="comment">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 blog-res-mg-bt">
-                                        <div class="form-group">
-                                            <input name="name" class="responsive-mg-b-10" type="text" placeholder="Name" />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group">
-                                            <input name="email" type="text" placeholder="Email" />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <textarea name="message" cols="30" rows="10" placeholder="Message"></textarea>
-                                        </div>
-                                        <div class="payment-adress comment-stn">
-                                            <button type="submit"
-                                                class="btn btn-primary waves-effect waves-light">Send</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                <div class="col-lg-12">
+                    <div class="footer-copy-right">
+                        <p class="text-white text-center mt-5">Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                            NodeWe.com</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-        <div class="footer-copyright-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer-copy-right">
-                            <p class="text-white text-center mt-5">Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved |
-                                NodeWe.com</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- jquery
-		============================================ -->
-    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+            ============================================ -->
+    <script src="student/js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
-		============================================ -->
-    <script src="js/bootstrap.min.js"></script>
+            ============================================ -->
+    <script src="student/js/bootstrap.min.js"></script>
     <!-- wow JS
-		============================================ -->
-    <script src="js/wow.min.js"></script>
+            ============================================ -->
+    <script src="student/js/wow.min.js"></script>
     <!-- price-slider JS
-		============================================ -->
-    <script src="js/jquery-price-slider.js"></script>
+            ============================================ -->
+    <script src="student/js/jquery-price-slider.js"></script>
     <!-- meanmenu JS
-		============================================ -->
-    <script src="js/jquery.meanmenu.js"></script>
+            ============================================ -->
+    <script src="student/js/jquery.meanmenu.js"></script>
     <!-- owl.carousel JS
-		============================================ -->
-    <script src="js/owl.carousel.min.js"></script>
+            ============================================ -->
+    <script src="student/js/owl.carousel.min.js"></script>
     <!-- sticky JS
-		============================================ -->
-    <script src="js/jquery.sticky.js"></script>
+            ============================================ -->
+    <script src="student/js/jquery.sticky.js"></script>
     <!-- scrollUp JS
-		============================================ -->
-    <script src="js/jquery.scrollUp.min.js"></script>
+            ============================================ -->
+    <script src="student/js/jquery.scrollUp.min.js"></script>
     <!-- mCustomScrollbar JS
-		============================================ -->
-    <script src="js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/scrollbar/mCustomScrollbar-active.js"></script>
+            ============================================ -->
+    <script src="student/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="student/js/scrollbar/mCustomScrollbar-active.js"></script>
     <!-- metisMenu JS
-		============================================ -->
-    <script src="js/metisMenu/metisMenu.min.js"></script>
-    <script src="js/metisMenu/metisMenu-active.js"></script>
+            ============================================ -->
+    <script src="student/js/metisMenu/metisMenu.min.js"></script>
+    <script src="student/js/metisMenu/metisMenu-active.js"></script>
     <!-- morrisjs JS
-		============================================ -->
-    <script src="js/sparkline/jquery.sparkline.min.js"></script>
-    <script src="js/sparkline/jquery.charts-sparkline.js"></script>
+            ============================================ -->
+    <script src="student/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="student/js/sparkline/jquery.charts-sparkline.js"></script>
     <!-- calendar JS
-		============================================ -->
-    <script src="js/calendar/moment.min.js"></script>
-    <script src="js/calendar/fullcalendar.min.js"></script>
-    <script src="js/calendar/fullcalendar-active.js"></script>
+            ============================================ -->
+    <script src="student/js/calendar/moment.min.js"></script>
+    <script src="student/js/calendar/fullcalendar.min.js"></script>
+    <script src="student/js/calendar/fullcalendar-active.js"></script>
     <!-- tab JS
-		============================================ -->
-    <script src="js/tab.js"></script>
+            ============================================ -->
+    <script src="student/js/tab.js"></script>
     <!-- plugins JS
-		============================================ -->
-    <script src="js/plugins.js"></script>
+            ============================================ -->
+    <script src="student/js/plugins.js"></script>
     <!-- main JS
-		============================================ -->
-    <script src="js/main.js"></script>
+            ============================================ -->
+    <script src="student/js/main.js"></script>
     <!-- tawk chat JS
-		============================================ -->
-    <script src="js/tawk-chat.js"></script>
+            ============================================ -->
+    <script src="student/js/tawk-chat.js"></script>
 </body>
 
 </html>
