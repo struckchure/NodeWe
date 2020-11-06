@@ -435,7 +435,7 @@ class CourseItem(models.Model):
 		return reverse('Home:dashboardCourseDetail', args=[self.course.slug, self.slug])
 
 	def get_course_download_name(self):
-		name = self.file.path.split('/')[-1]
+		name = f'{self.course.course}-_-{self.file.path.split('/')[-1]}'
 
 		return f'{name}'
 
