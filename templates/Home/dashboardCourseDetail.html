@@ -141,7 +141,7 @@
                                                             <a class="btn-primary btn-sm" href="{{ course.get_view }}">
                                                                 <i class="fa fa-play"></i>
                                                             </a>
-                                                            <a class="btn-success btn-sm" href="{{ course.file.url }}" download="{{ course.title }}">
+                                                            <a class="btn-success btn-sm" href="{{ course.file.url }}" download="{{ course.get_course_download_name }}">
                                                                 <i class="fa fa-cloud-download"></i>
                                                             </a>
                                                         </div>

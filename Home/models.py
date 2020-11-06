@@ -434,6 +434,11 @@ class CourseItem(models.Model):
 	def get_view(self):
 		return reverse('Home:dashboardCourseDetail', args=[self.course.slug, self.slug])
 
+	def get_course_download_name(self):
+		name = self.file.path.split('/')[-1]
+
+		return f'{name}'
+
 	class Meta:
 		verbose_name = 'Course Item'
 		verbose_name_plural = 'Course Items'
