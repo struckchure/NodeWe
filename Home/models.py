@@ -375,7 +375,9 @@ class Course(models.Model):
 		return f'{days_str} {hours_str} {minutes_str} {seconds_str}'
 
 	def get_details(self):
-		return reverse('Home:dashboardCourseDetail', args=[self.slug])
+		material = CourseItem.objects.filter(course=self.id)[0].slug
+
+		return reverse('Home:dashboardCourseDetail', args=[self.slug, material])
 
 	def get_courses_items(self):
 		courses = CourseItem.objects.filter(course=self.id)
@@ -430,7 +432,7 @@ class CourseItem(models.Model):
 		return reverse('Home:downloadFile', args=[self.file.url])
 
 	def get_view(self):
-		return reverse('Home:viewFile', args=[self.file.url])
+		return reverse('Home:dashboardCourseDetail', args=[self.course.slug, self.slug])
 
 	class Meta:
 		verbose_name = 'Course Item'

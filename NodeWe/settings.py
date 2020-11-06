@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = '0qbiz@v46kx&ut19(v^edq$f0$fu(^_ci4(5#-ofh#%b%kvwh@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = [
     '139.162.211.200',
@@ -47,10 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     'Home.apps.HomeConfig',
-
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -69,8 +65,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'NodeWe.urls'
 
 AUTHENTICATION_BACKENDS = ( 
-    'django.contrib.auth.backends.ModelBackend', 
-    'allauth.account.auth_backends.AuthenticationBackend', 
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 TEMPLATES = [
@@ -155,40 +150,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, f'static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 MEDIA_URL = '/Media/'
-
-####################
-# APIs Credentials #
-####################
-
-
-ACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 
-LOGIN_REDIRECT_URL = 'Home:dashboard'
-ACCOUNT_LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL
-
-SITE_ID = 1
-
-
-# GitHub
-
-GITHUB_CLIENT_KEY = 'f52e2612b300fec45817'
-GITHUB_CLIENT_SECRET = '0def268f8db9e5f4c772f97fcaeeb766a6bf5f0b'
-
-# Facebook
-
-FACEBOOK_CLIENT_ID = 657502841632941
-FACEBOOK_CLIENT_SECRET = 'd26b0dd263f4c02df412e75a845c18d6'
-
-# Google
-
-GOOGLE_CLIENT_ID = '890326707410-ubro1cpvggfjoen5k4vdh3bacs4bj89o.apps.googleusercontent.com'
-GOOGLE_CLIENT_SECRET = '4Myyots_QCMhF3NbSkqMuWrV'

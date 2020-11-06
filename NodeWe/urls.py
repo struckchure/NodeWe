@@ -17,7 +17,6 @@ handler500 = 'Home.views.Error500'
 urlpatterns = [
 	path('admin/', admin.site.urls),
     path('', include('Home.urls')),
-    path('account/auth/', include('allauth.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -30,7 +30,7 @@ urlpatterns = [
 
 	path('account/courses/materials/', views.dashboardMaterials, name='dashboardMaterials'),
 	path('account/courses/', views.dashboardCourses, name='dashboardCourses'),
-	path('account/courses/<slug:slug>/', views.dashboardCourseDetail, name='dashboardCourseDetail'),
+	path('account/courses/<slug:slug>/<slug:material>/', views.dashboardCourseDetail, name='dashboardCourseDetail'),
 	
 	# Cart
 
