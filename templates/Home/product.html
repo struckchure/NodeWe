@@ -58,7 +58,7 @@
 								{% endfor %}
 							{% endif %}
 							<a href="{% url 'Home:cartView' %}" class="btn" style="Background-color: #6fda44; color:#fff;">Go to Cart</a>
-							<a href="{% url 'Home:dashboardCourses' %}" class="btn btn-outline-success" style="color: #6fda44;">Proceed</a>
+							<a href="{{ course.get_details }}" class="btn btn-outline-success" style="color: #6fda44;">Proceed</a>
 						</div>
 					</div>
 					<div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
