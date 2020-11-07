@@ -375,7 +375,8 @@ class Course(models.Model):
 		return f'{days_str} {hours_str} {minutes_str} {seconds_str}'
 
 	def get_details(self):
-		material = CourseItem.objects.filter(course=self.id)[0].slug
+		material = CourseItem.objects.filter(course=self.id)
+		material = material[0].slug if material.exists() else False
 
 		return reverse('Home:dashboardCourseDetail', args=[self.slug, material])
 

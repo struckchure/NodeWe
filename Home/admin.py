@@ -18,7 +18,7 @@ class UserAdmin(admin.ModelAdmin):
 		'is_student',
 		'is_tutor'
 	)
-	list_display = ('username', 'email', 'date', 'user_permissions')
+	list_display = ('username', 'email', 'date', 'last_login')
 	search_fields = ('first_name', 'last_name', 'username', 'email')
 
 

@@ -23,32 +23,6 @@ from . import utils
 User = get_user_model()
 
 
-def download_file(request, path):
-	file_path = os.path.join(settings.MEDIA_ROOT, path)
-	
-	if os.path.exists(file_path):
-		with open(file_path, 'rb') as fh:
-			response = HttpResponse(fh.read(), content_type="application/download")
-			response['Content-Disposition'] = "inline; filename=%s" % os.path.basename(file_path)
-
-			return response
-
-	raise Http404
-
-
-def view_file(request, path):
-	file_path = os.path.join(settings.MEDIA_ROOT, path)
-	
-	if os.path.exists(file_path):
-		with open(file_path, 'rb') as fh:
-			response = HttpResponse(fh.read(), content_type="application/file")
-			response['Content-Disposition'] = "inline; filename=%s" % os.path.basename(file_path)
-
-			return response
-
-	raise Http404
-
-
 # Errors
 
 def Error404(request, exception=None):
@@ -155,8 +129,6 @@ def signUp(request):
 					new_user.set_password(password1)
 					new_user.save()
 
-					#signUpForm.save()
-
 					messages.info(request, 'Registration complete, check your Mail to verify your account')
 
 					username = signUpForm.cleaned_data.get('username')
@@ -174,10 +146,6 @@ def signUp(request):
 					messages.info(request, 'Password mismatch')
 			else:
 				messages.info(request, 'Email already exist')
-		# else:
-		# 	print(signUpForm.errors)
-		# 	print(signUpForm.error_messages)
-		# 	messages.error(request, f'Password not secure, try combining symbols, numbers')
 	else:
 		signUpForm = forms.SignUpForm()
 
@@ -287,14 +255,19 @@ def dashboardCourses(request):
 
 
 @login_required
-def dashboardCourseDetail(request, slug, material=None):
+def dashboardCourseDetail(request, slug, material=False):
 	request.session['next'] = request.path
 
 	course = get_object_or_404(models.Course, slug=slug)
 	if material:
-		material = get_object_or_404(models.CourseItem, slug=material)
+		print('Getting details')
+		material = models.CourseItem.objects.filter(slug=material)
+		if not material.exists():
+			material = None
 	else:
-		material = models.CourseItem.objects.filter(course=course)[0].slug
+		material = models.CourseItem.objects.filter(course=course)
+		if not material.exists():
+			material = None
 
 	if request.method == 'POST':
 		comment_form = forms.CommentForm(request.POST)

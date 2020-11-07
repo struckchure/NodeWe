@@ -79,7 +79,11 @@
                                             <i class="fa fa-play fa-3x" style="position: relative; top: 3px; left: 3px;"></i>
                                         </div>-->
                                         <video
-                                            src="{{ material.file.url }}"
+                                            {% if material %}                                            
+                                                src="{{ material.file.url }}"
+                                            {% else %}
+                                                src="{{ course.image.url }}"
+                                            {% endif %}
                                             autobuffer
                                             autoloop
                                             loop
