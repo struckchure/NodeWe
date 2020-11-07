@@ -260,10 +260,7 @@ def dashboardCourseDetail(request, slug, material=False):
 
 	course = get_object_or_404(models.Course, slug=slug)
 	if material:
-		print('Getting details')
-		material = models.CourseItem.objects.filter(slug=material)
-		if not material.exists():
-			material = None
+		material = get_object_or_404(models.CourseItem.objects, slug=material)
 	else:
 		material = models.CourseItem.objects.filter(course=course)
 		if not material.exists():

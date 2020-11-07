@@ -376,7 +376,10 @@ class Course(models.Model):
 
 	def get_details(self):
 		material = CourseItem.objects.filter(course=self.id)
-		material = material[0].slug if material.exists() else False
+		if len(list(material)) > 0:
+			material = material[0].slug
+		else:
+			material = False
 
 		return reverse('Home:dashboardCourseDetail', args=[self.slug, material])
 
