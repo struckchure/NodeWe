@@ -57,7 +57,7 @@
 									<p class="card-text" title="{{ item.description }}">{{ item.title }} - {{ item.description }}</p>
 								{% endfor %}
 							{% endif %}
-							<a href="{% url 'Home:cartView' %}" class="btn" style="Background-color: #6fda44; color:#fff;">Go to Cart</a>
+							<a href="{% url 'Home:dashboardCourses' %}" class="btn" style="Background-color: #6fda44; color:#fff;">Go to Cart</a>
 							<a href="{{ course.get_details }}" class="btn btn-outline-success" style="color: #6fda44;">Proceed</a>
 						</div>
 					</div>

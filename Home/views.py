@@ -259,12 +259,11 @@ def dashboardCourseDetail(request, slug, material=False):
 	request.session['next'] = request.path
 
 	course = get_object_or_404(models.Course, slug=slug)
-	if material:
-		material = get_object_or_404(models.CourseItem.objects, slug=material)
+	material_course = models.CourseItem.objects.filter(slug=material).exists()
+	if not material_course:
+		material_course = False
 	else:
-		material = models.CourseItem.objects.filter(course=course)
-		if not material.exists():
-			material = None
+		material_course = models.CourseItem.objects.get(slug=material)
 
 	if request.method == 'POST':
 		comment_form = forms.CommentForm(request.POST)
@@ -286,7 +285,7 @@ def dashboardCourseDetail(request, slug, material=False):
 	template_name = 'Home/dashboardCourseDetail.html'
 	context = {
 		'course': course,
-		'material': material,
+		'material': material_course,
 	}
 	context = utils.dictMerge(
 		external_context(request),
