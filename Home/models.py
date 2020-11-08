@@ -87,7 +87,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     	self.save()
 
     def send_verification(self, link):
-    	verify_url = reverse('Home:verify', args[link])
+    	verify_url = reverse('Home:verify', args=[link])
     	if not self.is_verified:
 	    	title = 'NodeWe'
 	    	body = f'Hello {self.username}, \nFollow this link https://www.nodewe.com/{verify_url} to verify your account.'
