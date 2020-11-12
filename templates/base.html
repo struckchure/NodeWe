@@ -135,100 +135,67 @@
 	{% block body %}
 		
 	{% endblock body %}
-
+	
 	<!-- Footer section -->
 	<section class="footer-section">
-		<div class="container">
-			<div class="footer-logo text-center">
-			    <a href="{% url 'Home:index' %}">
-			        <img src="{% static 'img/png/node_we_horizontal_colored-transparent.png' %}" alt="logo"
-			            style="height: 60px; width: 250px;">
-			    </a>
-			</div>
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-lg-3 col-sm-6">
+	                <div class="footer-widget about-widget">
+	                    <h2>About</h2>
+	                    <p>NodeWe is a platform and a tool to empower anyone, anywhere in Africa with education and
+	                        skill. Committed to providing
+	                        vast access to education and unrestricted learning space, to turn lives around for
+	                        greatness.</p>
+	                    <img src="{% static 'img/cards.png' %}" alt="">
+	                </div>
+	            </div>
+	            <div class="col-lg-4 col-sm-6">
+	                <div class="footer-widget about-widget">
+	                    <h2>Site Map</h2>
+	                    <ul>
+	                        <li><a href="">All Categories</a></li>
+	                        <li><a href="">About Us</a></li>
+	                        <li><a href="">Contact Us</a></li>
+	                        <li><a href="">Blog</a></li>
+	                        <li><a href="">Teach here</a></li>
+	                        <li><a href="">Blog</a></li>
+	                    </ul>
+	                    <ul>
+	                        <li><a href="">Nodewe for business</a></li>
+	                        <li><a href="">Sitemap</a></li>
+	                        <li><a href="">Support</a></li>
+	                        <li><a href="">Featured courses</a></li>
+	                        <li><a href="">Affiliate</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="social-links-warp">
+	        <div class="container">
+	            <div class="social-links">
+	                <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+	                <a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
+	                <a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
+	                <a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+	                <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+	                <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
+	                <a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
+	            </div>
 
-			<div class="row">
-				<div class="col-lg-3 col-sm-6">
-					<div class="footer-widget about-widget">
-						<h2>About</h2>
-						<p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
-						<img src="{% static 'img/cards.png' %}" alt="">
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="footer-widget about-widget">
-						<h2>Site Map</h2>
-						<ul>
-							<li><a href="">About Us</a></li>
-							<li><a href="">Track Orders</a></li>
-							<li><a href="">Returns</a></li>
-							<li><a href="">Jobs</a></li>
-							<li><a href="">Shipping</a></li>
-							<li><a href="">Blog</a></li>
-						</ul>
-						<ul>
-							<li><a href="">Partners</a></li>
-							<li><a href="">Bloggers</a></li>
-							<li><a href="">Support</a></li>
-							<li><a href="">Terms of Use</a></li>
-							<li><a href="">Press</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="footer-widget about-widget" style="margin-top: 4rem;">
-						<ul>
-							<li><a href="">About Us</a></li>
-							<li><a href="">Track Orders</a></li>
-							<li><a href="">Returns</a></li>
-							<li><a href="">Jobs</a></li>
-							<li><a href="">Shipping</a></li>
-							<li><a href="">Blog</a></li>
-						</ul>
-						<ul>
-							<li><a href="">Partners</a></li>
-							<li><a href="">Bloggers</a></li>
-							<li><a href="">Support</a></li>
-							<li><a href="">Terms of Use</a></li>
-							<li><a href="">Press</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-3 col-sm-6">
-					<div class="footer-widget about-widget"  style="margin-top: 4rem;">
-						<ul>
-							<li><a href="">About Us</a></li>
-							<li><a href="">Track Orders</a></li>
-							<li><a href="">Returns</a></li>
-							<li><a href="">Jobs</a></li>
-							<li><a href="">Shipping</a></li>
-							<li><a href="">Blog</a></li>
-						</ul>
-						<ul>
-							<li><a href="">Partners</a></li>
-							<li><a href="">Bloggers</a></li>
-							<li><a href="">Support</a></li>
-							<li><a href="">Terms of Use</a></li>
-							<li><a href="">Press</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="social-links-warp">
-			<div class="container">
-				<div class="social-links">
-					<a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
-					<a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
-					<a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
-					<a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
-					<a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
-					<a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
-					<a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
-				</div>
-
-<p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | NodeWe.com</a></p>
+	            <p class="text-white text-center mt-5">Copyright &copy;
+	                <script>document.write(new Date().getFullYear());</script> All rights reserved | NodeWe.com</a></p>
 
 
+	        </div>
+	    </div>
+	</section>
+	<!-- Footer section end -->
+
+	<p class="text-white text-center mt-5">
+		Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | NodeWe.com</a>
+	</p>
 			</div>
 		</div>
 	</section>
