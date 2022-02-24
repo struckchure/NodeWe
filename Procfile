@@ -1,2 +1,2 @@
 release: sh migrate.sh
-web: web: gunicorn NodeWe.wsgi
+web: gunicorn NodeWe.wsgi
