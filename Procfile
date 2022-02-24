@@ -1,2 +1,2 @@
 release: sh migrate.sh
-web: sh entry-point.sh
+web: python manage.py runserver 0.0.0.0:\$PORT
