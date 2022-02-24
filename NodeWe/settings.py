@@ -142,7 +142,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "Media")
 MEDIA_URL = "/Media/"
