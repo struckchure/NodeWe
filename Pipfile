@@ -8,6 +8,7 @@ Django = "==3.1"
 django-allauth = "*"
 Pillow = "*"
 django-heroku = "*"
+gunicorn = "*"
 
 [dev-packages]
 

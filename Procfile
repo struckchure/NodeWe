@@ -1,2 +1,2 @@
 release: sh migrate.sh
-web: python manage.py runserver 0.0.0.0:\$PORT
+web: web: gunicorn NodeWe.wsgi
